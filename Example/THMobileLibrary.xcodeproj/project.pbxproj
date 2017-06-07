@@ -8,14 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		37ED0C6B1EE7B1E5005B4CD8 /* THHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0C6A1EE7B1E5005B4CD8 /* THHomeViewController.m */; };
-		37ED0C6D1EE7B1FC005B4CD8 /* HomeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37ED0C6C1EE7B1FC005B4CD8 /* HomeStoryboard.storyboard */; };
-		37ED0C6F1EE7CF8A005B4CD8 /* ResourceStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37ED0C6E1EE7CF8A005B4CD8 /* ResourceStoryboard.storyboard */; };
 		37ED0C721EE7CFB5005B4CD8 /* THResourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0C711EE7CFB5005B4CD8 /* THResourceViewController.m */; };
 		37ED0C751EE7D029005B4CD8 /* THGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0C741EE7D029005B4CD8 /* THGuideViewController.m */; };
-		37ED0C771EE7D03F005B4CD8 /* GuideStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37ED0C761EE7D03F005B4CD8 /* GuideStoryboard.storyboard */; };
-		37ED0C791EE7D050005B4CD8 /* MineStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37ED0C781EE7D050005B4CD8 /* MineStoryboard.storyboard */; };
 		37ED0C7C1EE7D05C005B4CD8 /* THMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0C7B1EE7D05C005B4CD8 /* THMineViewController.m */; };
-		37ED0C7F1EE7D4B7005B4CD8 /* THMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0C7E1EE7D4B7005B4CD8 /* THMainViewController.m */; };
+		37ED0C881EE7E119005B4CD8 /* THBaseNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0C871EE7E119005B4CD8 /* THBaseNavView.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -52,18 +48,14 @@
 		2F0BFE47DA5CD8921F56EE37 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		37ED0C691EE7B1E5005B4CD8 /* THHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THHomeViewController.h; sourceTree = "<group>"; };
 		37ED0C6A1EE7B1E5005B4CD8 /* THHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THHomeViewController.m; sourceTree = "<group>"; };
-		37ED0C6C1EE7B1FC005B4CD8 /* HomeStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HomeStoryboard.storyboard; sourceTree = "<group>"; };
-		37ED0C6E1EE7CF8A005B4CD8 /* ResourceStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ResourceStoryboard.storyboard; sourceTree = "<group>"; };
 		37ED0C701EE7CFB5005B4CD8 /* THResourceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THResourceViewController.h; sourceTree = "<group>"; };
 		37ED0C711EE7CFB5005B4CD8 /* THResourceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THResourceViewController.m; sourceTree = "<group>"; };
 		37ED0C731EE7D029005B4CD8 /* THGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THGuideViewController.h; sourceTree = "<group>"; };
 		37ED0C741EE7D029005B4CD8 /* THGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THGuideViewController.m; sourceTree = "<group>"; };
-		37ED0C761EE7D03F005B4CD8 /* GuideStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GuideStoryboard.storyboard; sourceTree = "<group>"; };
-		37ED0C781EE7D050005B4CD8 /* MineStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MineStoryboard.storyboard; sourceTree = "<group>"; };
 		37ED0C7A1EE7D05C005B4CD8 /* THMineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THMineViewController.h; sourceTree = "<group>"; };
 		37ED0C7B1EE7D05C005B4CD8 /* THMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THMineViewController.m; sourceTree = "<group>"; };
-		37ED0C7D1EE7D4B7005B4CD8 /* THMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THMainViewController.h; sourceTree = "<group>"; };
-		37ED0C7E1EE7D4B7005B4CD8 /* THMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THMainViewController.m; sourceTree = "<group>"; };
+		37ED0C861EE7E119005B4CD8 /* THBaseNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THBaseNavView.h; sourceTree = "<group>"; };
+		37ED0C871EE7E119005B4CD8 /* THBaseNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THBaseNavView.m; sourceTree = "<group>"; };
 		481211680B25BA444412F886 /* Pods_THMobileLibrary_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_THMobileLibrary_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* THMobileLibrary_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = THMobileLibrary_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -121,12 +113,11 @@
 		37ED0C581EE7B0F6005B4CD8 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				37ED0C801EE7DFAD005B4CD8 /* BaseNavView */,
 				37ED0C5D1EE7B1CC005B4CD8 /* Home */,
 				37ED0C591EE7B1CC005B4CD8 /* ElectronResource */,
 				37ED0C611EE7B1CC005B4CD8 /* LibraryGuide */,
 				37ED0C651EE7B1CC005B4CD8 /* Mine */,
-				37ED0C7D1EE7D4B7005B4CD8 /* THMainViewController.h */,
-				37ED0C7E1EE7D4B7005B4CD8 /* THMainViewController.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -144,7 +135,6 @@
 		37ED0C5A1EE7B1CC005B4CD8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				37ED0C6E1EE7CF8A005B4CD8 /* ResourceStoryboard.storyboard */,
 				37ED0C701EE7CFB5005B4CD8 /* THResourceViewController.h */,
 				37ED0C711EE7CFB5005B4CD8 /* THResourceViewController.m */,
 			);
@@ -180,7 +170,6 @@
 			children = (
 				37ED0C691EE7B1E5005B4CD8 /* THHomeViewController.h */,
 				37ED0C6A1EE7B1E5005B4CD8 /* THHomeViewController.m */,
-				37ED0C6C1EE7B1FC005B4CD8 /* HomeStoryboard.storyboard */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -214,7 +203,6 @@
 			children = (
 				37ED0C731EE7D029005B4CD8 /* THGuideViewController.h */,
 				37ED0C741EE7D029005B4CD8 /* THGuideViewController.m */,
-				37ED0C761EE7D03F005B4CD8 /* GuideStoryboard.storyboard */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -246,7 +234,6 @@
 		37ED0C661EE7B1CC005B4CD8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				37ED0C781EE7D050005B4CD8 /* MineStoryboard.storyboard */,
 				37ED0C7A1EE7D05C005B4CD8 /* THMineViewController.h */,
 				37ED0C7B1EE7D05C005B4CD8 /* THMineViewController.m */,
 			);
@@ -265,6 +252,16 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		37ED0C801EE7DFAD005B4CD8 /* BaseNavView */ = {
+			isa = PBXGroup;
+			children = (
+				37ED0C861EE7E119005B4CD8 /* THBaseNavView.h */,
+				37ED0C871EE7E119005B4CD8 /* THBaseNavView.m */,
+			);
+			name = BaseNavView;
+			path = Base;
 			sourceTree = "<group>";
 		};
 		5982719DDC89E4A6C068FFC9 /* Pods */ = {
@@ -423,6 +420,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "C-bin";
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = 48Z73F6HGG;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -454,12 +454,8 @@
 			files = (
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
-				37ED0C791EE7D050005B4CD8 /* MineStoryboard.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
-				37ED0C6F1EE7CF8A005B4CD8 /* ResourceStoryboard.storyboard in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
-				37ED0C771EE7D03F005B4CD8 /* GuideStoryboard.storyboard in Resources */,
-				37ED0C6D1EE7B1FC005B4CD8 /* HomeStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,7 +568,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* THAppDelegate.m in Sources */,
-				37ED0C7F1EE7D4B7005B4CD8 /* THMainViewController.m in Sources */,
+				37ED0C881EE7E119005B4CD8 /* THBaseNavView.m in Sources */,
 				37ED0C7C1EE7D05C005B4CD8 /* THMineViewController.m in Sources */,
 				37ED0C751EE7D029005B4CD8 /* THGuideViewController.m in Sources */,
 				37ED0C721EE7CFB5005B4CD8 /* THResourceViewController.m in Sources */,
@@ -706,6 +702,7 @@
 			baseConfigurationReference = 15579A9F12CC4CA326BD1E45 /* Pods-THMobileLibrary_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 48Z73F6HGG;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "THMobileLibrary/THMobileLibrary-Prefix.pch";
 				INFOPLIST_FILE = "THMobileLibrary/THMobileLibrary-Info.plist";
@@ -721,6 +718,7 @@
 			baseConfigurationReference = A0BBF77371A810451569303D /* Pods-THMobileLibrary_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 48Z73F6HGG;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "THMobileLibrary/THMobileLibrary-Prefix.pch";
 				INFOPLIST_FILE = "THMobileLibrary/THMobileLibrary-Info.plist";

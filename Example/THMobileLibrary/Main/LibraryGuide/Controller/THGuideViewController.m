@@ -7,7 +7,7 @@
 //
 
 #import "THGuideViewController.h"
-
+#import "THBaseNavView.h"
 @interface THGuideViewController ()
 
 @end
@@ -16,7 +16,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+   
+    self.view.backgroundColor=[UIColor redColor];
+    //导航栏
+    THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
+    [self.view addSubview:navView];
 }
 
 - (void)didReceiveMemoryWarning {
