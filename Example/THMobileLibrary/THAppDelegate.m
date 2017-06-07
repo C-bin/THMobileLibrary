@@ -7,12 +7,13 @@
 //
 
 #import "THAppDelegate.h"
-
+#import "THMainViewController.h"
 @implementation THAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    
+    self.window.rootViewController=[[THMainViewController alloc]init];
     return YES;
 }
 
