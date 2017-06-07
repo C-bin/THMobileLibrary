@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface THResourceViewController : UIViewController
+#import "THRootViewController.h"
+@interface THResourceViewController : THRootViewController
 
 @end

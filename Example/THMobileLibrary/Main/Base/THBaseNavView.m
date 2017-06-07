@@ -20,7 +20,7 @@
 }
 -(void)setup
 {
-    [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
+    [self setBackgroundColor:[UIColor colorWithRed:142 green:159 blue:132 alpha:1]];
   
 }
 

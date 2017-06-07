@@ -7,11 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		37ED0C6B1EE7B1E5005B4CD8 /* THHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0C6A1EE7B1E5005B4CD8 /* THHomeViewController.m */; };
 		37ED0C721EE7CFB5005B4CD8 /* THResourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0C711EE7CFB5005B4CD8 /* THResourceViewController.m */; };
 		37ED0C751EE7D029005B4CD8 /* THGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0C741EE7D029005B4CD8 /* THGuideViewController.m */; };
 		37ED0C7C1EE7D05C005B4CD8 /* THMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0C7B1EE7D05C005B4CD8 /* THMineViewController.m */; };
 		37ED0C881EE7E119005B4CD8 /* THBaseNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0C871EE7E119005B4CD8 /* THBaseNavView.m */; };
+		37ED0C8B1EE7E942005B4CD8 /* LoopBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0C8A1EE7E942005B4CD8 /* LoopBanner.m */; };
+		37ED0C911EE7EB73005B4CD8 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37ED0C8D1EE7EB73005B4CD8 /* 1.jpg */; };
+		37ED0C921EE7EB73005B4CD8 /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37ED0C8E1EE7EB73005B4CD8 /* 2.jpg */; };
+		37ED0C931EE7EB73005B4CD8 /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37ED0C8F1EE7EB73005B4CD8 /* 3.jpg */; };
+		37ED0C941EE7EB73005B4CD8 /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37ED0C901EE7EB73005B4CD8 /* 4.jpg */; };
+		37ED0C9B1EE7F15B005B4CD8 /* THMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0C9A1EE7F15B005B4CD8 /* THMainViewController.m */; };
+		37ED0C9E1EE7F194005B4CD8 /* THRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0C9D1EE7F194005B4CD8 /* THRootViewController.m */; };
+		37ED0CA11EE7F346005B4CD8 /* THHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0CA01EE7F346005B4CD8 /* THHomeViewController.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -46,8 +53,6 @@
 		1414D7A7261CC215796BD584 /* Pods-THMobileLibrary_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-THMobileLibrary_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-THMobileLibrary_Tests/Pods-THMobileLibrary_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		15579A9F12CC4CA326BD1E45 /* Pods-THMobileLibrary_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-THMobileLibrary_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-THMobileLibrary_Example/Pods-THMobileLibrary_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		2F0BFE47DA5CD8921F56EE37 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		37ED0C691EE7B1E5005B4CD8 /* THHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THHomeViewController.h; sourceTree = "<group>"; };
-		37ED0C6A1EE7B1E5005B4CD8 /* THHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THHomeViewController.m; sourceTree = "<group>"; };
 		37ED0C701EE7CFB5005B4CD8 /* THResourceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THResourceViewController.h; sourceTree = "<group>"; };
 		37ED0C711EE7CFB5005B4CD8 /* THResourceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THResourceViewController.m; sourceTree = "<group>"; };
 		37ED0C731EE7D029005B4CD8 /* THGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THGuideViewController.h; sourceTree = "<group>"; };
@@ -56,6 +61,18 @@
 		37ED0C7B1EE7D05C005B4CD8 /* THMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THMineViewController.m; sourceTree = "<group>"; };
 		37ED0C861EE7E119005B4CD8 /* THBaseNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THBaseNavView.h; sourceTree = "<group>"; };
 		37ED0C871EE7E119005B4CD8 /* THBaseNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THBaseNavView.m; sourceTree = "<group>"; };
+		37ED0C891EE7E942005B4CD8 /* LoopBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopBanner.h; sourceTree = "<group>"; };
+		37ED0C8A1EE7E942005B4CD8 /* LoopBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopBanner.m; sourceTree = "<group>"; };
+		37ED0C8D1EE7EB73005B4CD8 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
+		37ED0C8E1EE7EB73005B4CD8 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
+		37ED0C8F1EE7EB73005B4CD8 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
+		37ED0C901EE7EB73005B4CD8 /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpg; sourceTree = "<group>"; };
+		37ED0C991EE7F15B005B4CD8 /* THMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THMainViewController.h; sourceTree = "<group>"; };
+		37ED0C9A1EE7F15B005B4CD8 /* THMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THMainViewController.m; sourceTree = "<group>"; };
+		37ED0C9C1EE7F194005B4CD8 /* THRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THRootViewController.h; sourceTree = "<group>"; };
+		37ED0C9D1EE7F194005B4CD8 /* THRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THRootViewController.m; sourceTree = "<group>"; };
+		37ED0C9F1EE7F346005B4CD8 /* THHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THHomeViewController.h; sourceTree = "<group>"; };
+		37ED0CA01EE7F346005B4CD8 /* THHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THHomeViewController.m; sourceTree = "<group>"; };
 		481211680B25BA444412F886 /* Pods_THMobileLibrary_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_THMobileLibrary_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* THMobileLibrary_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = THMobileLibrary_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -168,8 +185,8 @@
 		37ED0C5E1EE7B1CC005B4CD8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				37ED0C691EE7B1E5005B4CD8 /* THHomeViewController.h */,
-				37ED0C6A1EE7B1E5005B4CD8 /* THHomeViewController.m */,
+				37ED0C9F1EE7F346005B4CD8 /* THHomeViewController.h */,
+				37ED0CA01EE7F346005B4CD8 /* THHomeViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -184,6 +201,8 @@
 		37ED0C601EE7B1CC005B4CD8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				37ED0C891EE7E942005B4CD8 /* LoopBanner.h */,
+				37ED0C8A1EE7E942005B4CD8 /* LoopBanner.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -259,9 +278,24 @@
 			children = (
 				37ED0C861EE7E119005B4CD8 /* THBaseNavView.h */,
 				37ED0C871EE7E119005B4CD8 /* THBaseNavView.m */,
+				37ED0C991EE7F15B005B4CD8 /* THMainViewController.h */,
+				37ED0C9A1EE7F15B005B4CD8 /* THMainViewController.m */,
+				37ED0C9C1EE7F194005B4CD8 /* THRootViewController.h */,
+				37ED0C9D1EE7F194005B4CD8 /* THRootViewController.m */,
 			);
 			name = BaseNavView;
 			path = Base;
+			sourceTree = "<group>";
+		};
+		37ED0C8C1EE7E9D0005B4CD8 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				37ED0C8D1EE7EB73005B4CD8 /* 1.jpg */,
+				37ED0C8E1EE7EB73005B4CD8 /* 2.jpg */,
+				37ED0C8F1EE7EB73005B4CD8 /* 3.jpg */,
+				37ED0C901EE7EB73005B4CD8 /* 4.jpg */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		5982719DDC89E4A6C068FFC9 /* Pods */ = {
@@ -312,6 +346,7 @@
 		6003F593195388D20070C39A /* Example for THMobileLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				37ED0C8C1EE7E9D0005B4CD8 /* Resource */,
 				37ED0C581EE7B0F6005B4CD8 /* Main */,
 				6003F59C195388D20070C39A /* THAppDelegate.h */,
 				6003F59D195388D20070C39A /* THAppDelegate.m */,
@@ -452,10 +487,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37ED0C941EE7EB73005B4CD8 /* 4.jpg in Resources */,
+				37ED0C921EE7EB73005B4CD8 /* 2.jpg in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+				37ED0C931EE7EB73005B4CD8 /* 3.jpg in Resources */,
+				37ED0C911EE7EB73005B4CD8 /* 1.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,13 +607,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* THAppDelegate.m in Sources */,
+				37ED0C8B1EE7E942005B4CD8 /* LoopBanner.m in Sources */,
 				37ED0C881EE7E119005B4CD8 /* THBaseNavView.m in Sources */,
 				37ED0C7C1EE7D05C005B4CD8 /* THMineViewController.m in Sources */,
 				37ED0C751EE7D029005B4CD8 /* THGuideViewController.m in Sources */,
+				37ED0C9B1EE7F15B005B4CD8 /* THMainViewController.m in Sources */,
 				37ED0C721EE7CFB5005B4CD8 /* THResourceViewController.m in Sources */,
-				37ED0C6B1EE7B1E5005B4CD8 /* THHomeViewController.m in Sources */,
+				37ED0CA11EE7F346005B4CD8 /* THHomeViewController.m in Sources */,
 				6003F5A7195388D20070C39A /* THViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				37ED0C9E1EE7F194005B4CD8 /* THRootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -704,7 +746,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 48Z73F6HGG;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "THMobileLibrary/THMobileLibrary-Prefix.pch";
 				INFOPLIST_FILE = "THMobileLibrary/THMobileLibrary-Info.plist";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
@@ -720,7 +761,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 48Z73F6HGG;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "THMobileLibrary/THMobileLibrary-Prefix.pch";
 				INFOPLIST_FILE = "THMobileLibrary/THMobileLibrary-Info.plist";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";

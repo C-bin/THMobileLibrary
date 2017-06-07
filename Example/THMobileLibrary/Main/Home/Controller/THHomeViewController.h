@@ -6,8 +6,8 @@
 //  Copyright © 2017年 C-bin. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "THRootViewController.h"
 
-@interface THHomeViewController :UIViewController
+@interface THHomeViewController : THRootViewController
 
 @end

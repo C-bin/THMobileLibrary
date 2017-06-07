@@ -1,5 +1,5 @@
 //
-//  THGuideViewController.h
+//  THRootViewController.h
 //  THMobileLibrary
 //
 //  Created by 天海网络  on 2017/6/7.
@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "THRootViewController.h"
-@interface THGuideViewController : THRootViewController
+
+@interface THRootViewController : UIViewController
 
 @end
