@@ -7,7 +7,7 @@
 //
 
 #import "THResourceViewController.h"
-
+#import "THBaseNavView.h"
 @interface THResourceViewController ()
 
 @end
@@ -16,7 +16,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+   self.view.backgroundColor=[UIColor yellowColor];
+    //导航栏
+    THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
+    [self.view addSubview:navView];
 }
 
 - (void)didReceiveMemoryWarning {
