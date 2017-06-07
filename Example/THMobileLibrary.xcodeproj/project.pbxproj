@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37ED0C6B1EE7B1E5005B4CD8 /* THHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0C6A1EE7B1E5005B4CD8 /* THHomeViewController.m */; };
+		37ED0C6D1EE7B1FC005B4CD8 /* HomeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37ED0C6C1EE7B1FC005B4CD8 /* HomeStoryboard.storyboard */; };
+		37ED0C6F1EE7CF8A005B4CD8 /* ResourceStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37ED0C6E1EE7CF8A005B4CD8 /* ResourceStoryboard.storyboard */; };
+		37ED0C721EE7CFB5005B4CD8 /* THResourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0C711EE7CFB5005B4CD8 /* THResourceViewController.m */; };
+		37ED0C751EE7D029005B4CD8 /* THGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0C741EE7D029005B4CD8 /* THGuideViewController.m */; };
+		37ED0C771EE7D03F005B4CD8 /* GuideStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37ED0C761EE7D03F005B4CD8 /* GuideStoryboard.storyboard */; };
+		37ED0C791EE7D050005B4CD8 /* MineStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37ED0C781EE7D050005B4CD8 /* MineStoryboard.storyboard */; };
+		37ED0C7C1EE7D05C005B4CD8 /* THMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0C7B1EE7D05C005B4CD8 /* THMineViewController.m */; };
+		37ED0C7F1EE7D4B7005B4CD8 /* THMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0C7E1EE7D4B7005B4CD8 /* THMainViewController.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -40,7 +49,21 @@
 		1092B20D0FE14C3CF75B315D /* Pods_THMobileLibrary_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_THMobileLibrary_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1414D7A7261CC215796BD584 /* Pods-THMobileLibrary_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-THMobileLibrary_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-THMobileLibrary_Tests/Pods-THMobileLibrary_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		15579A9F12CC4CA326BD1E45 /* Pods-THMobileLibrary_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-THMobileLibrary_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-THMobileLibrary_Example/Pods-THMobileLibrary_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		2F0BFE47DA5CD8921F56EE37 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		2F0BFE47DA5CD8921F56EE37 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		37ED0C691EE7B1E5005B4CD8 /* THHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THHomeViewController.h; sourceTree = "<group>"; };
+		37ED0C6A1EE7B1E5005B4CD8 /* THHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THHomeViewController.m; sourceTree = "<group>"; };
+		37ED0C6C1EE7B1FC005B4CD8 /* HomeStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HomeStoryboard.storyboard; sourceTree = "<group>"; };
+		37ED0C6E1EE7CF8A005B4CD8 /* ResourceStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ResourceStoryboard.storyboard; sourceTree = "<group>"; };
+		37ED0C701EE7CFB5005B4CD8 /* THResourceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THResourceViewController.h; sourceTree = "<group>"; };
+		37ED0C711EE7CFB5005B4CD8 /* THResourceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THResourceViewController.m; sourceTree = "<group>"; };
+		37ED0C731EE7D029005B4CD8 /* THGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THGuideViewController.h; sourceTree = "<group>"; };
+		37ED0C741EE7D029005B4CD8 /* THGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THGuideViewController.m; sourceTree = "<group>"; };
+		37ED0C761EE7D03F005B4CD8 /* GuideStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GuideStoryboard.storyboard; sourceTree = "<group>"; };
+		37ED0C781EE7D050005B4CD8 /* MineStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MineStoryboard.storyboard; sourceTree = "<group>"; };
+		37ED0C7A1EE7D05C005B4CD8 /* THMineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THMineViewController.h; sourceTree = "<group>"; };
+		37ED0C7B1EE7D05C005B4CD8 /* THMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THMineViewController.m; sourceTree = "<group>"; };
+		37ED0C7D1EE7D4B7005B4CD8 /* THMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THMainViewController.h; sourceTree = "<group>"; };
+		37ED0C7E1EE7D4B7005B4CD8 /* THMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THMainViewController.m; sourceTree = "<group>"; };
 		481211680B25BA444412F886 /* Pods_THMobileLibrary_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_THMobileLibrary_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* THMobileLibrary_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = THMobileLibrary_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -65,8 +88,8 @@
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A0BBF77371A810451569303D /* Pods-THMobileLibrary_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-THMobileLibrary_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-THMobileLibrary_Example/Pods-THMobileLibrary_Example.release.xcconfig"; sourceTree = "<group>"; };
-		B867D4FD6E9D925C37113579 /* THMobileLibrary.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = THMobileLibrary.podspec; path = ../THMobileLibrary.podspec; sourceTree = "<group>"; };
-		D37E39F3C052260F21AF3500 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		B867D4FD6E9D925C37113579 /* THMobileLibrary.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = THMobileLibrary.podspec; path = ../THMobileLibrary.podspec; sourceTree = "<group>"; };
+		D37E39F3C052260F21AF3500 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +118,155 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37ED0C581EE7B0F6005B4CD8 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				37ED0C5D1EE7B1CC005B4CD8 /* Home */,
+				37ED0C591EE7B1CC005B4CD8 /* ElectronResource */,
+				37ED0C611EE7B1CC005B4CD8 /* LibraryGuide */,
+				37ED0C651EE7B1CC005B4CD8 /* Mine */,
+				37ED0C7D1EE7D4B7005B4CD8 /* THMainViewController.h */,
+				37ED0C7E1EE7D4B7005B4CD8 /* THMainViewController.m */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		37ED0C591EE7B1CC005B4CD8 /* ElectronResource */ = {
+			isa = PBXGroup;
+			children = (
+				37ED0C5A1EE7B1CC005B4CD8 /* Controller */,
+				37ED0C5B1EE7B1CC005B4CD8 /* Model */,
+				37ED0C5C1EE7B1CC005B4CD8 /* View */,
+			);
+			path = ElectronResource;
+			sourceTree = "<group>";
+		};
+		37ED0C5A1EE7B1CC005B4CD8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				37ED0C6E1EE7CF8A005B4CD8 /* ResourceStoryboard.storyboard */,
+				37ED0C701EE7CFB5005B4CD8 /* THResourceViewController.h */,
+				37ED0C711EE7CFB5005B4CD8 /* THResourceViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		37ED0C5B1EE7B1CC005B4CD8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		37ED0C5C1EE7B1CC005B4CD8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		37ED0C5D1EE7B1CC005B4CD8 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				37ED0C5E1EE7B1CC005B4CD8 /* Controller */,
+				37ED0C5F1EE7B1CC005B4CD8 /* Model */,
+				37ED0C601EE7B1CC005B4CD8 /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		37ED0C5E1EE7B1CC005B4CD8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				37ED0C691EE7B1E5005B4CD8 /* THHomeViewController.h */,
+				37ED0C6A1EE7B1E5005B4CD8 /* THHomeViewController.m */,
+				37ED0C6C1EE7B1FC005B4CD8 /* HomeStoryboard.storyboard */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		37ED0C5F1EE7B1CC005B4CD8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		37ED0C601EE7B1CC005B4CD8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		37ED0C611EE7B1CC005B4CD8 /* LibraryGuide */ = {
+			isa = PBXGroup;
+			children = (
+				37ED0C621EE7B1CC005B4CD8 /* Controller */,
+				37ED0C631EE7B1CC005B4CD8 /* Model */,
+				37ED0C641EE7B1CC005B4CD8 /* View */,
+			);
+			path = LibraryGuide;
+			sourceTree = "<group>";
+		};
+		37ED0C621EE7B1CC005B4CD8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				37ED0C731EE7D029005B4CD8 /* THGuideViewController.h */,
+				37ED0C741EE7D029005B4CD8 /* THGuideViewController.m */,
+				37ED0C761EE7D03F005B4CD8 /* GuideStoryboard.storyboard */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		37ED0C631EE7B1CC005B4CD8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		37ED0C641EE7B1CC005B4CD8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		37ED0C651EE7B1CC005B4CD8 /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				37ED0C661EE7B1CC005B4CD8 /* Controller */,
+				37ED0C671EE7B1CC005B4CD8 /* Model */,
+				37ED0C681EE7B1CC005B4CD8 /* View */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
+		37ED0C661EE7B1CC005B4CD8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				37ED0C781EE7D050005B4CD8 /* MineStoryboard.storyboard */,
+				37ED0C7A1EE7D05C005B4CD8 /* THMineViewController.h */,
+				37ED0C7B1EE7D05C005B4CD8 /* THMineViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		37ED0C671EE7B1CC005B4CD8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		37ED0C681EE7B1CC005B4CD8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		5982719DDC89E4A6C068FFC9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +315,7 @@
 		6003F593195388D20070C39A /* Example for THMobileLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				37ED0C581EE7B0F6005B4CD8 /* Main */,
 				6003F59C195388D20070C39A /* THAppDelegate.h */,
 				6003F59D195388D20070C39A /* THAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
@@ -281,8 +454,12 @@
 			files = (
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
+				37ED0C791EE7D050005B4CD8 /* MineStoryboard.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				37ED0C6F1EE7CF8A005B4CD8 /* ResourceStoryboard.storyboard in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+				37ED0C771EE7D03F005B4CD8 /* GuideStoryboard.storyboard in Resources */,
+				37ED0C6D1EE7B1FC005B4CD8 /* HomeStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +572,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* THAppDelegate.m in Sources */,
+				37ED0C7F1EE7D4B7005B4CD8 /* THMainViewController.m in Sources */,
+				37ED0C7C1EE7D05C005B4CD8 /* THMineViewController.m in Sources */,
+				37ED0C751EE7D029005B4CD8 /* THGuideViewController.m in Sources */,
+				37ED0C721EE7CFB5005B4CD8 /* THResourceViewController.m in Sources */,
+				37ED0C6B1EE7B1E5005B4CD8 /* THHomeViewController.m in Sources */,
 				6003F5A7195388D20070C39A /* THViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);

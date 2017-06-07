@@ -1,0 +1,22 @@
+{
+  "name": "THMobileLibrary",
+  "version": "0.1.0",
+  "summary": "A short description of THMobileLibrary.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/C-bin/THMobileLibrary",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "C-bin": "11124"
+  },
+  "source": {
+    "git": "https://github.com/C-bin/THMobileLibrary.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "THMobileLibrary/Classes/**/*"
+}
