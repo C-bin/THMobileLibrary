@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		375E7A531EEF859C00B4EB4E /* THFounctionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 375E7A521EEF859C00B4EB4E /* THFounctionCell.m */; };
+		375E7A551EEF863D00B4EB4E /* 热门话题.png in Resources */ = {isa = PBXBuildFile; fileRef = 375E7A541EEF863D00B4EB4E /* 热门话题.png */; };
+		3771FEE41EEEA2DF008464D9 /* CZCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3771FEE31EEEA2DF008464D9 /* CZCollectionViewCell.m */; };
+		3771FEE71EEEA33D008464D9 /* CZBookModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3771FEE61EEEA33D008464D9 /* CZBookModel.m */; };
+		3771FEE91EEEA4A1008464D9 /* woshi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3771FEE81EEEA4A1008464D9 /* woshi.jpg */; };
+		3771FEEE1EEEA50B008464D9 /* lunbo1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3771FEEA1EEEA50B008464D9 /* lunbo1.jpg */; };
+		3771FEEF1EEEA50B008464D9 /* lunbo2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3771FEEB1EEEA50B008464D9 /* lunbo2.png */; };
+		3771FEF01EEEA50B008464D9 /* lunbo3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3771FEEC1EEEA50B008464D9 /* lunbo3.png */; };
+		3771FEF11EEEA50B008464D9 /* lunbo4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3771FEED1EEEA50B008464D9 /* lunbo4.png */; };
 		37ED0C721EE7CFB5005B4CD8 /* THResourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0C711EE7CFB5005B4CD8 /* THResourceViewController.m */; };
 		37ED0C751EE7D029005B4CD8 /* THGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0C741EE7D029005B4CD8 /* THGuideViewController.m */; };
 		37ED0C7C1EE7D05C005B4CD8 /* THMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37ED0C7B1EE7D05C005B4CD8 /* THMineViewController.m */; };
@@ -53,6 +62,18 @@
 		1414D7A7261CC215796BD584 /* Pods-THMobileLibrary_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-THMobileLibrary_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-THMobileLibrary_Tests/Pods-THMobileLibrary_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		15579A9F12CC4CA326BD1E45 /* Pods-THMobileLibrary_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-THMobileLibrary_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-THMobileLibrary_Example/Pods-THMobileLibrary_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		2F0BFE47DA5CD8921F56EE37 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		375E7A511EEF859C00B4EB4E /* THFounctionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THFounctionCell.h; sourceTree = "<group>"; };
+		375E7A521EEF859C00B4EB4E /* THFounctionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THFounctionCell.m; sourceTree = "<group>"; };
+		375E7A541EEF863D00B4EB4E /* 热门话题.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "热门话题.png"; sourceTree = "<group>"; };
+		3771FEE21EEEA2DF008464D9 /* CZCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CZCollectionViewCell.h; path = ../../Home/View/CZCollectionViewCell.h; sourceTree = "<group>"; };
+		3771FEE31EEEA2DF008464D9 /* CZCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CZCollectionViewCell.m; path = ../../Home/View/CZCollectionViewCell.m; sourceTree = "<group>"; };
+		3771FEE51EEEA33D008464D9 /* CZBookModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CZBookModel.h; path = ../../Home/Model/CZBookModel.h; sourceTree = "<group>"; };
+		3771FEE61EEEA33D008464D9 /* CZBookModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CZBookModel.m; path = ../../Home/Model/CZBookModel.m; sourceTree = "<group>"; };
+		3771FEE81EEEA4A1008464D9 /* woshi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = woshi.jpg; sourceTree = "<group>"; };
+		3771FEEA1EEEA50B008464D9 /* lunbo1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lunbo1.jpg; sourceTree = "<group>"; };
+		3771FEEB1EEEA50B008464D9 /* lunbo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lunbo2.png; sourceTree = "<group>"; };
+		3771FEEC1EEEA50B008464D9 /* lunbo3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lunbo3.png; sourceTree = "<group>"; };
+		3771FEED1EEEA50B008464D9 /* lunbo4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lunbo4.png; sourceTree = "<group>"; };
 		37ED0C701EE7CFB5005B4CD8 /* THResourceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THResourceViewController.h; sourceTree = "<group>"; };
 		37ED0C711EE7CFB5005B4CD8 /* THResourceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THResourceViewController.m; sourceTree = "<group>"; };
 		37ED0C731EE7D029005B4CD8 /* THGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THGuideViewController.h; sourceTree = "<group>"; };
@@ -161,6 +182,8 @@
 		37ED0C5B1EE7B1CC005B4CD8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3771FEE51EEEA33D008464D9 /* CZBookModel.h */,
+				3771FEE61EEEA33D008464D9 /* CZBookModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -168,6 +191,8 @@
 		37ED0C5C1EE7B1CC005B4CD8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3771FEE21EEEA2DF008464D9 /* CZCollectionViewCell.h */,
+				3771FEE31EEEA2DF008464D9 /* CZCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -203,6 +228,8 @@
 			children = (
 				37ED0C891EE7E942005B4CD8 /* LoopBanner.h */,
 				37ED0C8A1EE7E942005B4CD8 /* LoopBanner.m */,
+				375E7A511EEF859C00B4EB4E /* THFounctionCell.h */,
+				375E7A521EEF859C00B4EB4E /* THFounctionCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -290,6 +317,12 @@
 		37ED0C8C1EE7E9D0005B4CD8 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				375E7A541EEF863D00B4EB4E /* 热门话题.png */,
+				3771FEEA1EEEA50B008464D9 /* lunbo1.jpg */,
+				3771FEEB1EEEA50B008464D9 /* lunbo2.png */,
+				3771FEEC1EEEA50B008464D9 /* lunbo3.png */,
+				3771FEED1EEEA50B008464D9 /* lunbo4.png */,
+				3771FEE81EEEA4A1008464D9 /* woshi.jpg */,
 				37ED0C8D1EE7EB73005B4CD8 /* 1.jpg */,
 				37ED0C8E1EE7EB73005B4CD8 /* 2.jpg */,
 				37ED0C8F1EE7EB73005B4CD8 /* 3.jpg */,
@@ -452,7 +485,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = TH;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "C-bin";
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
@@ -488,10 +521,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				37ED0C941EE7EB73005B4CD8 /* 4.jpg in Resources */,
+				3771FEEF1EEEA50B008464D9 /* lunbo2.png in Resources */,
 				37ED0C921EE7EB73005B4CD8 /* 2.jpg in Resources */,
+				375E7A551EEF863D00B4EB4E /* 热门话题.png in Resources */,
+				3771FEF11EEEA50B008464D9 /* lunbo4.png in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
+				3771FEEE1EEEA50B008464D9 /* lunbo1.jpg in Resources */,
+				3771FEE91EEEA4A1008464D9 /* woshi.jpg in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				3771FEF01EEEA50B008464D9 /* lunbo3.png in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 				37ED0C931EE7EB73005B4CD8 /* 3.jpg in Resources */,
 				37ED0C911EE7EB73005B4CD8 /* 1.jpg in Resources */,
@@ -611,9 +650,12 @@
 				37ED0C881EE7E119005B4CD8 /* THBaseNavView.m in Sources */,
 				37ED0C7C1EE7D05C005B4CD8 /* THMineViewController.m in Sources */,
 				37ED0C751EE7D029005B4CD8 /* THGuideViewController.m in Sources */,
+				3771FEE41EEEA2DF008464D9 /* CZCollectionViewCell.m in Sources */,
 				37ED0C9B1EE7F15B005B4CD8 /* THMainViewController.m in Sources */,
+				375E7A531EEF859C00B4EB4E /* THFounctionCell.m in Sources */,
 				37ED0C721EE7CFB5005B4CD8 /* THResourceViewController.m in Sources */,
 				37ED0CA11EE7F346005B4CD8 /* THHomeViewController.m in Sources */,
+				3771FEE71EEEA33D008464D9 /* CZBookModel.m in Sources */,
 				6003F5A7195388D20070C39A /* THViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				37ED0C9E1EE7F194005B4CD8 /* THRootViewController.m in Sources */,
@@ -679,14 +721,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -719,13 +766,18 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -773,6 +825,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6A4FB23133DF6645798D389A /* Pods-THMobileLibrary_Tests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -797,6 +850,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1414D7A7261CC215796BD584 /* Pods-THMobileLibrary_Tests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
