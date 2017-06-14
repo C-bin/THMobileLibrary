@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		375E7A531EEF859C00B4EB4E /* THFounctionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 375E7A521EEF859C00B4EB4E /* THFounctionCell.m */; };
 		375E7A551EEF863D00B4EB4E /* 热门话题.png in Resources */ = {isa = PBXBuildFile; fileRef = 375E7A541EEF863D00B4EB4E /* 热门话题.png */; };
+		375E7A5D1EEFC0EF00B4EB4E /* LGSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 375E7A5C1EEFC0EF00B4EB4E /* LGSegment.m */; };
+		376012661EF0C47600A1C758 /* THDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 376012641EF0C47600A1C758 /* THDetailViewController.m */; };
+		376012671EF0C47600A1C758 /* THDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 376012651EF0C47600A1C758 /* THDetailViewController.xib */; };
 		3771FEE41EEEA2DF008464D9 /* CZCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3771FEE31EEEA2DF008464D9 /* CZCollectionViewCell.m */; };
 		3771FEE71EEEA33D008464D9 /* CZBookModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3771FEE61EEEA33D008464D9 /* CZBookModel.m */; };
 		3771FEE91EEEA4A1008464D9 /* woshi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3771FEE81EEEA4A1008464D9 /* woshi.jpg */; };
@@ -65,6 +68,11 @@
 		375E7A511EEF859C00B4EB4E /* THFounctionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THFounctionCell.h; sourceTree = "<group>"; };
 		375E7A521EEF859C00B4EB4E /* THFounctionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THFounctionCell.m; sourceTree = "<group>"; };
 		375E7A541EEF863D00B4EB4E /* 热门话题.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "热门话题.png"; sourceTree = "<group>"; };
+		375E7A5B1EEFC0EF00B4EB4E /* LGSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSegment.h; sourceTree = "<group>"; };
+		375E7A5C1EEFC0EF00B4EB4E /* LGSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSegment.m; sourceTree = "<group>"; };
+		376012631EF0C47600A1C758 /* THDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THDetailViewController.h; sourceTree = "<group>"; };
+		376012641EF0C47600A1C758 /* THDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THDetailViewController.m; sourceTree = "<group>"; };
+		376012651EF0C47600A1C758 /* THDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THDetailViewController.xib; sourceTree = "<group>"; };
 		3771FEE21EEEA2DF008464D9 /* CZCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CZCollectionViewCell.h; path = ../../Home/View/CZCollectionViewCell.h; sourceTree = "<group>"; };
 		3771FEE31EEEA2DF008464D9 /* CZCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CZCollectionViewCell.m; path = ../../Home/View/CZCollectionViewCell.m; sourceTree = "<group>"; };
 		3771FEE51EEEA33D008464D9 /* CZBookModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CZBookModel.h; path = ../../Home/Model/CZBookModel.h; sourceTree = "<group>"; };
@@ -175,6 +183,9 @@
 			children = (
 				37ED0C701EE7CFB5005B4CD8 /* THResourceViewController.h */,
 				37ED0C711EE7CFB5005B4CD8 /* THResourceViewController.m */,
+				376012631EF0C47600A1C758 /* THDetailViewController.h */,
+				376012641EF0C47600A1C758 /* THDetailViewController.m */,
+				376012651EF0C47600A1C758 /* THDetailViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -226,6 +237,8 @@
 		37ED0C601EE7B1CC005B4CD8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				375E7A5B1EEFC0EF00B4EB4E /* LGSegment.h */,
+				375E7A5C1EEFC0EF00B4EB4E /* LGSegment.m */,
 				37ED0C891EE7E942005B4CD8 /* LoopBanner.h */,
 				37ED0C8A1EE7E942005B4CD8 /* LoopBanner.m */,
 				375E7A511EEF859C00B4EB4E /* THFounctionCell.h */,
@@ -523,6 +536,7 @@
 				37ED0C941EE7EB73005B4CD8 /* 4.jpg in Resources */,
 				3771FEEF1EEEA50B008464D9 /* lunbo2.png in Resources */,
 				37ED0C921EE7EB73005B4CD8 /* 2.jpg in Resources */,
+				376012671EF0C47600A1C758 /* THDetailViewController.xib in Resources */,
 				375E7A551EEF863D00B4EB4E /* 热门话题.png in Resources */,
 				3771FEF11EEEA50B008464D9 /* lunbo4.png in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
@@ -646,11 +660,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* THAppDelegate.m in Sources */,
+				376012661EF0C47600A1C758 /* THDetailViewController.m in Sources */,
 				37ED0C8B1EE7E942005B4CD8 /* LoopBanner.m in Sources */,
 				37ED0C881EE7E119005B4CD8 /* THBaseNavView.m in Sources */,
 				37ED0C7C1EE7D05C005B4CD8 /* THMineViewController.m in Sources */,
 				37ED0C751EE7D029005B4CD8 /* THGuideViewController.m in Sources */,
 				3771FEE41EEEA2DF008464D9 /* CZCollectionViewCell.m in Sources */,
+				375E7A5D1EEFC0EF00B4EB4E /* LGSegment.m in Sources */,
 				37ED0C9B1EE7F15B005B4CD8 /* THMainViewController.m in Sources */,
 				375E7A531EEF859C00B4EB4E /* THFounctionCell.m in Sources */,
 				37ED0C721EE7CFB5005B4CD8 /* THResourceViewController.m in Sources */,
