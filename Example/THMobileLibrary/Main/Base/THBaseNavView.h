@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface THBaseNavView : UIView
-
+- (instancetype)initWithFrame:(CGRect)frame navTitle:(NSString *)title;
 @end

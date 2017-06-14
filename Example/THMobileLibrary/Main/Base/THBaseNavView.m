@@ -7,21 +7,28 @@
 //
 
 #import "THBaseNavView.h"
-
+#define RGB(R,G,B)          [UIColor colorWithRed:R/255.0f green:G/255.0f blue:B/255.0f alpha:1.0f]
 @implementation THBaseNavView
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame navTitle:(NSString *)title
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setup];
+        [self setBackgroundColor:RGB(14, 193, 194)];
+        UILabel *navTitle=[[UILabel alloc]initWithFrame:CGRectMake((self.frame.size.width-80)/2, 32, 80, 20)];
+        
+        
+        navTitle.textAlignment=NSTextAlignmentCenter;
+        navTitle.text=title;
+        
+        navTitle.font=[UIFont systemFontOfSize:18];
+        
+        
+        [self addSubview:navTitle];
+       
     }
     return self;
 }
--(void)setup
-{
-    [self setBackgroundColor:[UIColor colorWithRed:142 green:159 blue:132 alpha:1]];
-  
-}
+
 
 @end

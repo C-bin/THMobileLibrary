@@ -7,16 +7,20 @@
 //
 
 #import "THRootViewController.h"
-
+#import "THBaseNavView.h"
 @interface THRootViewController ()
 
 @end
 
 @implementation THRootViewController
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+  
 }
 
 - (void)didReceiveMemoryWarning {

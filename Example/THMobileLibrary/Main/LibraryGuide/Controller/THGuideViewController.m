@@ -19,7 +19,7 @@
    
     self.view.backgroundColor=[UIColor redColor];
     //导航栏
-    THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
+    THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64) navTitle:@"图书馆指南"];
     [self.view addSubview:navView];
 }
 

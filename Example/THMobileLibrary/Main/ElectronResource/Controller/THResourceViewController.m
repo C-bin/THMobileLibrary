@@ -30,7 +30,7 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
     [super viewDidLoad];
    self.view.backgroundColor=[UIColor yellowColor];
     //导航栏
-    THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
+    THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64) navTitle:@"电子资源"];
     [self.view addSubview:navView];
     
     dataArray =@[@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清"];

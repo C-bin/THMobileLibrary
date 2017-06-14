@@ -7,7 +7,7 @@
 //
 
 #import "THMainViewController.h"
-
+#import "THBaseNavView.h"
 //定义四个视图控制器
 #define ViewControllers @[@"THHomeViewController", @"THResourceViewController", @"THGuideViewController", @"THMineViewController"]
 //标签 标题
@@ -21,33 +21,19 @@
 @end
 
 @implementation THMainViewController
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+ 
     //调用创建标签页方法
     [self createViewController];
-}
--(void)createMyNavigationBar{
     
-    
-    
-    UIView *barView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 64)];
-    barView.backgroundColor=[UIColor redColor];
-    [self.view addSubview:barView];
-    
-    UIButton *button=[UIButton buttonWithType:UIButtonTypeSystem];
-    button.frame=CGRectMake((self.view.frame.size.width-80)/2, 32, 80, 20);
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    
-    
-    [button setTitle:@"首页" forState:UIControlStateNormal];
-    
-    button.titleLabel.font=[UIFont systemFontOfSize:18];
-    
-    
-    [barView addSubview:button];
-    
+   
+
 }
 
 #pragma mark 创建标签页
