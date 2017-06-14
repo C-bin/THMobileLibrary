@@ -788,7 +788,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: tianhaiwangluoone@163.com (P4G9N6N224)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: tianhaiwangluoone@163.com (P4G9N6N224)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -818,6 +819,8 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "90005d5e-2015-422b-b812-f6fa64e21f67";
+				PROVISIONING_PROFILE_SPECIFIER = 0426tongpei;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -833,6 +836,8 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "90005d5e-2015-422b-b812-f6fa64e21f67";
+				PROVISIONING_PROFILE_SPECIFIER = 0426tongpei;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

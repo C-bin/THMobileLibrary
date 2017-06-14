@@ -19,7 +19,7 @@
    
     self.view.backgroundColor=[UIColor whiteColor];
     //导航栏
-    THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
+    THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64) navTitle:@"我的"];
     [self.view addSubview:navView];
 }
 

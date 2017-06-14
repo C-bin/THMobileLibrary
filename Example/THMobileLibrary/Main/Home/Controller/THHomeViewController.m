@@ -48,9 +48,9 @@
     self.view.backgroundColor=[UIColor whiteColor];
    dataArray =@[@"馆藏查询",@"新书推荐",@"借阅排行",@"扫一扫",@"读者信息",@"我的书架",@"正在借阅",@"历史借阅"];
     //导航栏
-    THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
+    THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64) navTitle:@"首页"];
     [self.view addSubview:navView];
-  
+    
     //轮播图
     [self createLoopBanner];
     //功能按钮
@@ -58,16 +58,29 @@
     //加载Segment
     [self setSegment];
     //加载ViewController
-//    [self addChildViewController];
+//   [self addChildViewController];
+    
     //加载ScrollView
     [self setContentScrollView];
     
 //    [self.storyboard instantiateViewControllerWithIdentifier:@"homeView"];
+    NSString *date=[self stringFromDate:[self dateFromLongLong:1446307200000]];
+    NSLog(@"date===========%@",date);
 
 }
+-(NSString*)stringFromDate:(NSDate*)date{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    return [dateFormatter stringFromDate:date];
+}
+-(NSDate*)dateFromLongLong:(long long)msSince1970{
+    return [NSDate dateWithTimeIntervalSince1970:msSince1970 / 1000];
+}
+
 -(void)createLoopBanner{
     
-    LoopBanner *loop = [[LoopBanner alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 180) scrollDuration:3.f];
+    LoopBanner *loop = [[LoopBanner alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 164) scrollDuration:3.f];
     loop.imageURLStrings = @[@"1.jpg", @"2.jpg", @"3.jpg", @"4.jpg"];
     loop.clickAction = ^(NSInteger index) {
         
@@ -87,7 +100,7 @@
     layout.minimumLineSpacing = 0;
     layout.minimumInteritemSpacing = 0;
     //2.初始化collectionView
-    mainCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 244, SCREEN_WIDTH, 150) collectionViewLayout:layout];
+    mainCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 228, SCREEN_WIDTH, 150) collectionViewLayout:layout];
     [self.view addSubview:mainCollectionView];
     
     mainCollectionView.backgroundColor = [UIColor whiteColor];
@@ -108,7 +121,7 @@
     
     [self buttonList];
     //初始化
-    LGSegment *segment = [[LGSegment alloc]initWithFrame:CGRectMake(0, 390, self.view.frame.size.width, LG_segmentH)];
+    LGSegment *segment = [[LGSegment alloc]initWithFrame:CGRectMake(0, 378, self.view.frame.size.width, LG_segmentH)];
     segment.delegate = self;
     self.segment = segment;
     segment.backgroundColor=[UIColor redColor];
