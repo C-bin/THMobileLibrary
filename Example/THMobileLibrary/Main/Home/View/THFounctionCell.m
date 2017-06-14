@@ -22,7 +22,7 @@
         
         
         
-        _botlabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _topImage.frame.size.height+5,frame.size.width, 20)];
+        _botlabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _topImage.frame.size.height+10,frame.size.width, 20)];
         _botlabel.textAlignment = NSTextAlignmentCenter;
         _botlabel.textColor = [UIColor blackColor];
         _botlabel.numberOfLines=0;

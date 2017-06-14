@@ -10,7 +10,7 @@
 #import "THBaseNavView.h"
 #import "LoopBanner.h"
 #import "CZCollectionViewCell.h"
-
+#import "THDetailViewController.h"
 #define SCREEN_WIDTH        [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT       [UIScreen mainScreen].bounds.size.height
 #define SCREEN_ASPECTRATIO  [UIScreen mainScreen].bounds.size.width/375
@@ -130,7 +130,11 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
     //    CZCollectionViewCell *cell = (CZCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     //    CZBookModel *model=dataArray[indexPath.row];
     
+    THDetailViewController *detail=[[THDetailViewController alloc]init];
+    [self.navigationController pushViewController:detail animated:NO];
     
+    
+    NSLog(@">>>>>>>>>>%ld",indexPath.row);
     
 }
 
