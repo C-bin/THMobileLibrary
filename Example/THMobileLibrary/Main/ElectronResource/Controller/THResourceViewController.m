@@ -8,9 +8,14 @@
 
 #import "THResourceViewController.h"
 #import "THBaseNavView.h"
-#import "LoopBanner.h"
+
 #import "CZCollectionViewCell.h"
 #import "THDetailViewController.h"
+
+#import "CZBookModel.h"
+
+#define WEAKSELF __weak typeof(self) weakSelf = self;
+#define WEBSERVICE_URL       @"http://101.201.116.210:7726/bookTypeAndSearch/queryBookList?bookType=&classificationId=&classificationNumber=&classificationType=&desc=0&keyword=&pageNum=%ld&pageSize=9&pageType=3&press=&rankType=1&upYearEndVal=&upYearStartVal=&yearEnd=&yearStart="
 #define SCREEN_WIDTH        [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT       [UIScreen mainScreen].bounds.size.height
 #define SCREEN_ASPECTRATIO  [UIScreen mainScreen].bounds.size.width/375
@@ -18,7 +23,7 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
 @interface THResourceViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 {
     UICollectionView *mainCollectionView;
-    NSArray * dataArray;
+    NSMutableArray * dataArray;
 }
 
 
@@ -32,12 +37,61 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
     //导航栏
     THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64) navTitle:@"电子资源"];
     [self.view addSubview:navView];
+    dataArray=[[NSMutableArray alloc]init];
     
-    dataArray =@[@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清",@"朱自清"];
-    [self createCollectionView];
+    
+    
+    [self getBooksData];
+    NSLog(@"");
+    
 }
 
-
+-(void)getBooksData{
+    NSString *baseString = @"http://101.201.116.210:7726/bookTypeAndSearch/queryBookList?rankType=1&pageSize=12&pageNum=1&pageType=3&keyword=&classificationType=&classificationNumber=&classificationId=&bookType=L15_1&press=&upYearEndVal=&desc=0&upYearStartVal=&yearEnd=&yearStart=";
+    //转化为URL
+    NSURL *baseURL = [NSURL URLWithString:baseString];
+    
+    //根据 baseURL 创建网络请求对象
+    NSMutableURLRequest *requset = [NSMutableURLRequest requestWithURL:baseURL];
+    //设置参数：1.POST 2.参数体（body）
+    [requset setHTTPMethod:@"GET"];
+    //2.body参数
+    //    NSString *bodyString = @"date=20131129&startRecord=1&len=5&udid=1234567890&terminalType=Iphone&cid=213";
+    //    NSData *badyData = [bodyString dataUsingEncoding:NSUTF8StringEncoding];
+    //设置 body（POST参数）
+    //    [requset setHTTPBody:badyData];
+    
+    //iOS 9 提供了 NSURLSession 来代替  NSURLConnection
+    //首先，创建一个 NSURLSession 对象（如果要使用block来完成网络请求，这个对象可以使用 NSURLSession 自带的单例对象）
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    
+    // session发送网络请求对象
+    WEAKSELF
+    NSURLSessionTask *task = [session dataTaskWithRequest:requset completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        NSArray * books =[[dict objectForKey:@"data"] objectForKey:@"list"];
+//        [dataArray removeAllObjects];
+        NSLog(@"--------*********%ld",books.count);
+        for (int i =0; i<books.count; i++) {
+            NSDictionary * book =[books objectAtIndex:i];
+            CZBookModel  *paperiteam =[[CZBookModel alloc]init];
+            paperiteam.bookName = [book objectForKey:@"bookName"];
+            paperiteam.id = [book objectForKey:@"id"];
+            paperiteam.bookImage = [NSString stringWithFormat:@"http://101.201.114.210/591/ebooks/%@",[[[book objectForKey:@"bookPictures"] objectAtIndex:0]objectForKey:@"filePath"]];
+//             NSLog(@"--------*********%@",paperiteam.bookName);
+            [dataArray addObject:paperiteam];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+         
+    
+        });
+    }];
+    //开始网络请求任务
+    [task resume];
+    [self createCollectionView];
+    
+}
 
 
 -(void)createCollectionView{
@@ -67,13 +121,13 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
     mainCollectionView.delegate = self;
     mainCollectionView.dataSource = self;
     //轮播图
-    LoopBanner *loop = [[LoopBanner alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 180) scrollDuration:3.f];
-    //    loop.imageURLStrings = @[@"lunbo2.png", @"lunbo1.jpg", @"lunbo3.png", @"lunbo4.png"];
-    loop.imageURLStrings = @[@"lunbo1.jpg", @"lunbo2.png", @"lunbo3.png", @"lunbo4.png"];
-    loop.clickAction = ^(NSInteger index) {
-        
-    };
-    [mainCollectionView addSubview:loop];
+//    LoopBanner *loop = [[LoopBanner alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 180) scrollDuration:3.f];
+//    //    loop.imageURLStrings = @[@"lunbo2.png", @"lunbo1.jpg", @"lunbo3.png", @"lunbo4.png"];
+//    loop.imageURLStrings = @[@"lunbo1.jpg", @"lunbo2.png", @"lunbo3.png", @"lunbo4.png"];
+//    loop.clickAction = ^(NSInteger index) {
+//        
+//    };
+//    [mainCollectionView addSubview:loop];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -81,12 +135,12 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
     return dataArray.count;
 }
 
-- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+- ( UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     CZCollectionViewCell *cell = (CZCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellId" forIndexPath:indexPath];
     //    cell.botlabel.text =[dataArray objectAtIndex:indexPath.row];
-    //    CZBookModel *model=dataArray[indexPath.row];
-    //    [cell configCellWithModel:model];
-    
+        CZBookModel *model=dataArray[indexPath.row];
+        [cell configCellWithModel:model];
+    NSLog(@">>>>>>><<<<<<<<<<<%@",cell.botlabel);
     return cell;
 }
 

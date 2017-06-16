@@ -8,6 +8,9 @@
 
 #import "CZCollectionViewCell.h"
 #import "CZBookModel.h"
+#import "UIImageView+WebCache.h"
+#define head_URL   @"http://101.201.114.210/591/ebooks/"
+
 @implementation CZCollectionViewCell
 -(id)initWithFrame:(CGRect)frame
 {
@@ -38,8 +41,9 @@
 
 -(void)configCellWithModel:(CZBookModel*)model{
 //    [self.topImage sd_setImageWithURL:[NSURL URLWithString:model.bookImage]];
-//     [self.topImage sd_setImageWithURL:[NSURL URLWithString:@"http://101.201.114.210/591/ebooks/group1/M00/03/49/Zcl0lljsPrmARWPmAAAWLX7hd4Q639.jpg"]];
-//    self.botlabel.text=model.bookName;
+     [self.topImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",head_URL,model.bookImage]]];
+//    [self.topImage sd_se]
+    self.botlabel.text=model.bookName;
 //    self.bookId=model.id;
 }
 

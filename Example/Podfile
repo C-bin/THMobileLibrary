@@ -10,5 +10,7 @@ target 'THMobileLibrary_Example' do
   pod 'Expecta'
   pod 'FBSnapshotTestCase'
   pod 'Expecta+Snapshots'
+  pod 'SDWebImage'
+  pod 'AFNetworking', '~>3.1.0'
   end
 end
