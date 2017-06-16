@@ -9,5 +9,7 @@
 #import "THRootViewController.h"
 
 @interface THHomeViewController : THRootViewController
+@property (nonatomic, strong) UISegmentedControl *segmentCtrl;
 
+@property (nonatomic, strong) UIScrollView *scrollView;
 @end

@@ -7,29 +7,39 @@
 //
 
 #import "THHomeViewController.h"
-#import "LoopBanner.h"
+#import "BHInfiniteScrollView.h"
+#import "THImageModel.h"
 #import "THBaseNavView.h"
 #import "THFounctionCell.h"
-#import "LGSegment.h"
+#import "THNewsTableView.h"
+#import "THAnnouncementTableView.h"
+
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define SCREEN_WIDTH        [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT       [UIScreen mainScreen].bounds.size.height
 #define SCREEN_ASPECTRATIO  [UIScreen mainScreen].bounds.size.width/375
 
+#define LOOP_HEIGHT    164
+#define FOUNCTION_HEIGHT    150
+
+
+#define IMAGE_URL @"http://101.201.116.210:7726/imageManage/getImagePathForMobile/1902ce11663d4399856887e1d11918c0"
+
 //ScrollView高度
-#define LG_scrollViewH 250
+#define LG_scrollViewH    SCREEN_HEIGHT-LOOP_HEIGHT-FOUNCTION_HEIGHT-SEGMENT_H-108
 //Segment高度
-#define LG_segmentH 40
-@interface THHomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate,SegmentDelegate>
+#define SEGMENT_H 40
+@interface THHomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate,BHInfiniteScrollViewDelegate>
 {
     UICollectionView *mainCollectionView;
     NSArray * dataArray;
+   
 }
-@property (nonatomic, strong) UIScrollView *contentScrollView;
+//@property (nonatomic, strong) UIScrollView *contentScrollView;
 @property(nonatomic,strong)NSMutableArray *buttonList;
-@property (nonatomic, weak) LGSegment *segment;
+@property(nonatomic,strong)NSMutableArray *loopImage_array;
 @property(nonatomic,weak)CALayer *LGLayer;
-
+@property (nonatomic, strong) BHInfiniteScrollView* infinitePageView;
 @end
 
 @implementation THHomeViewController
@@ -41,52 +51,122 @@
     }
     return _buttonList;
 }
+- (NSMutableArray *)loopImage_array
+{
+    if (!_loopImage_array)
+    {
+        _loopImage_array = [NSMutableArray array];
+    }
+    return _loopImage_array;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor=[UIColor whiteColor];
    dataArray =@[@"馆藏查询",@"新书推荐",@"借阅排行",@"扫一扫",@"读者信息",@"我的书架",@"正在借阅",@"历史借阅"];
+//loopImage_array=[[NSMutableArray alloc]init];
     //导航栏
     THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64) navTitle:@"首页"];
     [self.view addSubview:navView];
     
     //轮播图
-    [self createLoopBanner];
+       [self getImageArray:IMAGE_URL];
     //功能按钮
     [self createCollectionView];
     //加载Segment
-    [self setSegment];
-    //加载ViewController
-//   [self addChildViewController];
-    
+    [self settingSegment];
+
     //加载ScrollView
-    [self setContentScrollView];
-    
-//    [self.storyboard instantiateViewControllerWithIdentifier:@"homeView"];
-    NSString *date=[self stringFromDate:[self dateFromLongLong:1446307200000]];
-    NSLog(@"date===========%@",date);
+   [self settingScrollView];
 
-}
--(NSString*)stringFromDate:(NSDate*)date{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    
-    return [dateFormatter stringFromDate:date];
-}
--(NSDate*)dateFromLongLong:(long long)msSince1970{
-    return [NSDate dateWithTimeIntervalSince1970:msSince1970 / 1000];
+ 
 }
 
--(void)createLoopBanner{
-    
-    LoopBanner *loop = [[LoopBanner alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 164) scrollDuration:3.f];
-    loop.imageURLStrings = @[@"1.jpg", @"2.jpg", @"3.jpg", @"4.jpg"];
-    loop.clickAction = ^(NSInteger index) {
+-(void)getImageArray:(NSString *)image_url{
+   
+    NSURL *url = [NSURL URLWithString:image_url];
+    // 2.创建一个网络请求
+    NSURLRequest *request =[NSURLRequest requestWithURL:url];
+    // 3.获得会话对象
+    NSURLSession *session = [NSURLSession sharedSession];
+    // 4.根据会话对象，创建一个Task任务：
+    NSURLSessionDataTask *sessionDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSLog(@"从服务器获取到数据");
+        /*
+         对从服务器获取到的数据data进行相应的处理：
+         */
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:(NSJSONReadingMutableLeaves) error:nil];
+        NSArray * images =[dict objectForKey:@"data"];
+                //        [dataArray removeAllObjects];
+                NSLog(@"--------*********%ld",images.count);
+                for (NSDictionary *dic in images) {
         
-    };
-    [self.view addSubview:loop];
+                     THImageModel *loopImage=[[THImageModel alloc]init];
+                    loopImage.fileUrl = [dic objectForKey:@"fileUrl"];
+        
+        
+//                    NSLog(@"--------*********%@",loopImage.fileUrl);
+                    [_loopImage_array addObject:loopImage.fileUrl];
+                    
+                }
+        dispatch_async(dispatch_get_main_queue(),^{
+            
+            //更新界面
+//            [self reloadData];
+            [self createLoop];
+            NSLog(@"图片数组----%@",_loopImage_array);
+        });
+    }];
+    // 5.最后一步，执行任务（resume也是继续执行）:
+    [sessionDataTask resume];
+    
+    
+    
 }
+-(void)createLoop{
+//    NSArray *imageArray=[NSArray arrayWithArray:loopImage_array];
+//    NSLog(@"图片地址------%@",imageArray);
+    BHInfiniteScrollView* infinitePageView1 = [BHInfiniteScrollView
+                                               infiniteScrollViewWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), LOOP_HEIGHT) Delegate:self ImagesArray:_loopImage_array];
+    
+    infinitePageView1.dotSize = 10;
+    infinitePageView1.pageControlAlignmentOffset = CGSizeMake(0, 20);
+    //    infinitePageView1.titleView.textColor = [UIColor whiteColor];
+    //    infinitePageView1.titleView.margin = 30;
+    //    infinitePageView1.titleView.hidden = YES;
+    infinitePageView1.scrollTimeInterval = 2;
+    infinitePageView1.autoScrollToNextPage = YES;
+    infinitePageView1.delegate = self;
+    [self.view addSubview:infinitePageView1];
+    
+}
+- (void)stop {
+    [_infinitePageView stopAutoScrollPage];
+}
+
+- (void)start {
+    [_infinitePageView startAutoScrollPage];
+}
+
+
+
+- (void)infiniteScrollView:(BHInfiniteScrollView *)infiniteScrollView didScrollToIndex:(NSInteger)index {
+    NSLog(@"did scroll to index %ld", index);
+}
+
+- (void)infiniteScrollView:(BHInfiniteScrollView *)infiniteScrollView didSelectItemAtIndex:(NSInteger)index {
+    //NSLog(@"did select item at index %ld", index);
+}
+//-(void)createLoopBanner{
+//    
+//    LoopBanner *loop = [[LoopBanner alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, LOOP_HEIGHT) scrollDuration:3.f];
+//    loop.imageURLStrings = @[@"1.jpg", @"2.jpg", @"3.jpg", @"4.jpg"];
+//    loop.clickAction = ^(NSInteger index) {
+//        
+//    };
+//    [self.view addSubview:loop];
+//}
 -(void)createCollectionView{
     #pragma mark - CreateUICollectionView
     //1.初始化layout
@@ -100,7 +180,7 @@
     layout.minimumLineSpacing = 0;
     layout.minimumInteritemSpacing = 0;
     //2.初始化collectionView
-    mainCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 228, SCREEN_WIDTH, 150) collectionViewLayout:layout];
+    mainCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64+LOOP_HEIGHT, SCREEN_WIDTH,FOUNCTION_HEIGHT) collectionViewLayout:layout];
     [self.view addSubview:mainCollectionView];
     
     mainCollectionView.backgroundColor = [UIColor whiteColor];
@@ -116,89 +196,7 @@
  
     
 }
-//LGSegment
--(void)setSegment {
-    
-    [self buttonList];
-    //初始化
-    LGSegment *segment = [[LGSegment alloc]initWithFrame:CGRectMake(0, 378, self.view.frame.size.width, LG_segmentH)];
-    segment.delegate = self;
-    self.segment = segment;
-    segment.backgroundColor=[UIColor redColor];
-    [self.view addSubview:segment];
-    [self.buttonList addObject:segment.buttonList];
-    self.LGLayer = segment.LGLayer;
-    
-}
-//加载ScrollView
--(void)setContentScrollView {
-    
-    UIScrollView *sv = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 390+LG_segmentH, self.view.frame.size.width, LG_scrollViewH)];
-    [self.view addSubview:sv];
-    sv.bounces = NO;
-    sv.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    sv.contentOffset = CGPointMake(0, 0);
-    sv.pagingEnabled = YES;
-    sv.showsHorizontalScrollIndicator = NO;
-    sv.scrollEnabled = YES;
-    sv.userInteractionEnabled = YES;
-    sv.delegate = self;
-    
-    for (int i=0; i<self.childViewControllers.count; i++) {
-        UIViewController * vc = self.childViewControllers[i];
-        vc.view.frame = CGRectMake(i * SCREEN_WIDTH, 0, SCREEN_WIDTH, 300);
-        [sv addSubview:vc.view];
-        sv.backgroundColor=[UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1];
-        
-    }
-//    sv.backgroundColor=[UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1];
-    sv.contentSize = CGSizeMake(2 * SCREEN_WIDTH, 0);
-    self.contentScrollView = sv;
-}
-//加载3个ViewController
--(void)addChildViewController{
-    
-    UIScrollView *sv = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 390, self.view.frame.size.width, LG_scrollViewH)];
-    [self.view addSubview:sv];
-    sv.bounces = NO;
-    sv.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    sv.contentOffset = CGPointMake(0, 0);
-    sv.pagingEnabled = YES;
-    sv.showsHorizontalScrollIndicator = NO;
-    sv.scrollEnabled = YES;
-    sv.userInteractionEnabled = YES;
-    sv.delegate = self;
-    
-    for (int i=0; i<self.childViewControllers.count; i++) {
-        UIViewController * vc = self.childViewControllers[i];
-        vc.view.frame = CGRectMake(i * SCREEN_WIDTH, 0, SCREEN_WIDTH, 300);
-        sv.backgroundColor=[UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1];
-        [sv addSubview:vc.view];
-        
-    }
-    
 
-    sv.contentSize = CGSizeMake(3 * SCREEN_WIDTH, 0);
-    self.contentScrollView = sv;
-}
-
-#pragma mark - UIScrollViewDelegate
-//实现LGSegment代理方法
--(void)scrollToPage:(int)Page {
-    CGPoint offset = self.contentScrollView.contentOffset;
-    offset.x = self.view.frame.size.width * Page;
-    [UIView animateWithDuration:0.3 animations:^{
-        self.contentScrollView.contentOffset = offset;
-    }];
-}
-// 只要滚动UIScrollView就会调用
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    
-    CGFloat offsetX = scrollView.contentOffset.x;
-    [self.segment moveToOffsetX:offsetX];
-    
-}
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
@@ -244,6 +242,62 @@
     
     
 }
+
+#pragma mark -  新闻公告
+
+- (void)settingSegment{
+    NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"图书馆通知",@"系统公告",nil];
+    //1.初始化UISegmentedControl
+    UISegmentedControl *segmentCtrl = [[UISegmentedControl alloc]initWithItems:segmentedArray];
+    segmentCtrl.frame=CGRectMake(0, 64+LOOP_HEIGHT+FOUNCTION_HEIGHT, self.view.frame.size.width, SEGMENT_H);
+    
+    segmentCtrl.selectedSegmentIndex = 0;
+    //2.segmentCtrl字体大小，颜色
+    [segmentCtrl setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15],NSForegroundColorAttributeName:[UIColor blackColor]} forState:UIControlStateNormal];
+    [segmentCtrl setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20],NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateSelected];
+    //2.segmentCtrl 背景颜色
+    segmentCtrl.tintColor = [UIColor lightGrayColor];
+    [segmentCtrl addTarget:self action:@selector(segmentBtnClick:) forControlEvents:UIControlEventValueChanged];
+    _segmentCtrl = segmentCtrl;
+    [self.view addSubview:segmentCtrl];
+    
+}
+//segmentCtrl 点击事件
+- (void)segmentBtnClick:(UISegmentedControl *)segmentCtrl{
+   
+    self.scrollView.contentOffset = CGPointMake(self.segmentCtrl.selectedSegmentIndex * SCREEN_WIDTH, 0);
+}
+#pragma mark - ScrollView 新闻公告
+- (void)settingScrollView{
+    
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64+LOOP_HEIGHT+FOUNCTION_HEIGHT+SEGMENT_H, SCREEN_WIDTH, LG_scrollViewH)];
+    scrollView.delegate = self;
+    scrollView.bounces = NO;
+    scrollView.pagingEnabled = YES;
+    scrollView.directionalLockEnabled = YES;
+    scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    scrollView.contentSize = CGSizeMake(2 *SCREEN_WIDTH, 0);
+    scrollView.showsHorizontalScrollIndicator = NO;
+    
+    [self.view addSubview:scrollView];
+    
+    THNewsTableView *tableViewOne = [[THNewsTableView alloc] initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, LG_scrollViewH)];
+    
+    THAnnouncementTableView *tableViewTwo = [[THAnnouncementTableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH,0, SCREEN_WIDTH, LG_scrollViewH)];
+    [scrollView addSubview:tableViewOne];
+    [scrollView addSubview:tableViewTwo];
+    
+    _scrollView = scrollView;
+    
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    CGFloat offset = scrollView.contentOffset.x;
+    
+    self.segmentCtrl.selectedSegmentIndex = offset/SCREEN_WIDTH;
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
