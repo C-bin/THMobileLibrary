@@ -10,6 +10,7 @@
 
 @interface THDetailViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *bookImage;   //图书图片
+@property (nonatomic,copy) NSString *bookPicture;
 @property (weak, nonatomic) IBOutlet UILabel *bookName;        //书名
 @property (weak, nonatomic) IBOutlet UILabel *author;          //作者
 @property (weak, nonatomic) IBOutlet UILabel *publishingHouse; //出版社

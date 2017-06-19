@@ -15,7 +15,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self setBackgroundColor:RGB(14, 193, 194)];
-        UILabel *navTitle=[[UILabel alloc]initWithFrame:CGRectMake((self.frame.size.width-80)/2, 32, 80, 20)];
+        UILabel *navTitle=[[UILabel alloc]initWithFrame:CGRectMake((self.frame.size.width-100)/2, 32, 100, 20)];
         
         
         navTitle.textAlignment=NSTextAlignmentCenter;

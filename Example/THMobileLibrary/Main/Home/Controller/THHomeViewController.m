@@ -13,7 +13,9 @@
 #import "THFounctionCell.h"
 #import "THNewsTableView.h"
 #import "THAnnouncementTableView.h"
-
+#import "AFNetworking.h"
+//#import "AFNetworking.h"
+#define RGB(R,G,B)          [UIColor colorWithRed:R/255.0f green:G/255.0f blue:B/255.0f alpha:1.0f]
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define SCREEN_WIDTH        [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT       [UIScreen mainScreen].bounds.size.height
@@ -51,27 +53,20 @@
     }
     return _buttonList;
 }
-- (NSMutableArray *)loopImage_array
-{
-    if (!_loopImage_array)
-    {
-        _loopImage_array = [NSMutableArray array];
-    }
-    return _loopImage_array;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor=[UIColor whiteColor];
    dataArray =@[@"馆藏查询",@"新书推荐",@"借阅排行",@"扫一扫",@"读者信息",@"我的书架",@"正在借阅",@"历史借阅"];
-//loopImage_array=[[NSMutableArray alloc]init];
+
+    _loopImage_array = [[NSMutableArray alloc]init];
     //导航栏
     THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64) navTitle:@"首页"];
     [self.view addSubview:navView];
     
     //轮播图
-       [self getImageArray:IMAGE_URL];
+    [self getImageData:IMAGE_URL];
     //功能按钮
     [self createCollectionView];
     //加载Segment
@@ -82,65 +77,49 @@
 
  
 }
-
--(void)getImageArray:(NSString *)image_url{
-   
-    NSURL *url = [NSURL URLWithString:image_url];
-    // 2.创建一个网络请求
-    NSURLRequest *request =[NSURLRequest requestWithURL:url];
-    // 3.获得会话对象
-    NSURLSession *session = [NSURLSession sharedSession];
-    // 4.根据会话对象，创建一个Task任务：
-    NSURLSessionDataTask *sessionDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        NSLog(@"从服务器获取到数据");
-        /*
-         对从服务器获取到的数据data进行相应的处理：
-         */
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:(NSJSONReadingMutableLeaves) error:nil];
-        NSArray * images =[dict objectForKey:@"data"];
-                //        [dataArray removeAllObjects];
-                NSLog(@"--------*********%ld",images.count);
-                for (NSDictionary *dic in images) {
-        
-                     THImageModel *loopImage=[[THImageModel alloc]init];
-                    loopImage.fileUrl = [dic objectForKey:@"fileUrl"];
-        
-        
-//                    NSLog(@"--------*********%@",loopImage.fileUrl);
-                    [_loopImage_array addObject:loopImage.fileUrl];
-                    
-                }
-        dispatch_async(dispatch_get_main_queue(),^{
-            
-            //更新界面
-//            [self reloadData];
-            [self createLoop];
-            NSLog(@"图片数组----%@",_loopImage_array);
-        });
-    }];
-    // 5.最后一步，执行任务（resume也是继续执行）:
-    [sessionDataTask resume];
+-(void)getImageData:(NSString *)url{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
-    
+    [manager GET:url parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    }
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             
+      
+             NSDictionary *dict=(NSDictionary *)responseObject;
+             NSArray * images =[dict objectForKey:@"data"];
+           
+             for (NSDictionary *dic in images) {
+                 //
+                 //
+                 NSString *image_url = [dic objectForKey:@"fileUrl"];
+             
+                 [_loopImage_array addObject:image_url];
+                 //
+             }
+             
+             [self createImageLoop];
+         }
+     
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
+             
+             NSLog(@"%@",error);  //这里打印错误信息
+             
+         }];
     
 }
--(void)createLoop{
-//    NSArray *imageArray=[NSArray arrayWithArray:loopImage_array];
-//    NSLog(@"图片地址------%@",imageArray);
-    BHInfiniteScrollView* infinitePageView1 = [BHInfiniteScrollView
-                                               infiniteScrollViewWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), LOOP_HEIGHT) Delegate:self ImagesArray:_loopImage_array];
+-(void)createImageLoop{
     
+    BHInfiniteScrollView* infinitePageView1 = [BHInfiniteScrollView
+                                               infiniteScrollViewWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, LOOP_HEIGHT) Delegate:self ImagesArray:_loopImage_array];
     infinitePageView1.dotSize = 10;
     infinitePageView1.pageControlAlignmentOffset = CGSizeMake(0, 20);
-    //    infinitePageView1.titleView.textColor = [UIColor whiteColor];
-    //    infinitePageView1.titleView.margin = 30;
-    //    infinitePageView1.titleView.hidden = YES;
     infinitePageView1.scrollTimeInterval = 2;
     infinitePageView1.autoScrollToNextPage = YES;
     infinitePageView1.delegate = self;
     [self.view addSubview:infinitePageView1];
-    
 }
+
 - (void)stop {
     [_infinitePageView stopAutoScrollPage];
 }
@@ -152,21 +131,13 @@
 
 
 - (void)infiniteScrollView:(BHInfiniteScrollView *)infiniteScrollView didScrollToIndex:(NSInteger)index {
-    NSLog(@"did scroll to index %ld", index);
+//    NSLog(@"did scroll to index %ld", index);
 }
 
 - (void)infiniteScrollView:(BHInfiniteScrollView *)infiniteScrollView didSelectItemAtIndex:(NSInteger)index {
     //NSLog(@"did select item at index %ld", index);
 }
-//-(void)createLoopBanner{
-//    
-//    LoopBanner *loop = [[LoopBanner alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, LOOP_HEIGHT) scrollDuration:3.f];
-//    loop.imageURLStrings = @[@"1.jpg", @"2.jpg", @"3.jpg", @"4.jpg"];
-//    loop.clickAction = ^(NSInteger index) {
-//        
-//    };
-//    [self.view addSubview:loop];
-//}
+
 -(void)createCollectionView{
     #pragma mark - CreateUICollectionView
     //1.初始化layout
@@ -256,7 +227,7 @@
     [segmentCtrl setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15],NSForegroundColorAttributeName:[UIColor blackColor]} forState:UIControlStateNormal];
     [segmentCtrl setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20],NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateSelected];
     //2.segmentCtrl 背景颜色
-    segmentCtrl.tintColor = [UIColor lightGrayColor];
+    segmentCtrl.tintColor = RGB(109, 205, 250);
     [segmentCtrl addTarget:self action:@selector(segmentBtnClick:) forControlEvents:UIControlEventValueChanged];
     _segmentCtrl = segmentCtrl;
     [self.view addSubview:segmentCtrl];

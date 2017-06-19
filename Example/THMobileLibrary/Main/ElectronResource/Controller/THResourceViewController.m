@@ -8,11 +8,17 @@
 
 #import "THResourceViewController.h"
 #import "THBaseNavView.h"
-
+#import "BHInfiniteScrollView.h"
 #import "CZCollectionViewCell.h"
 #import "THDetailViewController.h"
-
+#import "AFNetworking.h"
 #import "CZBookModel.h"
+#import "THTHBookListCell.h"
+
+#define LOOP_HEIGHT    164
+#define IMAGE_URL @"http://101.201.116.210:7726/imageManage/getImagePathForMobile/1902ce11663d4399856887e1d11918c0"
+
+#define HEADER_URL @"http://101.201.114.210/591/ebooks/"
 
 #define WEAKSELF __weak typeof(self) weakSelf = self;
 #define WEBSERVICE_URL       @"http://101.201.116.210:7726/bookTypeAndSearch/queryBookList?bookType=&classificationId=&classificationNumber=&classificationType=&desc=0&keyword=&pageNum=%ld&pageSize=9&pageType=3&press=&rankType=1&upYearEndVal=&upYearStartVal=&yearEnd=&yearStart="
@@ -20,76 +26,140 @@
 #define SCREEN_HEIGHT       [UIScreen mainScreen].bounds.size.height
 #define SCREEN_ASPECTRATIO  [UIScreen mainScreen].bounds.size.width/375
 static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHeaderIdentify";
-@interface THResourceViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface THResourceViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,BHInfiniteScrollViewDelegate>
 {
     UICollectionView *mainCollectionView;
     NSMutableArray * dataArray;
 }
-
+@property(nonatomic,strong)NSMutableArray *loopImage_array;
+@property (nonatomic, strong) BHInfiniteScrollView* infinitePageView;
 
 @end
 
 @implementation THResourceViewController
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+    self.tabBarController.tabBar.hidden=NO;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-   self.view.backgroundColor=[UIColor yellowColor];
+   self.view.backgroundColor=[UIColor whiteColor];
+    _loopImage_array = [[NSMutableArray alloc]init];
     //导航栏
     THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64) navTitle:@"电子资源"];
     [self.view addSubview:navView];
     dataArray=[[NSMutableArray alloc]init];
-    
-    
+   
     
     [self getBooksData];
-    NSLog(@"");
+
     
 }
+#pragma mark - 获取轮播图数据
+-(void)getImageData:(NSString *)url{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    [manager GET:url parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    }
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             
+             NSDictionary *dict=(NSDictionary *)responseObject;
+             NSArray * images =[dict objectForKey:@"data"];
 
+             for (NSDictionary *dic in images) {
+        
+                 NSString *image_url = [dic objectForKey:@"fileUrl"];
+        
+                 [_loopImage_array addObject:image_url];
+              
+             }
+             
+             [self createImageLoop];
+         }
+     
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
+             
+             NSLog(@"%@",error);  //这里打印错误信息
+             
+         }];
+    
+}
+-(void)createImageLoop{
+    
+    BHInfiniteScrollView* infinitePageView1 = [BHInfiniteScrollView
+                                               infiniteScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, LOOP_HEIGHT) Delegate:self ImagesArray:_loopImage_array];
+    infinitePageView1.dotSize = 10;
+    infinitePageView1.pageControlAlignmentOffset = CGSizeMake(0, 20);
+    infinitePageView1.scrollTimeInterval = 2;
+    infinitePageView1.autoScrollToNextPage = YES;
+    infinitePageView1.delegate = self;
+    [mainCollectionView addSubview:infinitePageView1];
+}
+
+- (void)stop {
+    [_infinitePageView stopAutoScrollPage];
+}
+
+- (void)start {
+    [_infinitePageView startAutoScrollPage];
+}
+
+
+
+- (void)infiniteScrollView:(BHInfiniteScrollView *)infiniteScrollView didScrollToIndex:(NSInteger)index {
+//    NSLog(@"did scroll to index %ld", index);
+}
+
+- (void)infiniteScrollView:(BHInfiniteScrollView *)infiniteScrollView didSelectItemAtIndex:(NSInteger)index {
+    //NSLog(@"did select item at index %ld", index);
+}
+#pragma mark - 获取书城数据
 -(void)getBooksData{
     NSString *baseString = @"http://101.201.116.210:7726/bookTypeAndSearch/queryBookList?rankType=1&pageSize=12&pageNum=1&pageType=3&keyword=&classificationType=&classificationNumber=&classificationId=&bookType=L15_1&press=&upYearEndVal=&desc=0&upYearStartVal=&yearEnd=&yearStart=";
-    //转化为URL
-    NSURL *baseURL = [NSURL URLWithString:baseString];
     
-    //根据 baseURL 创建网络请求对象
-    NSMutableURLRequest *requset = [NSMutableURLRequest requestWithURL:baseURL];
-    //设置参数：1.POST 2.参数体（body）
-    [requset setHTTPMethod:@"GET"];
-    //2.body参数
-    //    NSString *bodyString = @"date=20131129&startRecord=1&len=5&udid=1234567890&terminalType=Iphone&cid=213";
-    //    NSData *badyData = [bodyString dataUsingEncoding:NSUTF8StringEncoding];
-    //设置 body（POST参数）
-    //    [requset setHTTPBody:badyData];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
-    //iOS 9 提供了 NSURLSession 来代替  NSURLConnection
-    //首先，创建一个 NSURLSession 对象（如果要使用block来完成网络请求，这个对象可以使用 NSURLSession 自带的单例对象）
-    
-    NSURLSession *session = [NSURLSession sharedSession];
-    
-    // session发送网络请求对象
-    WEAKSELF
-    NSURLSessionTask *task = [session dataTaskWithRequest:requset completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        NSArray * books =[[dict objectForKey:@"data"] objectForKey:@"list"];
-//        [dataArray removeAllObjects];
-        NSLog(@"--------*********%ld",books.count);
-        for (int i =0; i<books.count; i++) {
-            NSDictionary * book =[books objectAtIndex:i];
-            CZBookModel  *paperiteam =[[CZBookModel alloc]init];
-            paperiteam.bookName = [book objectForKey:@"bookName"];
-            paperiteam.id = [book objectForKey:@"id"];
-            paperiteam.bookImage = [NSString stringWithFormat:@"http://101.201.114.210/591/ebooks/%@",[[[book objectForKey:@"bookPictures"] objectAtIndex:0]objectForKey:@"filePath"]];
-//             NSLog(@"--------*********%@",paperiteam.bookName);
-            [dataArray addObject:paperiteam];
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-         
-    
-        });
-    }];
-    //开始网络请求任务
-    [task resume];
-    [self createCollectionView];
+    [manager GET:baseString parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    }
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             
+             NSLog(@"这里打印请求成功要做的事");
+             NSDictionary *dict=(NSDictionary *)responseObject;
+//             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+                     NSArray * list =[[dict objectForKey:@"data"] objectForKey:@"list"];
+             //        [dataArray removeAllObjects];
+                     NSLog(@"--------*********%ld",list.count);
+                     for (NSDictionary *bookDic in list) {
+                        
+                         CZBookModel  *model =[[CZBookModel alloc]init];
+                         model.bookName = [bookDic objectForKey:@"bookName"];
+                         model.id = [bookDic objectForKey:@"id"];
+//                         @"http://101.201.114.210/591/ebooks/group2/M00/03/39/Zcl001j4jE6ABd5OAAb9aJCUdq4442.png";
+//                         paperiteam.bookImage = [NSString stringWithFormat:@"http://101.201.114.210/591/ebooks/%@",[[[book objectForKey:@"bookPictures"] objectAtIndex:0]];
+                         
+                         NSArray *pictures=[bookDic objectForKey:@"bookPictures"];
+                         NSString *bookPicture=[[pictures objectAtIndex:0]objectForKey:@"filePath"];
+                         
+                         model.bookImage =[NSString stringWithFormat:@"%@%@",HEADER_URL,bookPicture];
+                          NSLog(@"书名---------------%@",model.bookImage);
+                         [dataArray addObject:model];
+//                 group1/M00/03/4F/Zcl0d1jsinuAKtcJAAAyS6vFjww339.jpg
+             }
+             
+            [self createCollectionView];
+         }
+     
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
+             
+             NSLog(@"%@",error);  //这里打印错误信息
+             
+         }];
+
+   
     
 }
 
@@ -104,7 +174,7 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
     //该方法也可以设置itemSize
     layout.itemSize =CGSizeMake(100, 100);
     //2.初始化collectionView
-    mainCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-44) collectionViewLayout:layout];
+    mainCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-108) collectionViewLayout:layout];
     [self.view addSubview:mainCollectionView];
     
     mainCollectionView.backgroundColor = [UIColor whiteColor];
@@ -121,13 +191,8 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
     mainCollectionView.delegate = self;
     mainCollectionView.dataSource = self;
     //轮播图
-//    LoopBanner *loop = [[LoopBanner alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 180) scrollDuration:3.f];
-//    //    loop.imageURLStrings = @[@"lunbo2.png", @"lunbo1.jpg", @"lunbo3.png", @"lunbo4.png"];
-//    loop.imageURLStrings = @[@"lunbo1.jpg", @"lunbo2.png", @"lunbo3.png", @"lunbo4.png"];
-//    loop.clickAction = ^(NSInteger index) {
-//        
-//    };
-//    [mainCollectionView addSubview:loop];
+    [self getImageData:IMAGE_URL];
+
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -140,7 +205,7 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
     //    cell.botlabel.text =[dataArray objectAtIndex:indexPath.row];
         CZBookModel *model=dataArray[indexPath.row];
         [cell configCellWithModel:model];
-    NSLog(@">>>>>>><<<<<<<<<<<%@",cell.botlabel);
+
     return cell;
 }
 
@@ -175,20 +240,23 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
 #pragma mark - UICollectionViewDelegateFlowLayout method
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
     if(section == 0){
-        return CGSizeMake(100, 180);
+        return CGSizeMake(100, 164);
     }
     return CGSizeMake(100, 10);
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    CZCollectionViewCell *cell = (CZCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    //    CZBookModel *model=dataArray[indexPath.row];
-    
+//        CZCollectionViewCell *cell = (CZCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        CZBookModel *model=dataArray[indexPath.row];
+
     THDetailViewController *detail=[[THDetailViewController alloc]init];
+    detail.bookPicture = model.bookImage;
+    
+    
     [self.navigationController pushViewController:detail animated:NO];
     
     
-    NSLog(@">>>>>>>>>>%ld",indexPath.row);
+    NSLog(@">>>>>>>>>>%@",detail.bookPicture);
     
 }
 

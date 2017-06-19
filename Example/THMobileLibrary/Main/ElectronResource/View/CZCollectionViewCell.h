@@ -14,8 +14,9 @@
 
 
 @property (strong, nonatomic) UIImageView *topImage;
+
 @property (strong, nonatomic) UILabel *botlabel;
-@property (nonatomic,assign) NSString *bookId;
+@property (nonatomic,assign) NSString* bookId;
 
 -(void)configCellWithModel:(CZBookModel *)model;
 @end

@@ -7,20 +7,35 @@
 //
 
 #import "THDetailViewController.h"
-
+#import "THBaseNavView.h"
+#import "UIImageView+WebCache.h"
+#define SCREEN_WIDTH        [UIScreen mainScreen].bounds.size.width
 @interface THDetailViewController ()
 
 
 @end
 
 @implementation THDetailViewController
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+    self.tabBarController.tabBar.hidden=YES;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    //导航栏
+    THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64) navTitle:@"图书详情"];
+    [self.view addSubview:navView];
+    UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame=CGRectMake(10, 30, 40, 30);
+    [button setTitle:@"返回" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [navView addSubview:button];
     
-    [_bookImage setImage:[UIImage imageNamed:@"woshi.jpg"]];
-    
+//    [_bookImage setImage:[UIImage imageNamed:self.bookPicture]];
+   [self.bookImage sd_setImageWithURL:[NSURL URLWithString:self.bookPicture] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     _bookName.text=@"我是名人";
     _bookName.font=[UIFont systemFontOfSize:18];
     _author.text=@"卡卡西";
@@ -34,6 +49,10 @@
     _price.text=@"¥14.50";
     _price.font=[UIFont systemFontOfSize:15];
     
+}
+-(void)back{
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)readNow:(id)sender {
     

@@ -1,5 +1,5 @@
 use_frameworks!
-
+platform :ios, '8.0'
 target 'THMobileLibrary_Example' do
   pod 'THMobileLibrary', :path => '../'
 

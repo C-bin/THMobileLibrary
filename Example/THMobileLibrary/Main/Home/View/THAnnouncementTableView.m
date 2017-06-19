@@ -36,7 +36,7 @@
 }
 -(void)getDataArray{
     //入参直接拼接在URL后（？衔接），多个入参用&分割
-    NSString *urlstring=@"http://101.201.116.210:7726/bookTypeAndSearch/queryBookList?bookType=&classificationId=&classificationNumber=&classificationType=&desc=0&keyword=&pageNum=6&pageSize=9&pageType=3&press=&rankType=1&upYearEndVal=&upYearStartVal=&yearEnd=&yearStart=";
+    NSString *urlstring=@"http://101.201.116.210:7726/bookTypeAndSearch/queryBookList?bookType=&classificationId=&classificationNumber=&classificationType=&desc=0&keyword=&pageNum=6&pageSize=20&pageType=3&press=&rankType=1&upYearEndVal=&upYearStartVal=&yearEnd=&yearStart=";
     
     NSURL *url = [NSURL URLWithString:urlstring];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];

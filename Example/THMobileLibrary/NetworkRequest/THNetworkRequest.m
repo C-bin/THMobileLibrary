@@ -14,9 +14,7 @@
 -(NSMutableArray *)getBookList{
      NSMutableArray * books_Array =[[NSMutableArray alloc]init];
     //第一步，创建url
-    
-    NSString *get_url=[NSString stringWithFormat:WEBSERVICEURL];
-    NSString *encodedURLString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)get_url,(CFStringRef)@"!$&'()*+,-./:;=?@_~%#[]",NULL,kCFStringEncodingUTF8));
+    NSString *encodedURLString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)WEBSERVICEURL,(CFStringRef)@"!$&'()*+,-./:;=?@_~%#[]",NULL,kCFStringEncodingUTF8));
     
     NSURL *url = [NSURL URLWithString:encodedURLString];
     //第二步，创建请求

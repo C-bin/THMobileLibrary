@@ -9,8 +9,6 @@
 #import "CZCollectionViewCell.h"
 #import "CZBookModel.h"
 #import "UIImageView+WebCache.h"
-#define head_URL   @"http://101.201.114.210/591/ebooks/"
-
 @implementation CZCollectionViewCell
 -(id)initWithFrame:(CGRect)frame
 {
@@ -19,18 +17,16 @@
     {
         _topImage  = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width,140)];
        
-        [_topImage setImage:[UIImage imageNamed:@"woshi.jpg"]];
         [self.contentView addSubview:_topImage];
         
         
-        
+       
         
         _botlabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _topImage.frame.size.height+5,frame.size.width, 40)];
         _botlabel.textAlignment = NSTextAlignmentLeft;
         _botlabel.textColor = [UIColor blackColor];
         _botlabel.numberOfLines=0;
         _botlabel.font = [UIFont systemFontOfSize:15];
-         self.botlabel.text=@"朱自清";
         [self.contentView addSubview:_botlabel];
     }
 
@@ -40,11 +36,15 @@
 
 
 -(void)configCellWithModel:(CZBookModel*)model{
-//    [self.topImage sd_setImageWithURL:[NSURL URLWithString:model.bookImage]];
-     [self.topImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",head_URL,model.bookImage]]];
-//    [self.topImage sd_se]
+   [self.topImage sd_setImageWithURL:[NSURL URLWithString:model.bookImage] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     self.botlabel.text=model.bookName;
 //    self.bookId=model.id;
 }
-
+//-(void)configCellWithModel:(CZBookModel*)model{
+//
+//    [self.maskView sd_setImageWithURL:[NSURL URLWithString:model.bookImage] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+//   
+//    self.bookname.text=model.bookName;
+//   
+//}
 @end

@@ -76,7 +76,7 @@
 {
     [self initialize];
     [self addSubview:self.collectionView];
-    [self addSubview:self.titleView];
+//    [self addSubview:self.titleView];
 }
 
 - (void)layoutSubviews
@@ -666,7 +666,7 @@
     if (!self.imagesArray.count) return;
 
     self.pageControl.currentPage = self.currentPageIndex;
-    //NSLog(@"%ld",index);
+   
     
     if ([self.delegate respondsToSelector:@selector(infiniteScrollView:didScrollToIndex:)]) {
         [self.delegate infiniteScrollView:self didScrollToIndex:self.currentPageIndex];
