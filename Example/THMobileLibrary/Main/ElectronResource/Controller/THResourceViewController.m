@@ -129,7 +129,7 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
              
              NSLog(@"这里打印请求成功要做的事");
              NSDictionary *dict=(NSDictionary *)responseObject;
-//             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+
                      NSArray * list =[[dict objectForKey:@"data"] objectForKey:@"list"];
              //        [dataArray removeAllObjects];
                      NSLog(@"--------*********%ld",list.count);
@@ -137,17 +137,15 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
                         
                          CZBookModel  *model =[[CZBookModel alloc]init];
                          model.bookName = [bookDic objectForKey:@"bookName"];
-                         model.id = [bookDic objectForKey:@"id"];
-//                         @"http://101.201.114.210/591/ebooks/group2/M00/03/39/Zcl001j4jE6ABd5OAAb9aJCUdq4442.png";
-//                         paperiteam.bookImage = [NSString stringWithFormat:@"http://101.201.114.210/591/ebooks/%@",[[[book objectForKey:@"bookPictures"] objectAtIndex:0]];
-                         
+                         model.bookid = [bookDic objectForKey:@"id"];
+                        NSLog(@"ID---------------%@",model.bookid);
                          NSArray *pictures=[bookDic objectForKey:@"bookPictures"];
                          NSString *bookPicture=[[pictures objectAtIndex:0]objectForKey:@"filePath"];
                          
                          model.bookImage =[NSString stringWithFormat:@"%@%@",HEADER_URL,bookPicture];
                           NSLog(@"书名---------------%@",model.bookImage);
                          [dataArray addObject:model];
-//                 group1/M00/03/4F/Zcl0d1jsinuAKtcJAAAyS6vFjww339.jpg
+//
              }
              
             [self createCollectionView];
@@ -246,17 +244,17 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//        CZCollectionViewCell *cell = (CZCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        CZBookModel *model=dataArray[indexPath.row];
 
+    CZBookModel *model=dataArray[indexPath.row];
+   
     THDetailViewController *detail=[[THDetailViewController alloc]init];
-    detail.bookPicture = model.bookImage;
+    detail.bookModel = model;
     
     
     [self.navigationController pushViewController:detail animated:NO];
     
     
-    NSLog(@">>>>>>>>>>%@",detail.bookPicture);
+//    NSLog(@">>>>>>>>>>%@",bookid);
     
 }
 
@@ -265,14 +263,6 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

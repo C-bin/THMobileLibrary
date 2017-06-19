@@ -11,5 +11,7 @@
 @interface THTHBookListCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *bookImageView;
 @property (weak, nonatomic) IBOutlet UILabel *bookname;
+
+
 -(void)configCellWithModel:(CZBookModel *)model;
 @end

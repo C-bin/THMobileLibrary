@@ -40,15 +40,12 @@
         //获取的内容是字符串
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSArray * books =[[dict objectForKey:@"data"] objectForKey:@"list"];
-        //        [dataArray removeAllObjects];
-        NSLog(@"--------*********%ld",books.count);
+
         for (int i =0; i<books.count; i++) {
             NSDictionary * book =[books objectAtIndex:i];
             CZBookModel  *paperiteam =[[CZBookModel alloc]init];
             paperiteam.bookName = [book objectForKey:@"bookName"];
             
-            
-            NSLog(@"--------*********%@",paperiteam.bookName);
             [dataArray addObject:paperiteam];
             
             
@@ -62,7 +59,7 @@
     }];
     [dataTask resume];
     
-    NSLog(@"--------%@*********",dataArray);
+ 
     
 }
 - (NSInteger)numberOfRowsInSection:(NSInteger)section{

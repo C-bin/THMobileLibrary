@@ -40,6 +40,9 @@
 		37782CB91EF76BDA00D41AE8 /* THTHBookListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37782CB71EF76BDA00D41AE8 /* THTHBookListCell.m */; };
 		37782CBA1EF76BDA00D41AE8 /* THTHBookListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37782CB81EF76BDA00D41AE8 /* THTHBookListCell.xib */; };
 		37782CBD1EF7754000D41AE8 /* CZCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37782CBC1EF7754000D41AE8 /* CZCollectionViewCell.m */; };
+		37782CC31EF7C06500D41AE8 /* THDetaileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 37782CC21EF7C06500D41AE8 /* THDetaileModel.m */; };
+		37782CC61EF7C2A500D41AE8 /* THDetaile.m in Sources */ = {isa = PBXBuildFile; fileRef = 37782CC51EF7C2A500D41AE8 /* THDetaile.m */; };
+		37782D0B1EF7DC0100D41AE8 /* UILabel+THLabelHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 37782D0A1EF7DC0100D41AE8 /* UILabel+THLabelHeightAndWidth.m */; };
 		37DA69E71EF28D9500E71A08 /* BHInfiniteScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DA69BD1EF28D9500E71A08 /* BHInfiniteScrollView.m */; };
 		37DA69E81EF28D9500E71A08 /* FXPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DA69C01EF28D9500E71A08 /* FXPageControl.m */; };
 		37DA69E91EF28D9500E71A08 /* BHInfiniteScrollViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DA69C31EF28D9500E71A08 /* BHInfiniteScrollViewCell.m */; };
@@ -167,6 +170,12 @@
 		37782CB81EF76BDA00D41AE8 /* THTHBookListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THTHBookListCell.xib; sourceTree = "<group>"; };
 		37782CBB1EF7754000D41AE8 /* CZCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZCollectionViewCell.h; sourceTree = "<group>"; };
 		37782CBC1EF7754000D41AE8 /* CZCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZCollectionViewCell.m; sourceTree = "<group>"; };
+		37782CC11EF7C06500D41AE8 /* THDetaileModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THDetaileModel.h; sourceTree = "<group>"; };
+		37782CC21EF7C06500D41AE8 /* THDetaileModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THDetaileModel.m; sourceTree = "<group>"; };
+		37782CC41EF7C2A500D41AE8 /* THDetaile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THDetaile.h; sourceTree = "<group>"; };
+		37782CC51EF7C2A500D41AE8 /* THDetaile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THDetaile.m; sourceTree = "<group>"; };
+		37782D091EF7DC0100D41AE8 /* UILabel+THLabelHeightAndWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+THLabelHeightAndWidth.h"; sourceTree = "<group>"; };
+		37782D0A1EF7DC0100D41AE8 /* UILabel+THLabelHeightAndWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+THLabelHeightAndWidth.m"; sourceTree = "<group>"; };
 		37DA69BC1EF28D9500E71A08 /* BHInfiniteScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHInfiniteScrollView.h; sourceTree = "<group>"; };
 		37DA69BD1EF28D9500E71A08 /* BHInfiniteScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHInfiniteScrollView.m; sourceTree = "<group>"; };
 		37DA69BF1EF28D9500E71A08 /* FXPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXPageControl.h; sourceTree = "<group>"; };
@@ -471,6 +480,10 @@
 			children = (
 				3771FEE51EEEA33D008464D9 /* CZBookModel.h */,
 				3771FEE61EEEA33D008464D9 /* CZBookModel.m */,
+				37782CC11EF7C06500D41AE8 /* THDetaileModel.h */,
+				37782CC21EF7C06500D41AE8 /* THDetaileModel.m */,
+				37782D091EF7DC0100D41AE8 /* UILabel+THLabelHeightAndWidth.h */,
+				37782D0A1EF7DC0100D41AE8 /* UILabel+THLabelHeightAndWidth.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -483,6 +496,8 @@
 				37782CB61EF76BDA00D41AE8 /* THTHBookListCell.h */,
 				37782CB71EF76BDA00D41AE8 /* THTHBookListCell.m */,
 				37782CB81EF76BDA00D41AE8 /* THTHBookListCell.xib */,
+				37782CC41EF7C2A500D41AE8 /* THDetaile.h */,
+				37782CC51EF7C2A500D41AE8 /* THDetaile.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -972,7 +987,9 @@
 				37ED0C751EE7D029005B4CD8 /* THGuideViewController.m in Sources */,
 				375F02331EF2779200E6B27C /* THNewsViewController.m in Sources */,
 				37782CAC1EF75A3700D41AE8 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				37782CC31EF7C06500D41AE8 /* THDetaileModel.m in Sources */,
 				37DA69E81EF28D9500E71A08 /* FXPageControl.m in Sources */,
+				37782CC61EF7C2A500D41AE8 /* THDetaile.m in Sources */,
 				37DA69F61EF28D9500E71A08 /* UIImage+GIF.m in Sources */,
 				37DA69F71EF28D9500E71A08 /* UIImage+MultiFormat.m in Sources */,
 				37782CB91EF76BDA00D41AE8 /* THTHBookListCell.m in Sources */,
@@ -991,6 +1008,7 @@
 				37782CA61EF75A3700D41AE8 /* AFSecurityPolicy.m in Sources */,
 				37ED0CA11EE7F346005B4CD8 /* THHomeViewController.m in Sources */,
 				3771FEE71EEEA33D008464D9 /* CZBookModel.m in Sources */,
+				37782D0B1EF7DC0100D41AE8 /* UILabel+THLabelHeightAndWidth.m in Sources */,
 				37DA69F11EF28D9500E71A08 /* SDWebImageDownloader.m in Sources */,
 				37DA69F51EF28D9500E71A08 /* UIButton+WebCache.m in Sources */,
 				375F02301EF266BA00E6B27C /* THTableViewCell.m in Sources */,

@@ -38,7 +38,7 @@
 -(void)configCellWithModel:(CZBookModel*)model{
    [self.topImage sd_setImageWithURL:[NSURL URLWithString:model.bookImage] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     self.botlabel.text=model.bookName;
-//    self.bookId=model.id;
+//    self.bookId=model.bookid;
 }
 //-(void)configCellWithModel:(CZBookModel*)model{
 //

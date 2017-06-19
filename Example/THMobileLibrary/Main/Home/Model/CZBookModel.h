@@ -12,7 +12,7 @@
 
 @interface CZBookModel : NSObject 
 
-@property (nonatomic,assign) NSString* id;//书籍编号
+@property (nonatomic,copy) NSString* bookid;//书籍编号
 @property (nonatomic,copy) NSString *bookName; //书籍名字
 @property (nonatomic,copy) NSString *bookImage; //书籍图片
 

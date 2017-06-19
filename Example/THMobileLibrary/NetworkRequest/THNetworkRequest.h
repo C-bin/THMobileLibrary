@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface THNetworkRequest : NSObject
--(NSMutableArray *)getBookList;
+//-(NSMutableArray *)getBookList;
 @end
