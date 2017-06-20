@@ -7,7 +7,7 @@
 //
 
 #import "THTHBookListCell.h"
-#import "UIImageView+WebCache.h"
+#import "PrefixHeader.pch"
 @implementation THTHBookListCell
 
 - (void)awakeFromNib {

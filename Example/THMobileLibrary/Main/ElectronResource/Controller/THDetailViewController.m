@@ -9,15 +9,17 @@
 #import "THDetailViewController.h"
 #import "THBaseNavView.h"
 #import "UIImageView+WebCache.h"
-#import "AFNetworking.h"
+#import "LSYReadPageViewController.h"
 #import "UILabel+THLabelHeightAndWidth.h"
 #import "THDetaileModel.h"
+
 #define SCREEN_WIDTH        [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT       [UIScreen mainScreen].bounds.size.height
 @interface THDetailViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>{
     UICollectionView *mainCollectionView;
     NSMutableArray *detailArray;
     CGFloat height;
+    NSString *downPath;
 }
 
 
@@ -36,7 +38,7 @@
     detailArray=[[NSMutableArray alloc]init];
     [self createNavgationBar];
     
-
+[self createDetailData];
     
 }
 -(void)createCollectionView{
@@ -107,7 +109,8 @@
              NSArray *bookFiles=[data1 objectForKey:@"bookFiles"];
              NSDictionary *filesDic=[bookFiles objectAtIndex:0];
                 model.fileExt=[filesDic objectForKey:@"fileExt"];
-                model.filePath=[filesDic objectForKey:@"filePath"];
+                model.filePath=[NSString stringWithFormat:@"http://101.201.114.210/591/ebooks/%@",[filesDic objectForKey:@"filePath"]];
+             downPath=model.filePath;
                 model.tableContent=[filesDic objectForKey:@"tableContent"];
              [self createDetailViewWithModel:model];
          }
@@ -134,7 +137,7 @@
     _fileFormat.text=[NSString stringWithFormat:@"文件格式：%@",model.fileExt];
     _fileFormat.font=[UIFont systemFontOfSize:15];
     
-    NSLog(@"%@",model.tableContent);
+    NSLog(@"%@",model.filePath);
     UILabel *labelOne = [[UILabel alloc] initWithFrame:CGRectMake(10, 284, self.view.frame.size.width, 50)];
     labelOne.text = model.describe;
     labelOne.backgroundColor = [UIColor whiteColor];
@@ -156,7 +159,39 @@
 
 - (IBAction)readNow:(id)sender {
     
-    NSLog(@"》》》》》》》》》》》》》开始阅读");
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSURL *URL = [NSURL URLWithString:downPath];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+        return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
+    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        NSLog(@"File downloaded to: %@", filePath);
+        LSYReadPageViewController *pageView = [[LSYReadPageViewController alloc] init];
+        
+        
+        pageView.resourceURL = filePath;    //文件位置
+        
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            
+            pageView.model = [LSYReadModel getLocalModelWithURL:filePath];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //            [_epubActivity stopAnimating];
+                //            [_beginEpub setTitle:@"Beign epub Read" forState:UIControlStateNormal];
+                //            [_beginEpub setEnabled:YES];
+                
+                [self presentViewController:pageView animated:YES completion:nil];
+            });
+        });
+    }];
+    [downloadTask resume];
+    
+   
+
     
     
 }

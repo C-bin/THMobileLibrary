@@ -15,7 +15,7 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        _topImage  = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width,140)];
+        _topImage  = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100,120)];
        
         [self.contentView addSubview:_topImage];
         

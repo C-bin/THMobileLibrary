@@ -9,11 +9,11 @@
 #import "THHomeViewController.h"
 #import "BHInfiniteScrollView.h"
 #import "THImageModel.h"
-#import "THBaseNavView.h"
 #import "THFounctionCell.h"
 #import "THNewsTableView.h"
 #import "THAnnouncementTableView.h"
-#import "AFNetworking.h"
+
+#import "PrefixHeader.pch"
 //#import "AFNetworking.h"
 #define RGB(R,G,B)          [UIColor colorWithRed:R/255.0f green:G/255.0f blue:B/255.0f alpha:1.0f]
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
@@ -74,6 +74,8 @@
 
     //加载ScrollView
    [self settingScrollView];
+    
+
 
  
 }
