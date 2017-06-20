@@ -41,6 +41,7 @@
 [self createDetailData];
     
 }
+
 -(void)createCollectionView{
     //1.初始化layout
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];

@@ -12,21 +12,20 @@
 #import "THFounctionCell.h"
 #import "THNewsTableView.h"
 #import "THAnnouncementTableView.h"
+#import "THLibraryCatalogSearch.h"
+/***********************************************************
+ **  首页
+ **********************************************************/
 
-#import "PrefixHeader.pch"
-//#import "AFNetworking.h"
-#define RGB(R,G,B)          [UIColor colorWithRed:R/255.0f green:G/255.0f blue:B/255.0f alpha:1.0f]
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
-#define SCREEN_WIDTH        [UIScreen mainScreen].bounds.size.width
-#define SCREEN_HEIGHT       [UIScreen mainScreen].bounds.size.height
+
 #define SCREEN_ASPECTRATIO  [UIScreen mainScreen].bounds.size.width/375
-
+//轮播图高度
 #define LOOP_HEIGHT    164
+//功能按钮区高度
 #define FOUNCTION_HEIGHT    150
-
-
+//轮播图数据
 #define IMAGE_URL @"http://101.201.116.210:7726/imageManage/getImagePathForMobile/1902ce11663d4399856887e1d11918c0"
-
 //ScrollView高度
 #define LG_scrollViewH    SCREEN_HEIGHT-LOOP_HEIGHT-FOUNCTION_HEIGHT-SEGMENT_H-108
 //Segment高度
@@ -49,22 +48,27 @@
 {
     if (!_buttonList)
     {
-        _buttonList = [NSMutableArray array];
+        _buttonList = [[NSMutableArray alloc]init];
     }
     return _buttonList;
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+    self.tabBarController.tabBar.hidden=NO;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     self.view.backgroundColor=[UIColor whiteColor];
+    //初始化
    dataArray =@[@"馆藏查询",@"新书推荐",@"借阅排行",@"扫一扫",@"读者信息",@"我的书架",@"正在借阅",@"历史借阅"];
-
     _loopImage_array = [[NSMutableArray alloc]init];
     //导航栏
     THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64) navTitle:@"首页"];
     [self.view addSubview:navView];
-    
     //轮播图
     [self getImageData:IMAGE_URL];
     //功能按钮
@@ -144,10 +148,6 @@
     #pragma mark - CreateUICollectionView
     //1.初始化layout
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    //设置collectionView滚动方向
-    //    [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    //设置headerView的尺寸大小
-    //    layout.headerReferenceSize = CGSizeMake(self.view.frame.size.width,44);
     //该方法也可以设置itemSize
     layout.itemSize = CGSizeMake(kScreenWidth / 4, 60);
     layout.minimumLineSpacing = 0;
@@ -160,8 +160,6 @@
     //3.注册collectionViewCell
     //注意，此处的ReuseIdentifier 必须和 cellForItemAtIndexPath 方法中 一致 均为 cellId
     [mainCollectionView registerClass:[THFounctionCell class] forCellWithReuseIdentifier:@"cellId"];
-    //注册headerView  此处的ReuseIdentifier 必须和 cellForItemAtIndexPath 方法中 一致  均为reusableView
-    //    [mainCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"reusableView"];
     
     //4.设置代理
     mainCollectionView.delegate = self;
@@ -179,12 +177,9 @@
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     THFounctionCell *cell = (THFounctionCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellId" forIndexPath:indexPath];
         cell.botlabel.text =[dataArray objectAtIndex:indexPath.row];
-    //    CZBookModel *model=dataArray[indexPath.row];
-    //    [cell configCellWithModel:model];
     
     return cell;
 }
-
 
 //设置每个item的UIEdgeInsets
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -198,7 +193,6 @@
     return 0;
 }
 
-
 //设置每个item垂直间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
@@ -209,9 +203,12 @@
 //点击
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    CZCollectionViewCell *cell = (CZCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    //    CZBookModel *model=dataArray[indexPath.row];
-    NSLog(@"----------%ld",indexPath.row);
+   
+    if (indexPath.row==0) {
+        THLibraryCatalogSearch *libraryCatalogSearch=[[THLibraryCatalogSearch alloc]init];
+        [self.navigationController pushViewController:libraryCatalogSearch animated:NO];
+    }
+    
     
     
 }

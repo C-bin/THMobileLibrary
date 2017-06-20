@@ -63,6 +63,19 @@
 		374C8FA41EF8BF4300ACEC80 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 374C8FA31EF8BF4300ACEC80 /* libxml2.tbd */; };
 		374C8FA61EF8C59C00ACEC80 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 374C8FA51EF8C59C00ACEC80 /* libz.tbd */; };
 		374C8FA71EF8C6CB00ACEC80 /* LSYRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 374C8F201EF8BD5500ACEC80 /* LSYRecordModel.m */; };
+		374C8FAB1EF8FAAC00ACEC80 /* THLibraryCatalogSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 374C8FAA1EF8FAAC00ACEC80 /* THLibraryCatalogSearch.m */; };
+		374C8FB31EF8FB0000ACEC80 /* comboDownArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 374C8FAD1EF8FB0000ACEC80 /* comboDownArrow.png */; };
+		374C8FB41EF8FB0000ACEC80 /* comboDownArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 374C8FAE1EF8FB0000ACEC80 /* comboDownArrow@2x.png */; };
+		374C8FB51EF8FB0000ACEC80 /* FSComboListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 374C8FB01EF8FB0000ACEC80 /* FSComboListView.m */; };
+		374C8FB61EF8FB0000ACEC80 /* UIImage+FSAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 374C8FB21EF8FB0000ACEC80 /* UIImage+FSAdditions.m */; };
+		374C8FB81EF91F0F00ACEC80 /* Bookstore_search_click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 374C8FB71EF91F0F00ACEC80 /* Bookstore_search_click@2x.png */; };
+		374C8FBA1EF9250E00ACEC80 /* btn_opac.png in Resources */ = {isa = PBXBuildFile; fileRef = 374C8FB91EF9250E00ACEC80 /* btn_opac.png */; };
+		374C8FC21EF9333A00ACEC80 /* bookshelf@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 374C8FBC1EF9333A00ACEC80 /* bookshelf@2x.png */; };
+		374C8FC31EF9333A00ACEC80 /* bookshelf_clicked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 374C8FBD1EF9333A00ACEC80 /* bookshelf_clicked@2x.png */; };
+		374C8FC41EF9333A00ACEC80 /* Bookstore_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 374C8FBE1EF9333A00ACEC80 /* Bookstore_search@2x.png */; };
+		374C8FC51EF9333A00ACEC80 /* Bookstore_search_click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 374C8FBF1EF9333A00ACEC80 /* Bookstore_search_click@2x.png */; };
+		374C8FC61EF9333A00ACEC80 /* shengming@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 374C8FC01EF9333A00ACEC80 /* shengming@3x.png */; };
+		374C8FC71EF9333A00ACEC80 /* shengming_press@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 374C8FC11EF9333A00ACEC80 /* shengming_press@3x.png */; };
 		375E7A531EEF859C00B4EB4E /* THFounctionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 375E7A521EEF859C00B4EB4E /* THFounctionCell.m */; };
 		375E7A551EEF863D00B4EB4E /* 热门话题.png in Resources */ = {isa = PBXBuildFile; fileRef = 375E7A541EEF863D00B4EB4E /* 热门话题.png */; };
 		375F022A1EF2657200E6B27C /* THNewsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F02291EF2657200E6B27C /* THNewsTableView.m */; };
@@ -267,6 +280,22 @@
 		374C8F6D1EF8BD5500ACEC80 /* LSYTopMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSYTopMenuView.m; sourceTree = "<group>"; };
 		374C8FA31EF8BF4300ACEC80 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		374C8FA51EF8C59C00ACEC80 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		374C8FA91EF8FAAC00ACEC80 /* THLibraryCatalogSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLibraryCatalogSearch.h; sourceTree = "<group>"; };
+		374C8FAA1EF8FAAC00ACEC80 /* THLibraryCatalogSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLibraryCatalogSearch.m; sourceTree = "<group>"; };
+		374C8FAD1EF8FB0000ACEC80 /* comboDownArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comboDownArrow.png; sourceTree = "<group>"; };
+		374C8FAE1EF8FB0000ACEC80 /* comboDownArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comboDownArrow@2x.png"; sourceTree = "<group>"; };
+		374C8FAF1EF8FB0000ACEC80 /* FSComboListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSComboListView.h; sourceTree = "<group>"; };
+		374C8FB01EF8FB0000ACEC80 /* FSComboListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSComboListView.m; sourceTree = "<group>"; };
+		374C8FB11EF8FB0000ACEC80 /* UIImage+FSAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FSAdditions.h"; sourceTree = "<group>"; };
+		374C8FB21EF8FB0000ACEC80 /* UIImage+FSAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FSAdditions.m"; sourceTree = "<group>"; };
+		374C8FB71EF91F0F00ACEC80 /* Bookstore_search_click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bookstore_search_click@2x.png"; sourceTree = "<group>"; };
+		374C8FB91EF9250E00ACEC80 /* btn_opac.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_opac.png; sourceTree = "<group>"; };
+		374C8FBC1EF9333A00ACEC80 /* bookshelf@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bookshelf@2x.png"; sourceTree = "<group>"; };
+		374C8FBD1EF9333A00ACEC80 /* bookshelf_clicked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bookshelf_clicked@2x.png"; sourceTree = "<group>"; };
+		374C8FBE1EF9333A00ACEC80 /* Bookstore_search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bookstore_search@2x.png"; sourceTree = "<group>"; };
+		374C8FBF1EF9333A00ACEC80 /* Bookstore_search_click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bookstore_search_click@2x.png"; sourceTree = "<group>"; };
+		374C8FC01EF9333A00ACEC80 /* shengming@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shengming@3x.png"; sourceTree = "<group>"; };
+		374C8FC11EF9333A00ACEC80 /* shengming_press@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shengming_press@3x.png"; sourceTree = "<group>"; };
 		375E7A511EEF859C00B4EB4E /* THFounctionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THFounctionCell.h; sourceTree = "<group>"; };
 		375E7A521EEF859C00B4EB4E /* THFounctionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THFounctionCell.m; sourceTree = "<group>"; };
 		375E7A541EEF863D00B4EB4E /* 热门话题.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "热门话题.png"; sourceTree = "<group>"; };
@@ -657,6 +686,42 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		374C8FA81EF8F24600ACEC80 /* FounctionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				374C8FAC1EF8FB0000ACEC80 /* FSComboListView */,
+				374C8FA91EF8FAAC00ACEC80 /* THLibraryCatalogSearch.h */,
+				374C8FAA1EF8FAAC00ACEC80 /* THLibraryCatalogSearch.m */,
+			);
+			path = FounctionViewController;
+			sourceTree = "<group>";
+		};
+		374C8FAC1EF8FB0000ACEC80 /* FSComboListView */ = {
+			isa = PBXGroup;
+			children = (
+				374C8FAD1EF8FB0000ACEC80 /* comboDownArrow.png */,
+				374C8FAE1EF8FB0000ACEC80 /* comboDownArrow@2x.png */,
+				374C8FAF1EF8FB0000ACEC80 /* FSComboListView.h */,
+				374C8FB01EF8FB0000ACEC80 /* FSComboListView.m */,
+				374C8FB11EF8FB0000ACEC80 /* UIImage+FSAdditions.h */,
+				374C8FB21EF8FB0000ACEC80 /* UIImage+FSAdditions.m */,
+			);
+			path = FSComboListView;
+			sourceTree = "<group>";
+		};
+		374C8FBB1EF9333A00ACEC80 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				374C8FBC1EF9333A00ACEC80 /* bookshelf@2x.png */,
+				374C8FBD1EF9333A00ACEC80 /* bookshelf_clicked@2x.png */,
+				374C8FBE1EF9333A00ACEC80 /* Bookstore_search@2x.png */,
+				374C8FBF1EF9333A00ACEC80 /* Bookstore_search_click@2x.png */,
+				374C8FC01EF9333A00ACEC80 /* shengming@3x.png */,
+				374C8FC11EF9333A00ACEC80 /* shengming_press@3x.png */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 		375F01A21EF211EB00E6B27C /* Third */ = {
 			isa = PBXGroup;
 			children = (
@@ -875,6 +940,7 @@
 		37ED0C5E1EE7B1CC005B4CD8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				374C8FA81EF8F24600ACEC80 /* FounctionViewController */,
 				37ED0C9F1EE7F346005B4CD8 /* THHomeViewController.h */,
 				37ED0CA01EE7F346005B4CD8 /* THHomeViewController.m */,
 				375F02311EF2779200E6B27C /* THNewsViewController.h */,
@@ -990,6 +1056,9 @@
 		37ED0C8C1EE7E9D0005B4CD8 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				374C8FBB1EF9333A00ACEC80 /* TabBar */,
+				374C8FB91EF9250E00ACEC80 /* btn_opac.png */,
+				374C8FB71EF91F0F00ACEC80 /* Bookstore_search_click@2x.png */,
 				375E7A541EEF863D00B4EB4E /* 热门话题.png */,
 				3771FEEA1EEEA50B008464D9 /* lunbo1.jpg */,
 				3771FEEB1EEEA50B008464D9 /* lunbo2.png */,
@@ -1197,26 +1266,36 @@
 			buildActionMask = 2147483647;
 			files = (
 				37782CBA1EF76BDA00D41AE8 /* THTHBookListCell.xib in Resources */,
+				374C8FB31EF8FB0000ACEC80 /* comboDownArrow.png in Resources */,
 				37ED0C941EE7EB73005B4CD8 /* 4.jpg in Resources */,
 				374C8F851EF8BD5500ACEC80 /* 细说明朝.epub in Resources */,
 				374C8F841EF8BD5500ACEC80 /* 每天懂一点好玩心理学.epub in Resources */,
+				374C8FBA1EF9250E00ACEC80 /* btn_opac.png in Resources */,
 				374C8F861EF8BD5500ACEC80 /* 陌生人的来信.epub in Resources */,
 				3771FEEF1EEEA50B008464D9 /* lunbo2.png in Resources */,
 				374C8F831EF8BD5500ACEC80 /* sale_discount_yellow.png in Resources */,
 				37ED0C921EE7EB73005B4CD8 /* 2.jpg in Resources */,
 				376012671EF0C47600A1C758 /* THDetailViewController.xib in Resources */,
+				374C8FC61EF9333A00ACEC80 /* shengming@3x.png in Resources */,
 				374C8F7F1EF8BD5500ACEC80 /* ic_add.png in Resources */,
+				374C8FC51EF9333A00ACEC80 /* Bookstore_search_click@2x.png in Resources */,
+				374C8FB41EF8FB0000ACEC80 /* comboDownArrow@2x.png in Resources */,
 				374C8F821EF8BD5500ACEC80 /* reader_more@2x.png in Resources */,
 				375E7A551EEF863D00B4EB4E /* 热门话题.png in Resources */,
 				374C8F9E1EF8BD5500ACEC80 /* bt_tjcp_no@2x.png in Resources */,
 				3771FEF11EEEA50B008464D9 /* lunbo4.png in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
+				374C8FC41EF9333A00ACEC80 /* Bookstore_search@2x.png in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				374C8F7D1EF8BD5500ACEC80 /* bg_back_white.png in Resources */,
 				3771FEEE1EEEA50B008464D9 /* lunbo1.jpg in Resources */,
 				374C8F7E1EF8BD5500ACEC80 /* bg_back_white@2x.png in Resources */,
 				3771FEE91EEEA4A1008464D9 /* woshi.jpg in Resources */,
 				37DA69EB1EF28D9500E71A08 /* LICENSE in Resources */,
+				374C8FB81EF91F0F00ACEC80 /* Bookstore_search_click@2x.png in Resources */,
+				374C8FC21EF9333A00ACEC80 /* bookshelf@2x.png in Resources */,
+				374C8FC31EF9333A00ACEC80 /* bookshelf_clicked@2x.png in Resources */,
+				374C8FC71EF9333A00ACEC80 /* shengming_press@3x.png in Resources */,
 				374C8F811EF8BD5500ACEC80 /* reader_cover@2x.png in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				3771FEF01EEEA50B008464D9 /* lunbo3.png in Resources */,
@@ -1392,13 +1471,16 @@
 				374C8F901EF8BD5500ACEC80 /* CXMLElement_CreationExtensions.m in Sources */,
 				37ED0C9B1EE7F15B005B4CD8 /* THMainViewController.m in Sources */,
 				37782CAE1EF75A3700D41AE8 /* UIButton+AFNetworking.m in Sources */,
+				374C8FAB1EF8FAAC00ACEC80 /* THLibraryCatalogSearch.m in Sources */,
 				374C8F8B1EF8BD5500ACEC80 /* CXMLNode_CreationExtensions.m in Sources */,
 				374C8F701EF8BD5500ACEC80 /* LSYNoteVC.m in Sources */,
+				374C8FB51EF8FB0000ACEC80 /* FSComboListView.m in Sources */,
 				37DA69F41EF28D9500E71A08 /* SDWebImagePrefetcher.m in Sources */,
 				375E7A531EEF859C00B4EB4E /* THFounctionCell.m in Sources */,
 				37782CA71EF75A3700D41AE8 /* AFURLRequestSerialization.m in Sources */,
 				375F022D1EF265AD00E6B27C /* THAnnouncementTableView.m in Sources */,
 				37782CA81EF75A3700D41AE8 /* AFURLResponseSerialization.m in Sources */,
+				374C8FB61EF8FB0000ACEC80 /* UIImage+FSAdditions.m in Sources */,
 				374C8F911EF8BD5500ACEC80 /* CXMLElement_ElementTreeExtensions.m in Sources */,
 				37DA69FA1EF28D9500E71A08 /* UIView+WebCacheOperation.m in Sources */,
 				37DA69E71EF28D9500E71A08 /* BHInfiniteScrollView.m in Sources */,

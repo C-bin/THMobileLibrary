@@ -40,11 +40,5 @@
     self.botlabel.text=model.bookName;
 //    self.bookId=model.bookid;
 }
-//-(void)configCellWithModel:(CZBookModel*)model{
-//
-//    [self.maskView sd_setImageWithURL:[NSURL URLWithString:model.bookImage] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-//   
-//    self.bookname.text=model.bookName;
-//   
-//}
+
 @end

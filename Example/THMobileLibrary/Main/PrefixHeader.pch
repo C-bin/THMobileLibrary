@@ -30,6 +30,10 @@
 #define ViewSize(view)  (view.frame.size)
 #define ScreenSize [UIScreen mainScreen].bounds.size
 
+#define SCREEN_WIDTH        [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT       [UIScreen mainScreen].bounds.size.height
+
+
 #import "THBaseNavView.h"
 #import "AFNetworking.h"
 #import "UIImageView+WebCache.h"

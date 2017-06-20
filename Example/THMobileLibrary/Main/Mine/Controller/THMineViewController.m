@@ -8,9 +8,8 @@
 
 #import "THMineViewController.h"
 #import "THBaseNavView.h"
-#define SCREEN_WIDTH        [UIScreen mainScreen].bounds.size.width
-#define SCREEN_HEIGHT       [UIScreen mainScreen].bounds.size.height
-#define RGB(R,G,B)          [UIColor colorWithRed:R/255.0f green:G/255.0f blue:B/255.0f alpha:1.0f]
+
+
 @interface THMineViewController ()<UIScrollViewDelegate>
 
 @end

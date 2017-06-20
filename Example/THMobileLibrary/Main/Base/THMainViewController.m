@@ -13,9 +13,9 @@
 //标签 标题
 #define Titles @[@"首页", @"电子资源", @"图书馆指南", @"我的"]
 //标签 未选中图片
-#define Images @[@"tabbar_picture@3x", @"tabbar_news@3x", @"tabbar_video@3x", @"tabbar_setting@3x"]
+#define Images @[@"bookshelf@2x", @"Bookstore_search@2x", @"shengming@3x", @"tabbar_setting@3x"]
 //标签 选中图片
-#define SelectedImages @[@"tabbar_picture_hl@3x", @"tabbar_news_hl@3x", @"tabbar_video_hl@3x", @"tabbar_setting_hl@3x"]
+#define SelectedImages @[@"bookshelf_clicked@2x", @"Bookstore_search_click@2x", @"shengming_press@3x", @"tabbar_setting_hl@3x"]
 @interface THMainViewController ()
 
 @end
@@ -25,6 +25,7 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
+    self.tabBarController.tabBar.hidden=NO;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -56,10 +57,13 @@
         
         UIImage *selectdImage = [[UIImage imageNamed:SelectedImages[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
+    
         //  实现标签
         nc.tabBarItem = [[UITabBarItem alloc] initWithTitle:Titles[i] image:image selectedImage:selectdImage];
         
-        
+        nc.title=Titles[i];
+       
+
         //3 将NVC放入数组
         [vcs addObject:nc];
         
