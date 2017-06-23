@@ -83,7 +83,6 @@
 		375F02301EF266BA00E6B27C /* THTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F022F1EF266BA00E6B27C /* THTableViewCell.m */; };
 		375F02331EF2779200E6B27C /* THNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F02321EF2779200E6B27C /* THNewsViewController.m */; };
 		376012661EF0C47600A1C758 /* THDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 376012641EF0C47600A1C758 /* THDetailViewController.m */; };
-		376012671EF0C47600A1C758 /* THDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 376012651EF0C47600A1C758 /* THDetailViewController.xib */; };
 		3771FEE71EEEA33D008464D9 /* CZBookModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3771FEE61EEEA33D008464D9 /* CZBookModel.m */; };
 		3771FEE91EEEA4A1008464D9 /* woshi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3771FEE81EEEA4A1008464D9 /* woshi.jpg */; };
 		3771FEEE1EEEA50B008464D9 /* lunbo1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3771FEEA1EEEA50B008464D9 /* lunbo1.jpg */; };
@@ -111,6 +110,7 @@
 		37782CC31EF7C06500D41AE8 /* THDetaileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 37782CC21EF7C06500D41AE8 /* THDetaileModel.m */; };
 		37782CC61EF7C2A500D41AE8 /* THDetaile.m in Sources */ = {isa = PBXBuildFile; fileRef = 37782CC51EF7C2A500D41AE8 /* THDetaile.m */; };
 		37782D0B1EF7DC0100D41AE8 /* UILabel+THLabelHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 37782D0A1EF7DC0100D41AE8 /* UILabel+THLabelHeightAndWidth.m */; };
+		37A8971E1EFBCB53003BDF05 /* THBookMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A8971D1EFBCB53003BDF05 /* THBookMessageView.m */; };
 		37DA69E71EF28D9500E71A08 /* BHInfiniteScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DA69BD1EF28D9500E71A08 /* BHInfiniteScrollView.m */; };
 		37DA69E81EF28D9500E71A08 /* FXPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DA69C01EF28D9500E71A08 /* FXPageControl.m */; };
 		37DA69E91EF28D9500E71A08 /* BHInfiniteScrollViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DA69C31EF28D9500E71A08 /* BHInfiniteScrollViewCell.m */; };
@@ -179,7 +179,7 @@
 		2F0BFE47DA5CD8921F56EE37 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		3716F1AF1EF129B8009534C5 /* THNetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNetworkRequest.h; sourceTree = "<group>"; };
 		3716F1B01EF129B8009534C5 /* THNetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNetworkRequest.m; sourceTree = "<group>"; };
-		374C8EFE1EF8B7AA00ACEC80 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		374C8EFE1EF8B7AA00ACEC80 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = THMobileLibrary/Main/PrefixHeader.pch; sourceTree = SOURCE_ROOT; };
 		374C8F011EF8BD5500ACEC80 /* LSYChapterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSYChapterVC.h; sourceTree = "<group>"; };
 		374C8F021EF8BD5500ACEC80 /* LSYChapterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSYChapterVC.m; sourceTree = "<group>"; };
 		374C8F031EF8BD5500ACEC80 /* LSYMarkVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSYMarkVC.h; sourceTree = "<group>"; };
@@ -309,7 +309,6 @@
 		375F02321EF2779200E6B27C /* THNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNewsViewController.m; sourceTree = "<group>"; };
 		376012631EF0C47600A1C758 /* THDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THDetailViewController.h; sourceTree = "<group>"; };
 		376012641EF0C47600A1C758 /* THDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THDetailViewController.m; sourceTree = "<group>"; };
-		376012651EF0C47600A1C758 /* THDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THDetailViewController.xib; sourceTree = "<group>"; };
 		3771FEE51EEEA33D008464D9 /* CZBookModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CZBookModel.h; path = ../../Home/Model/CZBookModel.h; sourceTree = "<group>"; };
 		3771FEE61EEEA33D008464D9 /* CZBookModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CZBookModel.m; path = ../../Home/Model/CZBookModel.m; sourceTree = "<group>"; };
 		3771FEE81EEEA4A1008464D9 /* woshi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = woshi.jpg; sourceTree = "<group>"; };
@@ -361,6 +360,8 @@
 		37782CC51EF7C2A500D41AE8 /* THDetaile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THDetaile.m; sourceTree = "<group>"; };
 		37782D091EF7DC0100D41AE8 /* UILabel+THLabelHeightAndWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+THLabelHeightAndWidth.h"; sourceTree = "<group>"; };
 		37782D0A1EF7DC0100D41AE8 /* UILabel+THLabelHeightAndWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+THLabelHeightAndWidth.m"; sourceTree = "<group>"; };
+		37A8971C1EFBCB53003BDF05 /* THBookMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THBookMessageView.h; sourceTree = "<group>"; };
+		37A8971D1EFBCB53003BDF05 /* THBookMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THBookMessageView.m; sourceTree = "<group>"; };
 		37DA69BC1EF28D9500E71A08 /* BHInfiniteScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHInfiniteScrollView.h; sourceTree = "<group>"; };
 		37DA69BD1EF28D9500E71A08 /* BHInfiniteScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHInfiniteScrollView.m; sourceTree = "<group>"; };
 		37DA69BF1EF28D9500E71A08 /* FXPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXPageControl.h; sourceTree = "<group>"; };
@@ -895,7 +896,6 @@
 				37ED0C711EE7CFB5005B4CD8 /* THResourceViewController.m */,
 				376012631EF0C47600A1C758 /* THDetailViewController.h */,
 				376012641EF0C47600A1C758 /* THDetailViewController.m */,
-				376012651EF0C47600A1C758 /* THDetailViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -916,6 +916,8 @@
 		37ED0C5C1EE7B1CC005B4CD8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				37A8971C1EFBCB53003BDF05 /* THBookMessageView.h */,
+				37A8971D1EFBCB53003BDF05 /* THBookMessageView.m */,
 				37782CBB1EF7754000D41AE8 /* CZCollectionViewCell.h */,
 				37782CBC1EF7754000D41AE8 /* CZCollectionViewCell.m */,
 				37782CB61EF76BDA00D41AE8 /* THTHBookListCell.h */,
@@ -1275,7 +1277,6 @@
 				3771FEEF1EEEA50B008464D9 /* lunbo2.png in Resources */,
 				374C8F831EF8BD5500ACEC80 /* sale_discount_yellow.png in Resources */,
 				37ED0C921EE7EB73005B4CD8 /* 2.jpg in Resources */,
-				376012671EF0C47600A1C758 /* THDetailViewController.xib in Resources */,
 				374C8FC61EF9333A00ACEC80 /* shengming@3x.png in Resources */,
 				374C8F7F1EF8BD5500ACEC80 /* ic_add.png in Resources */,
 				374C8FC51EF9333A00ACEC80 /* Bookstore_search_click@2x.png in Resources */,
@@ -1475,6 +1476,7 @@
 				374C8F8B1EF8BD5500ACEC80 /* CXMLNode_CreationExtensions.m in Sources */,
 				374C8F701EF8BD5500ACEC80 /* LSYNoteVC.m in Sources */,
 				374C8FB51EF8FB0000ACEC80 /* FSComboListView.m in Sources */,
+				37A8971E1EFBCB53003BDF05 /* THBookMessageView.m in Sources */,
 				37DA69F41EF28D9500E71A08 /* SDWebImagePrefetcher.m in Sources */,
 				375E7A531EEF859C00B4EB4E /* THFounctionCell.m in Sources */,
 				37782CA71EF75A3700D41AE8 /* AFURLRequestSerialization.m in Sources */,

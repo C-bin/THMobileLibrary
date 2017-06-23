@@ -8,7 +8,6 @@
 
 #import "CZCollectionViewCell.h"
 #import "CZBookModel.h"
-#import "UIImageView+WebCache.h"
 @implementation CZCollectionViewCell
 -(id)initWithFrame:(CGRect)frame
 {

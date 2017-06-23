@@ -22,6 +22,10 @@
 
 #define WEAKSELF __weak typeof(self) weakSelf = self;
 #define WEBSERVICE_URL       @"http://101.201.116.210:7726/bookTypeAndSearch/queryBookList?bookType=&classificationId=&classificationNumber=&classificationType=&desc=0&keyword=&pageNum=%ld&pageSize=9&pageType=3&press=&rankType=1&upYearEndVal=&upYearStartVal=&yearEnd=&yearStart="
+#define BOOKSTORE_HEARD  @"http://101.201.116.210:7726/bookTypeAndSearch/queryBookList?rankType=1&pageSize=12&pageNum="
+#define BOOKSTORE_END    @"&pageType=3&keyword=&classificationType=&classificationNumber=&classificationId=&bookType=L15_1&press=&upYearEndVal=&desc=0&upYearStartVal=&yearEnd=&yearStart="
+
+
 #define SCREEN_WIDTH        [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT       [UIScreen mainScreen].bounds.size.height
 #define SCREEN_ASPECTRATIO  [UIScreen mainScreen].bounds.size.width/375
@@ -30,6 +34,7 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
 {
     UICollectionView *mainCollectionView;
     NSMutableArray * dataArray;
+    NSInteger page;
 }
 @property(nonatomic,strong)NSMutableArray *loopImage_array;
 @property (nonatomic, strong) BHInfiniteScrollView* infinitePageView;
@@ -50,12 +55,10 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
     //导航栏
     THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64) navTitle:@"电子资源"];
     [self.view addSubview:navView];
+    page=1;
     dataArray=[[NSMutableArray alloc]init];
-   
-    
-    [self getBooksData];
 
-    
+    [self getBooksData];
 }
 #pragma mark - 获取轮播图数据
 -(void)getImageData:(NSString *)url{
@@ -118,8 +121,10 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
 }
 #pragma mark - 获取书城数据
 -(void)getBooksData{
-    NSString *baseString = @"http://101.201.116.210:7726/bookTypeAndSearch/queryBookList?rankType=1&pageSize=12&pageNum=1&pageType=3&keyword=&classificationType=&classificationNumber=&classificationId=&bookType=L15_1&press=&upYearEndVal=&desc=0&upYearStartVal=&yearEnd=&yearStart=";
+//    NSString *baseString = @"http://101.201.116.210:7726/bookTypeAndSearch/queryBookList?rankType=1&pageSize=12&pageNum=1&pageType=3&keyword=&classificationType=&classificationNumber=&classificationId=&bookType=L15_1&press=&upYearEndVal=&desc=0&upYearStartVal=&yearEnd=&yearStart=";
     
+    NSString *baseString = [NSString stringWithFormat:@"%@%ld%@",BOOKSTORE_HEARD,page,BOOKSTORE_END];
+//    NSLog(@"url===========%@",baseString);
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     [manager GET:baseString parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
@@ -138,12 +143,12 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
                          CZBookModel  *model =[[CZBookModel alloc]init];
                          model.bookName = [bookDic objectForKey:@"bookName"];
                          model.bookid = [bookDic objectForKey:@"id"];
-                        NSLog(@"ID---------------%@",model.bookid);
+//                        NSLog(@"ID---------------%@",model.bookid);
                          NSArray *pictures=[bookDic objectForKey:@"bookPictures"];
                          NSString *bookPicture=[[pictures objectAtIndex:0]objectForKey:@"filePath"];
                          
                          model.bookImage =[NSString stringWithFormat:@"%@%@",HEADER_URL,bookPicture];
-                          NSLog(@"书名---------------%@",model.bookImage);
+//                          NSLog(@"书名---------------%@",model.bookImage);
                          [dataArray addObject:model];
 //
              }

@@ -11,6 +11,7 @@
 @interface THDetaileModel : NSObject
 
 @property (nonatomic,copy) NSString *describe;
+@property (nonatomic,copy) NSString *bookImage;
 @property (copy, nonatomic) NSString *bookName;        //书名
 @property (copy, nonatomic) NSString *bookAuthor;          //作者
 @property (copy, nonatomic) NSString *press; //出版社

@@ -12,13 +12,14 @@
 #import "LSYReadPageViewController.h"
 #import "UILabel+THLabelHeightAndWidth.h"
 #import "THDetaileModel.h"
-
+#import "THBookMessageView.h"
 #define SCREEN_WIDTH        [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT       [UIScreen mainScreen].bounds.size.height
-@interface THDetailViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>{
-    UICollectionView *mainCollectionView;
-    NSMutableArray *detailArray;
+@interface THDetailViewController ()<UIScrollViewDelegate>{
+    UIScrollView *scrollView;
     CGFloat height;
+    CGFloat list_heigh;
+    NSMutableArray *detailArray;
     NSString *downPath;
 }
 
@@ -35,43 +36,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    //初始化数据源
     detailArray=[[NSMutableArray alloc]init];
     [self createNavgationBar];
-    
-[self createDetailData];
-    
+    [self createDetailData];
 }
 
--(void)createCollectionView{
-    //1.初始化layout
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    //设置collectionView滚动方向
-    //    [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    //设置headerView的尺寸大小
-    //    layout.headerReferenceSize = CGSizeMake(self.view.frame.size.width,44);
-    //该方法也可以设置itemSize
-    layout.itemSize =CGSizeMake(100, 100);
-    //2.初始化collectionView
-    mainCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) collectionViewLayout:layout];
-    [self.view addSubview:mainCollectionView];
-    
-    mainCollectionView.backgroundColor = [UIColor whiteColor];
-    
-    //3.注册collectionViewCell
-    //注意，此处的ReuseIdentifier 必须和 cellForItemAtIndexPath 方法中 一致 均为 cellId
-//    [mainCollectionView registerClass:[CZCollectionViewCell class] forCellWithReuseIdentifier:@"cellId"];
-//    
-//    [mainCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:SupplementaryViewHeaderIdentify];
-    //注册headerView  此处的ReuseIdentifier 必须和 cellForItemAtIndexPath 方法中 一致  均为reusableView
-    //    [mainCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"reusableView"];
-    
-    //4.设置代理
-    mainCollectionView.delegate = self;
-    mainCollectionView.dataSource = self;
-    //轮播图
-[self createDetailData];
-    
-}
+#pragma mark -创建导航栏
 -(void)createNavgationBar{
         //导航栏
     THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64) navTitle:@"图书详情"];
@@ -86,6 +57,7 @@
     
     [self.navigationController popViewControllerAnimated:YES];
 }
+#pragma mark -获取图书详情的网络请求
 -(void)createDetailData{
     NSString *baseString =[NSString stringWithFormat:@"http://101.201.116.210:7726/mobile/bookDetailById?bookId=%@",self.bookModel.bookid];
     
@@ -111,9 +83,16 @@
              NSDictionary *filesDic=[bookFiles objectAtIndex:0];
                 model.fileExt=[filesDic objectForKey:@"fileExt"];
                 model.filePath=[NSString stringWithFormat:@"http://101.201.114.210/591/ebooks/%@",[filesDic objectForKey:@"filePath"]];
-             downPath=model.filePath;
+                downPath=model.filePath;
                 model.tableContent=[filesDic objectForKey:@"tableContent"];
-             [self createDetailViewWithModel:model];
+             UILabel *labelOne = [[UILabel alloc] initWithFrame:CGRectMake(10, 170, SCREEN_WIDTH-20, 20)];
+             labelOne.text =model.tableContent;
+             labelOne.backgroundColor = [UIColor whiteColor];
+             labelOne.font = [UIFont systemFontOfSize:15];
+             labelOne.numberOfLines = 0;
+             list_heigh= [UILabel getHeightByWidth:labelOne.frame.size.width title:labelOne.text font:labelOne.font];
+             labelOne.frame = CGRectMake(10, 284+height, self.view.frame.size.width-20, list_heigh);
+            [self createCollectionViewWithModel:model];
          }
      
          failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
@@ -121,45 +100,54 @@
              NSLog(@"%@",error);  //这里打印错误信息
              
          }];
-
+}
+#pragma mark -创建UIScrollView
+-(void)createCollectionViewWithModel:(THDetaileModel *)model{
+    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH,SCREEN_HEIGHT-64 )];
+    scrollView.backgroundColor = [UIColor whiteColor];
+    // 是否支持滑动最顶端
+    //    scrollView.scrollsToTop = NO;
+    scrollView.delegate = self;
+    // 设置内容大小
+    scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,SCREEN_HEIGHT/3*2+list_heigh);
+    // 是否反弹
+    //        scrollView.bounces = YES;
+    // 是否分页
+    //        scrollView.pagingEnabled = YES;
+    // 是否滚动
+    //    scrollView.scrollEnabled = NO;
+    //    scrollView.showsHorizontalScrollIndicator = NO;
+    // 设置indicator风格
+    //    scrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    // 设置内容的边缘和Indicators边缘
+    //    scrollView.contentInset = UIEdgeInsetsMake(0, 50, 50, 0);
+    //    scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 50, 0, 0);
     
+    //  当处于跟踪状态(tracking)时是否显示垂直状态条，默认值为YES。
+    scrollView.showsVerticalScrollIndicator=NO;
+    // 提示用户,Indicators flash
+    [scrollView flashScrollIndicators];
+    // 是否同时运动,lock
+    scrollView.directionalLockEnabled = YES;
+    
+    [self createDetailViewWithModel:model];
+    
+    //立即阅读，加入书架
+    UIButton *addBookShell=[self buttonWithtitle:@"加入书架" frame:CGRectMake(SCREEN_WIDTH-30-(SCREEN_WIDTH-90)/2, 160, (SCREEN_WIDTH-90)/2, 40) action:@selector(clickBookShell)];
+    [addBookShell setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    addBookShell.backgroundColor=RGB(229, 229, 229);
+    [scrollView addSubview:addBookShell];
+    UIButton *readNow=[self buttonWithtitle:@"立即阅读" frame:CGRectMake(30, 160, (SCREEN_WIDTH-90)/2, 40) action:@selector(clickRead)];
+    [readNow setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    readNow.backgroundColor=[UIColor orangeColor];
+    [scrollView addSubview:readNow];
+    
+    [self bookDescriptionWithModel:model];
+    [self bookListWithModelModel:model];
+    [self.view addSubview:scrollView];
 }
 
--(void)createDetailViewWithModel:(THDetaileModel *)model{
-    [self.bookImage sd_setImageWithURL:[NSURL URLWithString:self.bookModel.bookImage] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-    _bookName.text=model.bookName;
-    _bookName.font=[UIFont systemFontOfSize:18];
-    _author.text=model.bookAuthor;
-    _author.font=[UIFont systemFontOfSize:15];
-    _publishingHouse.text=model.press;
-    _publishingHouse.font=[UIFont systemFontOfSize:15];
-    _isbn.text=model.isbn;
-    _isbn.font=[UIFont systemFontOfSize:15];
-    _fileFormat.text=[NSString stringWithFormat:@"文件格式：%@",model.fileExt];
-    _fileFormat.font=[UIFont systemFontOfSize:15];
-    
-    NSLog(@"%@",model.filePath);
-    UILabel *labelOne = [[UILabel alloc] initWithFrame:CGRectMake(10, 284, self.view.frame.size.width, 50)];
-    labelOne.text = model.describe;
-    labelOne.backgroundColor = [UIColor whiteColor];
-    labelOne.font = [UIFont systemFontOfSize:20];
-    labelOne.numberOfLines = 0;
-    height = [UILabel getHeightByWidth:labelOne.frame.size.width title:labelOne.text font:labelOne.font];
-    labelOne.frame = CGRectMake(10, 284, self.view.frame.size.width-20, height);
-    [self.view addSubview:labelOne];
-    
-    UITextView *textView=[[UITextView alloc]initWithFrame:CGRectMake(10, 284+height, self.view.frame.size.width, self.view.frame.size.height-284-height)];
-    textView.text=model.tableContent;
-    textView.backgroundColor=[UIColor whiteColor];
-     textView.font=[UIFont systemFontOfSize:18];
-    //不可编辑状态
-     textView.editable = NO;
-    [self.view addSubview:textView];
-    
-}
-
-- (IBAction)readNow:(id)sender {
-    
+-(void)clickRead{
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     
@@ -190,6 +178,108 @@
         });
     }];
     [downloadTask resume];
+}
+-(void)clickBookShell{
+    
+}
+
+
+#pragma mark -立即阅读／收藏
+-(UIButton *)buttonWithtitle:(NSString *)title frame:(CGRect)frame action:(SEL)action{
+    
+    UIButton *iconbtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    [iconbtn setTitle:title forState:UIControlStateNormal];
+    
+    iconbtn.frame=frame;
+    iconbtn.layer.cornerRadius = 0;//2.0是圆角的弧度，根据需求自己更改
+    iconbtn.layer.borderColor = [UIColor clearColor].CGColor;//设置边框颜色
+    iconbtn.layer.borderWidth = 1.0f;//设置边框
+    [iconbtn addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    return iconbtn;
+}
+
+
+
+#pragma mark -图书详情
+-(void)createDetailViewWithModel:(THDetaileModel *)model{
+   model.bookImage=self.bookModel.bookImage;
+    THBookMessageView *messageView=[[THBookMessageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150)];
+//     UIImageView *background_image=[[UIImageView alloc]initWithFrame:messageView.bounds];
+//   [background_image sd_setImageWithURL:[NSURL URLWithString:self.bookModel.bookImage] placeholderImage:[UIImage imageNamed:@"000000.jpg"]];
+    
+    [messageView configCellWithModel:model];
+    [scrollView addSubview:messageView];
+}
+//生成一张毛玻璃图片
+- (UIImage*)blur:(UIImage*)theImage
+{
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CIImage *inputImage = [CIImage imageWithCGImage:theImage.CGImage];
+    
+    CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
+    [filter setValue:inputImage forKey:kCIInputImageKey];
+    [filter setValue:[NSNumber numberWithFloat:15.0f] forKey:@"inputRadius"];
+    CIImage *result = [filter valueForKey:kCIOutputImageKey];
+    
+    CGImageRef cgImage = [context createCGImage:result fromRect:[inputImage extent]];
+    
+    UIImage *returnImage = [UIImage imageWithCGImage:cgImage];
+    CGImageRelease(cgImage);
+    return returnImage;
+}
+#pragma mark -图书简介
+
+-(void )bookDescriptionWithModel:(THDetaileModel *)model{
+    
+    //线
+    UILabel *line=[[UILabel alloc]initWithFrame:CGRectMake(0, 209 , SCREEN_WIDTH, 1)];
+    line.backgroundColor = [UIColor lightGrayColor];
+    [scrollView addSubview:line];
+//    图书简介Title
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 220, SCREEN_WIDTH, 20)];
+    titleLabel.text =@"图书简介";
+    titleLabel.backgroundColor = [UIColor whiteColor];
+    titleLabel.font = [UIFont systemFontOfSize:20];
+    titleLabel.textColor=[UIColor redColor];
+    [scrollView addSubview:titleLabel];
+    UILabel *labelOne = [[UILabel alloc] initWithFrame:CGRectMake(10, 250, SCREEN_WIDTH-20, 40)];
+    labelOne.text =model.describe;
+    labelOne.backgroundColor = [UIColor whiteColor];
+    labelOne.font = [UIFont systemFontOfSize:16];
+    labelOne.numberOfLines = 0;
+    height= [UILabel getHeightByWidth:labelOne.frame.size.width title:labelOne.text font:labelOne.font];
+    labelOne.frame = CGRectMake(10, 250, self.view.frame.size.width-20, height);
+    [scrollView addSubview:labelOne];
+}
+#pragma mark -图书目录
+-(void)bookListWithModelModel:(THDetaileModel *)model{
+        //线
+    UILabel *line=[[UILabel alloc]initWithFrame:CGRectMake(0, 259+height , SCREEN_WIDTH, 1)];
+    line.backgroundColor = [UIColor lightGrayColor];
+    [scrollView addSubview:line];
+    //  书目详情Title
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 270+height, SCREEN_WIDTH, 20)];
+    titleLabel.text =@"书目详情";
+    titleLabel.backgroundColor = [UIColor whiteColor];
+    titleLabel.font = [UIFont systemFontOfSize:20];
+    titleLabel.textColor=[UIColor redColor];
+    [scrollView addSubview:titleLabel];
+    
+    UILabel *labelOne = [[UILabel alloc] initWithFrame:CGRectMake(10, 170, SCREEN_WIDTH-20, 20)];
+    labelOne.text =model.tableContent;
+    labelOne.backgroundColor = [UIColor whiteColor];
+    labelOne.font = [UIFont systemFontOfSize:14];
+    labelOne.numberOfLines = 0;
+    list_heigh= [UILabel getHeightByWidth:labelOne.frame.size.width title:labelOne.text font:labelOne.font];
+    labelOne.frame = CGRectMake(10, 300+height, self.view.frame.size.width-20, list_heigh);
+    [scrollView addSubview:labelOne];
+    
+}
+
+
+- (IBAction)readNow:(id)sender {
+    
+   
     
    
 
@@ -202,14 +292,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
