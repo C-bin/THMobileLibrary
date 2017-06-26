@@ -161,9 +161,10 @@
     
     [self.view addSubview:scrollView];
     
-    THNewsTableView *tableViewOne = [[THNewsTableView alloc] initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, SCREEN_HEIGHT-248)];
-    
-    THAnnouncementTableView *tableViewTwo = [[THAnnouncementTableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH,0, SCREEN_WIDTH, SCREEN_HEIGHT-248)];
+    THNewBook *tableViewOne = [[THNewBook alloc] initWithFrame:CGRectMake(20,0, SCREEN_WIDTH-40, SCREEN_HEIGHT-248)];
+//    tableViewOne.backgroundColor=[UIColor redColor];
+    THHotBook *tableViewTwo = [[THHotBook alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-40,0, SCREEN_WIDTH-60, SCREEN_HEIGHT-248)];
+//     tableViewTwo.backgroundColor=[UIColor greenColor];
     [scrollView addSubview:tableViewOne];
     [scrollView addSubview:tableViewTwo];
     
@@ -171,7 +172,7 @@
     detail_Button.frame=CGRectMake((SCREEN_WIDTH-100)/2, SCREEN_HEIGHT-124, 100, 30);
     [detail_Button setTitle:@"详情" forState:UIControlStateNormal];
     detail_Button.backgroundColor=RGB(109, 205, 250);
-    [self.view addSubview:detail_Button];
+//    [self.view addSubview:detail_Button];
     
     _scrollView = scrollView;
     
@@ -180,7 +181,7 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     CGFloat offset = scrollView.contentOffset.x;
     
-    self.segmentCtrl.selectedSegmentIndex = offset/SCREEN_WIDTH;
+    self.segmentCtrl.selectedSegmentIndex = offset/(SCREEN_WIDTH-40);
 }
 
 

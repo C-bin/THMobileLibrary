@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "THNewsTableView.h"
-#import "THAnnouncementTableView.h"
+#import "THNewBook.h"
+#import "THHotBook.h"
 @interface THLibraryCatalogSearch : UIViewController
 @property(nonatomic,strong)UIView *searchView;
 @property (nonatomic,strong)UITextField *textField;

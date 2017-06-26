@@ -28,6 +28,8 @@
 		370508A91EFD10EB00A01557 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 370508941EFD10EB00A01557 /* UIScrollView+MJRefresh.m */; };
 		370508AA1EFD10EB00A01557 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 370508961EFD10EB00A01557 /* UIView+MJExtension.m */; };
 		3716F1B11EF129B8009534C5 /* THNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3716F1B01EF129B8009534C5 /* THNetworkRequest.m */; };
+		3747547D1F00A83900AAF358 /* THNewBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 3747547C1F00A83900AAF358 /* THNewBook.m */; };
+		374754801F00A85800AAF358 /* THHotBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 3747547F1F00A85800AAF358 /* THHotBook.m */; };
 		374C8F6E1EF8BD5500ACEC80 /* LSYChapterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 374C8F021EF8BD5500ACEC80 /* LSYChapterVC.m */; };
 		374C8F6F1EF8BD5500ACEC80 /* LSYMarkVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 374C8F041EF8BD5500ACEC80 /* LSYMarkVC.m */; };
 		374C8F701EF8BD5500ACEC80 /* LSYNoteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 374C8F061EF8BD5500ACEC80 /* LSYNoteVC.m */; };
@@ -239,6 +241,10 @@
 		370508961EFD10EB00A01557 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		3716F1AF1EF129B8009534C5 /* THNetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNetworkRequest.h; sourceTree = "<group>"; };
 		3716F1B01EF129B8009534C5 /* THNetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNetworkRequest.m; sourceTree = "<group>"; };
+		3747547B1F00A83900AAF358 /* THNewBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNewBook.h; sourceTree = "<group>"; };
+		3747547C1F00A83900AAF358 /* THNewBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNewBook.m; sourceTree = "<group>"; };
+		3747547E1F00A85800AAF358 /* THHotBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THHotBook.h; sourceTree = "<group>"; };
+		3747547F1F00A85800AAF358 /* THHotBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THHotBook.m; sourceTree = "<group>"; };
 		374C8EFE1EF8B7AA00ACEC80 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = THMobileLibrary/Main/PrefixHeader.pch; sourceTree = SOURCE_ROOT; };
 		374C8F011EF8BD5500ACEC80 /* LSYChapterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSYChapterVC.h; sourceTree = "<group>"; };
 		374C8F021EF8BD5500ACEC80 /* LSYChapterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSYChapterVC.m; sourceTree = "<group>"; };
@@ -644,6 +650,10 @@
 		3747547A1F00A77700AAF358 /* FounctionViews */ = {
 			isa = PBXGroup;
 			children = (
+				3747547B1F00A83900AAF358 /* THNewBook.h */,
+				3747547C1F00A83900AAF358 /* THNewBook.m */,
+				3747547E1F00A85800AAF358 /* THHotBook.h */,
+				3747547F1F00A85800AAF358 /* THHotBook.m */,
 			);
 			path = FounctionViews;
 			sourceTree = "<group>";
@@ -1587,6 +1597,7 @@
 				37DA69F01EF28D9500E71A08 /* SDWebImageDecoder.m in Sources */,
 				375F022A1EF2657200E6B27C /* THNewsTableView.m in Sources */,
 				37DA69F31EF28D9500E71A08 /* SDWebImageManager.m in Sources */,
+				3747547D1F00A83900AAF358 /* THNewBook.m in Sources */,
 				374C8F7B1EF8BD5500ACEC80 /* LSYReadModel.m in Sources */,
 				374C8F8A1EF8BD5500ACEC80 /* CXMLDocument_CreationExtensions.m in Sources */,
 				374C8F881EF8BD5500ACEC80 /* LSYViewPagerVC.m in Sources */,
@@ -1614,6 +1625,7 @@
 				374C8F8C1EF8BD5500ACEC80 /* CXHTMLDocument.m in Sources */,
 				37ED0C881EE7E119005B4CD8 /* THBaseNavView.m in Sources */,
 				374C8F951EF8BD5500ACEC80 /* CXMLNode_XPathExtensions.m in Sources */,
+				374754801F00A85800AAF358 /* THHotBook.m in Sources */,
 				37DA69EC1EF28D9500E71A08 /* README.md in Sources */,
 				37ED0C7C1EE7D05C005B4CD8 /* THMineViewController.m in Sources */,
 				37DA69F91EF28D9500E71A08 /* UIImageView+WebCache.m in Sources */,
