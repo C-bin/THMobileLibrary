@@ -12,7 +12,7 @@
 /*
  ********************馆藏查询
  */
-@interface THLibraryCatalogSearch ()<FSComboPickerViewDelegate,UISearchBarDelegate>{
+@interface THLibraryCatalogSearch ()<FSComboPickerViewDelegate,UISearchBarDelegate,UIScrollViewDelegate>{
     NSString *searchTitle;
 }
 
@@ -32,6 +32,11 @@
     [self createNavgationBar];
     //搜索选择
     [self createSearchBar];
+    //加载Segment
+    [self settingSegment];
+    
+    //加载ScrollView
+    [self settingScrollView];
 }
 -(void)createNavgationBar{
     //导航栏
@@ -117,6 +122,68 @@
 {
     [self.textField resignFirstResponder];
 }
+
+#pragma mark -  新书推荐／热门图书
+
+- (void)settingSegment{
+    NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"新书推荐",@"热门图书",nil];
+    //1.初始化UISegmentedControl
+    UISegmentedControl *segmentCtrl = [[UISegmentedControl alloc]initWithItems:segmentedArray];
+    segmentCtrl.frame=CGRectMake(20, 180, self.view.frame.size.width-40, 40);
+    
+    segmentCtrl.selectedSegmentIndex = 0;
+    //2.segmentCtrl字体大小，颜色
+    [segmentCtrl setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:RGB(223, 163, 17)} forState:UIControlStateNormal];
+    [segmentCtrl setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:22],NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateSelected];
+    //2.segmentCtrl 背景颜色
+    segmentCtrl.tintColor = RGB(223, 163, 17);
+    [segmentCtrl addTarget:self action:@selector(segmentBtnClick:) forControlEvents:UIControlEventValueChanged];
+    _segmentCtrl = segmentCtrl;
+    [self.view addSubview:segmentCtrl];
+    
+}
+//segmentCtrl 点击事件
+- (void)segmentBtnClick:(UISegmentedControl *)segmentCtrl{
+    
+    self.scrollView.contentOffset = CGPointMake(self.segmentCtrl.selectedSegmentIndex * SCREEN_WIDTH, 0);
+}
+#pragma mark - ScrollView 新闻公告
+- (void)settingScrollView{
+    
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, 250, SCREEN_WIDTH-40, SCREEN_HEIGHT-248)];
+    scrollView.delegate = self;
+    scrollView.bounces = NO;
+    scrollView.pagingEnabled = YES;
+    scrollView.directionalLockEnabled = YES;
+    scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    scrollView.contentSize = CGSizeMake(2 *(SCREEN_WIDTH-40), 0);
+    scrollView.showsHorizontalScrollIndicator = NO;
+    
+    [self.view addSubview:scrollView];
+    
+    THNewsTableView *tableViewOne = [[THNewsTableView alloc] initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, SCREEN_HEIGHT-248)];
+    
+    THAnnouncementTableView *tableViewTwo = [[THAnnouncementTableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH,0, SCREEN_WIDTH, SCREEN_HEIGHT-248)];
+    [scrollView addSubview:tableViewOne];
+    [scrollView addSubview:tableViewTwo];
+    
+    UIButton *detail_Button=[UIButton buttonWithType:UIButtonTypeCustom];
+    detail_Button.frame=CGRectMake((SCREEN_WIDTH-100)/2, SCREEN_HEIGHT-124, 100, 30);
+    [detail_Button setTitle:@"详情" forState:UIControlStateNormal];
+    detail_Button.backgroundColor=RGB(109, 205, 250);
+    [self.view addSubview:detail_Button];
+    
+    _scrollView = scrollView;
+    
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    CGFloat offset = scrollView.contentOffset.x;
+    
+    self.segmentCtrl.selectedSegmentIndex = offset/SCREEN_WIDTH;
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

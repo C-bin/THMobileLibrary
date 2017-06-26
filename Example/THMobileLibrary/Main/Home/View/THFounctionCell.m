@@ -27,7 +27,7 @@
         _botlabel.textColor = [UIColor blackColor];
         _botlabel.numberOfLines=0;
         _botlabel.font = [UIFont systemFontOfSize:15];
-        self.botlabel.text=@"朱自清";
+       
         [self.contentView addSubview:_botlabel];
     }
     

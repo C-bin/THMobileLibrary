@@ -29,14 +29,19 @@
 @implementation THDetailViewController
 - (void)viewWillAppear:(BOOL)animated
 {
+//    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
     self.tabBarController.tabBar.hidden=YES;
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+    }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     //初始化数据源
+    self.view.backgroundColor=[UIColor whiteColor];
     detailArray=[[NSMutableArray alloc]init];
     [self createNavgationBar];
     [self createDetailData];

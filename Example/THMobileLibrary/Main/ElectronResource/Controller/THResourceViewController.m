@@ -14,7 +14,7 @@
 #import "AFNetworking.h"
 #import "CZBookModel.h"
 #import "THTHBookListCell.h"
-
+#import "MJRefresh.h"
 #define LOOP_HEIGHT    164
 #define IMAGE_URL @"http://101.201.116.210:7726/imageManage/getImagePathForMobile/1902ce11663d4399856887e1d11918c0"
 
@@ -35,6 +35,7 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
     UICollectionView *mainCollectionView;
     NSMutableArray * dataArray;
     NSInteger page;
+    BOOL _ispulling;
 }
 @property(nonatomic,strong)NSMutableArray *loopImage_array;
 @property (nonatomic, strong) BHInfiniteScrollView* infinitePageView;
@@ -59,11 +60,16 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
     dataArray=[[NSMutableArray alloc]init];
 
     [self getBooksData];
+   
 }
+
+#pragma mark UICollectionView 上下拉刷新
+
+
 #pragma mark - 获取轮播图数据
 -(void)getImageData:(NSString *)url{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
+    [_loopImage_array removeAllObjects];
     [manager GET:url parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
         
     }
@@ -77,7 +83,6 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
                  NSString *image_url = [dic objectForKey:@"fileUrl"];
         
                  [_loopImage_array addObject:image_url];
-              
              }
              
              [self createImageLoop];
@@ -121,10 +126,7 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
 }
 #pragma mark - 获取书城数据
 -(void)getBooksData{
-//    NSString *baseString = @"http://101.201.116.210:7726/bookTypeAndSearch/queryBookList?rankType=1&pageSize=12&pageNum=1&pageType=3&keyword=&classificationType=&classificationNumber=&classificationId=&bookType=L15_1&press=&upYearEndVal=&desc=0&upYearStartVal=&yearEnd=&yearStart=";
-    
     NSString *baseString = [NSString stringWithFormat:@"%@%ld%@",BOOKSTORE_HEARD,page,BOOKSTORE_END];
-//    NSLog(@"url===========%@",baseString);
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     [manager GET:baseString parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
@@ -150,20 +152,23 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
                          model.bookImage =[NSString stringWithFormat:@"%@%@",HEADER_URL,bookPicture];
 //                          NSLog(@"书名---------------%@",model.bookImage);
                          [dataArray addObject:model];
-//
+                       
+
              }
-             
-            [self createCollectionView];
+             if (mainCollectionView) {
+                   [mainCollectionView reloadData];
+             }else{
+              [self createCollectionView];
+             }
+             [mainCollectionView.mj_header endRefreshing];
+             [mainCollectionView.mj_footer endRefreshing];
          }
-     
          failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
              
              NSLog(@"%@",error);  //这里打印错误信息
              
          }];
 
-   
-    
 }
 
 
@@ -193,11 +198,30 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
     //4.设置代理
     mainCollectionView.delegate = self;
     mainCollectionView.dataSource = self;
+    mainCollectionView.mj_header= [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(uppull)];
+    
+    mainCollectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(downPull)];
     //轮播图
     [self getImageData:IMAGE_URL];
+   
 
 }
-
+-(void)uppull{
+    [_loopImage_array removeAllObjects];
+    [dataArray removeAllObjects];
+    [self getBooksData];
+    [mainCollectionView reloadData];
+    
+    // 结束刷新
+//    [mainCollectionView.mj_header endRefreshing];
+}
+-(void)downPull{
+    page++;
+    
+    [self getBooksData];
+    // 结束刷新
+//    [mainCollectionView.mj_footer endRefreshing];
+}
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
     return dataArray.count;
@@ -257,10 +281,7 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
     
     
     [self.navigationController pushViewController:detail animated:NO];
-    
-    
-//    NSLog(@">>>>>>>>>>%@",bookid);
-    
+
 }
 
 - (void)didReceiveMemoryWarning {

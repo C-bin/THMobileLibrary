@@ -13,9 +13,9 @@
 //标签 标题
 #define Titles @[@"首页", @"电子资源", @"图书馆指南", @"我的"]
 //标签 未选中图片
-#define Images @[@"bookshelf@2x", @"Bookstore_search@2x", @"shengming@3x", @"tabbar_setting@3x"]
+#define Images @[@"", @"", @"", @"tabbar_setting@3x"]
 //标签 选中图片
-#define SelectedImages @[@"bookshelf_clicked@2x", @"Bookstore_search_click@2x", @"shengming_press@3x", @"tabbar_setting_hl@3x"]
+#define SelectedImages @[@"", @"", @"", @"tabbar_setting_hl@3x"]
 @interface THMainViewController ()
 
 @end
