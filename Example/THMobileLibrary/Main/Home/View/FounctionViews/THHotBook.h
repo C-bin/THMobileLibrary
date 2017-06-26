@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface THHotBook : UITableView<UITableViewDelegate, UITableViewDataSource>
-
+@property (nonatomic,strong)UITextField *textField;
 @end

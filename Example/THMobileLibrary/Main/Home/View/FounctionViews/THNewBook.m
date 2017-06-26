@@ -47,8 +47,7 @@
             paperiteam.bookName = [book objectForKey:@"bookName"];
             
             [dataArray addObject:paperiteam];
-            
-            
+
         }
         dispatch_async(dispatch_get_main_queue(),^{
             
@@ -86,6 +85,7 @@
 // 选中某行cell时会调用
 - (void)tableView:(nonnull UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     CZBookModel *model=dataArray[indexPath.row];
+     [self.textField resignFirstResponder];
     NSLog(@"选中didSelectRowAtIndexPath row = %@", model.bookName);
 }
 

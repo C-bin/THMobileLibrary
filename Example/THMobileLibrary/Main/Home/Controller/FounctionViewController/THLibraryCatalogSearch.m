@@ -24,6 +24,11 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
     self.tabBarController.tabBar.hidden=YES;
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+    }
+
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -96,8 +101,8 @@
     
 }
 -(void)searchBook{
-    
-    
+    [self.textField resignFirstResponder];
+    NSLog(@"搜索书籍");
 }
 
 -(void)back{
@@ -123,7 +128,7 @@
     [self.textField resignFirstResponder];
 }
 
-#pragma mark -  新书推荐／热门图书
+#pragma mark -  新书推荐／热门图书  UISegmentedControl
 
 - (void)settingSegment{
     NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"新书推荐",@"热门图书",nil];
@@ -140,14 +145,15 @@
     [segmentCtrl addTarget:self action:@selector(segmentBtnClick:) forControlEvents:UIControlEventValueChanged];
     _segmentCtrl = segmentCtrl;
     [self.view addSubview:segmentCtrl];
+    [self.textField resignFirstResponder];
     
 }
 //segmentCtrl 点击事件
 - (void)segmentBtnClick:(UISegmentedControl *)segmentCtrl{
-    
-    self.scrollView.contentOffset = CGPointMake(self.segmentCtrl.selectedSegmentIndex * SCREEN_WIDTH, 0);
+    [self.textField resignFirstResponder];
+    self.scrollView.contentOffset = CGPointMake(self.segmentCtrl.selectedSegmentIndex * (SCREEN_WIDTH-40), 0);
 }
-#pragma mark - ScrollView 新闻公告
+#pragma mark - ScrollView  新书推荐／热门图书 列表
 - (void)settingScrollView{
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, 250, SCREEN_WIDTH-40, SCREEN_HEIGHT-248)];
@@ -158,22 +164,15 @@
     scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     scrollView.contentSize = CGSizeMake(2 *(SCREEN_WIDTH-40), 0);
     scrollView.showsHorizontalScrollIndicator = NO;
-    
     [self.view addSubview:scrollView];
     
-    THNewBook *tableViewOne = [[THNewBook alloc] initWithFrame:CGRectMake(20,0, SCREEN_WIDTH-40, SCREEN_HEIGHT-248)];
-//    tableViewOne.backgroundColor=[UIColor redColor];
+    THNewBook *tableViewOne = [[THNewBook alloc] initWithFrame:CGRectMake(0,0, SCREEN_WIDTH-40, SCREEN_HEIGHT-248)];
+    tableViewOne.backgroundColor=[UIColor redColor];
     THHotBook *tableViewTwo = [[THHotBook alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-40,0, SCREEN_WIDTH-60, SCREEN_HEIGHT-248)];
-//     tableViewTwo.backgroundColor=[UIColor greenColor];
+     tableViewTwo.backgroundColor=[UIColor greenColor];
     [scrollView addSubview:tableViewOne];
     [scrollView addSubview:tableViewTwo];
-    
-    UIButton *detail_Button=[UIButton buttonWithType:UIButtonTypeCustom];
-    detail_Button.frame=CGRectMake((SCREEN_WIDTH-100)/2, SCREEN_HEIGHT-124, 100, 30);
-    [detail_Button setTitle:@"详情" forState:UIControlStateNormal];
-    detail_Button.backgroundColor=RGB(109, 205, 250);
-//    [self.view addSubview:detail_Button];
-    
+    [self.textField resignFirstResponder];
     _scrollView = scrollView;
     
 }

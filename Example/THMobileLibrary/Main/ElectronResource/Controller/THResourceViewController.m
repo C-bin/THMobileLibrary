@@ -15,6 +15,9 @@
 #import "CZBookModel.h"
 #import "THTHBookListCell.h"
 #import "MJRefresh.h"
+/***********************************************************
+ **  电子资源
+ **********************************************************/
 #define LOOP_HEIGHT    164
 #define IMAGE_URL @"http://101.201.116.210:7726/imageManage/getImagePathForMobile/1902ce11663d4399856887e1d11918c0"
 

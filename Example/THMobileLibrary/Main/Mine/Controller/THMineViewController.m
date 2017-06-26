@@ -8,7 +8,9 @@
 
 #import "THMineViewController.h"
 #import "THBaseNavView.h"
-
+/***********************************************************
+ **  我的
+ **********************************************************/
 
 @interface THMineViewController ()<UIScrollViewDelegate>
 

@@ -199,7 +199,9 @@
     iconbtn.layer.cornerRadius = 0;//2.0是圆角的弧度，根据需求自己更改
     iconbtn.layer.borderColor = [UIColor clearColor].CGColor;//设置边框颜色
     iconbtn.layer.borderWidth = 1.0f;//设置边框
+
     [iconbtn addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    
     return iconbtn;
 }
 
@@ -211,7 +213,8 @@
     THBookMessageView *messageView=[[THBookMessageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150)];
 //     UIImageView *background_image=[[UIImageView alloc]initWithFrame:messageView.bounds];
 //   [background_image sd_setImageWithURL:[NSURL URLWithString:self.bookModel.bookImage] placeholderImage:[UIImage imageNamed:@"000000.jpg"]];
-    
+   
+   
     [messageView configCellWithModel:model];
     [scrollView addSubview:messageView];
 }
@@ -237,46 +240,46 @@
 -(void )bookDescriptionWithModel:(THDetaileModel *)model{
     
     //线
-    UILabel *line=[[UILabel alloc]initWithFrame:CGRectMake(0, 209 , SCREEN_WIDTH, 1)];
+    UILabel *line=[[UILabel alloc]initWithFrame:CGRectMake(20, 209 , SCREEN_WIDTH-40, 1)];
     line.backgroundColor = [UIColor lightGrayColor];
     [scrollView addSubview:line];
 //    图书简介Title
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 220, SCREEN_WIDTH, 20)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 220, SCREEN_WIDTH-40, 20)];
     titleLabel.text =@"图书简介";
     titleLabel.backgroundColor = [UIColor whiteColor];
     titleLabel.font = [UIFont systemFontOfSize:20];
     titleLabel.textColor=[UIColor redColor];
     [scrollView addSubview:titleLabel];
-    UILabel *labelOne = [[UILabel alloc] initWithFrame:CGRectMake(10, 250, SCREEN_WIDTH-20, 40)];
+    UILabel *labelOne = [[UILabel alloc] initWithFrame:CGRectMake(20, 250, SCREEN_WIDTH-40, 40)];
     labelOne.text =model.describe;
     labelOne.backgroundColor = [UIColor whiteColor];
     labelOne.font = [UIFont systemFontOfSize:16];
     labelOne.numberOfLines = 0;
     height= [UILabel getHeightByWidth:labelOne.frame.size.width title:labelOne.text font:labelOne.font];
-    labelOne.frame = CGRectMake(10, 250, self.view.frame.size.width-20, height);
+    labelOne.frame = CGRectMake(20, 250, self.view.frame.size.width-40, height);
     [scrollView addSubview:labelOne];
 }
 #pragma mark -图书目录
 -(void)bookListWithModelModel:(THDetaileModel *)model{
         //线
-    UILabel *line=[[UILabel alloc]initWithFrame:CGRectMake(0, 259+height , SCREEN_WIDTH, 1)];
+    UILabel *line=[[UILabel alloc]initWithFrame:CGRectMake(20, 259+height , SCREEN_WIDTH-40, 1)];
     line.backgroundColor = [UIColor lightGrayColor];
     [scrollView addSubview:line];
     //  书目详情Title
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 270+height, SCREEN_WIDTH, 20)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 270+height, SCREEN_WIDTH-40, 20)];
     titleLabel.text =@"书目详情";
     titleLabel.backgroundColor = [UIColor whiteColor];
     titleLabel.font = [UIFont systemFontOfSize:20];
     titleLabel.textColor=[UIColor redColor];
     [scrollView addSubview:titleLabel];
     
-    UILabel *labelOne = [[UILabel alloc] initWithFrame:CGRectMake(10, 170, SCREEN_WIDTH-20, 20)];
+    UILabel *labelOne = [[UILabel alloc] initWithFrame:CGRectMake(20, 170, SCREEN_WIDTH-40, 20)];
     labelOne.text =model.tableContent;
     labelOne.backgroundColor = [UIColor whiteColor];
     labelOne.font = [UIFont systemFontOfSize:14];
     labelOne.numberOfLines = 0;
     list_heigh= [UILabel getHeightByWidth:labelOne.frame.size.width title:labelOne.text font:labelOne.font];
-    labelOne.frame = CGRectMake(10, 300+height, self.view.frame.size.width-20, list_heigh);
+    labelOne.frame = CGRectMake(20, 300+height, self.view.frame.size.width-40, list_heigh);
     [scrollView addSubview:labelOne];
     
 }

@@ -15,7 +15,10 @@
     if (self)
     {
         _topImage  = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100,120)];
-       
+        _topImage.layer.shadowOpacity=0.8;
+        _topImage.layer.shadowRadius=4;
+        _topImage.layer.shadowOffset=CGSizeMake(2, 2);
+        _topImage.layer.shadowColor=[UIColor grayColor].CGColor;
         [self.contentView addSubview:_topImage];
         
         
