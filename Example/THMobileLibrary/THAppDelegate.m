@@ -7,13 +7,20 @@
 //
 
 #import "THAppDelegate.h"
-#import "THMainViewController.h"
+#import "THLoginViewController.h"
 @implementation THAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    self.window.rootViewController=[[THMainViewController alloc]init];
+//    self.window.rootViewController=[[THMainViewController alloc]init];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    THLoginViewController *loginVC = [[THLoginViewController alloc] init];
+    self.nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    self.window.rootViewController = self.nav;
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

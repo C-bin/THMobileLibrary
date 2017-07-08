@@ -18,13 +18,11 @@
 /***********************************************************
  **  电子资源
  **********************************************************/
-#define LOOP_HEIGHT    164
+/** 轮播图高度 **/
+#define LOOP_HEIGHT    [UIScreen mainScreen].bounds.size.height/3-64
 #define IMAGE_URL @"http://101.201.116.210:7726/imageManage/getImagePathForMobile/1902ce11663d4399856887e1d11918c0"
 
 #define HEADER_URL @"http://101.201.114.210/591/ebooks/"
-
-#define WEAKSELF __weak typeof(self) weakSelf = self;
-#define WEBSERVICE_URL       @"http://101.201.116.210:7726/bookTypeAndSearch/queryBookList?bookType=&classificationId=&classificationNumber=&classificationType=&desc=0&keyword=&pageNum=%ld&pageSize=9&pageType=3&press=&rankType=1&upYearEndVal=&upYearStartVal=&yearEnd=&yearStart="
 #define BOOKSTORE_HEARD  @"http://101.201.116.210:7726/bookTypeAndSearch/queryBookList?rankType=1&pageSize=12&pageNum="
 #define BOOKSTORE_END    @"&pageType=3&keyword=&classificationType=&classificationNumber=&classificationId=&bookType=L15_1&press=&upYearEndVal=&desc=0&upYearStartVal=&yearEnd=&yearStart="
 
@@ -204,11 +202,13 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
     mainCollectionView.mj_header= [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(uppull)];
     
     mainCollectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(downPull)];
+//    [self prepareRefresh];
     //轮播图
     [self getImageData:IMAGE_URL];
    
 
 }
+
 -(void)uppull{
     [_loopImage_array removeAllObjects];
     [dataArray removeAllObjects];
@@ -270,7 +270,7 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
 #pragma mark - UICollectionViewDelegateFlowLayout method
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
     if(section == 0){
-        return CGSizeMake(100, 164);
+        return CGSizeMake(100, LOOP_HEIGHT);
     }
     return CGSizeMake(100, 10);
 }

@@ -8,88 +8,183 @@
 
 #import "THMineViewController.h"
 #import "THBaseNavView.h"
+#import "THAppDelegate.h"
+#import "THLoginViewController.h"
+#import "THPersonalInformation.h"
+#import "THPersonalCell.h"
 /***********************************************************
  **  我的
+ 
+
  **********************************************************/
-
-@interface THMineViewController ()<UIScrollViewDelegate>
-
+#define Head_HEIGHT    ([UIScreen mainScreen].bounds.size.height-114)/3
+#define Message_HEIGHT [UIScreen mainScreen].bounds.size.height/3*2-64
+@interface THMineViewController ()<UITableViewDelegate,UITableViewDataSource>{
+    NSArray *title_array;
+}
+@property (nonatomic,strong) UITableView *tableView;
+/** 数据数组 */
+@property (nonatomic, strong) NSArray *dataList;
 @end
 
 @implementation THMineViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor=RGB(237, 236, 239);
+ 
+    
+    [self headImageView];
+    [self createMessageAndSetting];
+    [self createExit_Button];
+}
+- (NSArray *)dataList{
+    if (!_dataList) {
+        NSMutableDictionary *miaoBi = [NSMutableDictionary dictionary];
+        miaoBi[@"title"] = @"个人信息";
+        miaoBi[@"icon"] = @"user_icon@2x.png";
+        
+        //自己写要跳转到的控制器
+        miaoBi[@"controller"] = [UIViewController class];
+        
+        NSMutableDictionary *zhiBoJian = [NSMutableDictionary dictionary];
+        zhiBoJian[@"title"] = @"借阅信息";
+        zhiBoJian[@"icon"] = @"借阅@2x.png";
+        //自己写要跳转到的控制器
+        zhiBoJian[@"controller"] = [UIViewController class];
+        
+        
+        NSMutableDictionary *liCai = [NSMutableDictionary dictionary];
+        liCai[@"title"] = @"程序设置";
+        liCai[@"icon"] = @"设置@2x.png";
+        liCai[@"controller"] = [UIViewController class];
+        
+        NSMutableDictionary *cleanCache = [NSMutableDictionary dictionary];
+        cleanCache[@"title"] = @"关于我们";
+        cleanCache[@"icon"] = @"关于@2x.png";
+        
+        NSMutableDictionary *setting = [NSMutableDictionary dictionary];
+        setting[@"title"] = @"意见建议";
+        setting[@"icon"] = @"建议@2x.png";
+        setting[@"controller"] = [UIViewController class];
+        
+        NSArray *section1 = @[miaoBi, zhiBoJian];
+        NSArray *section2 = @[liCai];
+        NSArray *section3 = @[cleanCache];
+        NSArray *section4 = @[setting];
+        
+        _dataList = [NSArray arrayWithObjects:section1, section2, section3,section4, nil];
+    }
+    return _dataList;
+}
+#pragma mark -  头图片
+-(void)headImageView{
+    _imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, Head_HEIGHT)];
+    [_imageView setImage:[UIImage imageNamed:@"MineBackGround.jpg"]];
+    [self.view addSubview:_imageView];
+    
+    UIImageView *imageView1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"3787527286718810832.jpg"]];
+    
+    imageView1.frame = CGRectMake(40,Head_HEIGHT-30, 60, 60);
+    
+    imageView1.layer.masksToBounds =YES;
+    
+    imageView1.layer.cornerRadius =30;
+    
+    [self.view addSubview:imageView1];
+    
+    UILabel *nameTitle=[[UILabel alloc]initWithFrame:CGRectMake(120, Head_HEIGHT+5, SCREEN_WIDTH-180, 20)];
+    nameTitle.text=@"003";
+    nameTitle.backgroundColor=[UIColor clearColor];
+    [self.view addSubview:nameTitle];
+    
+}
+
+-(void)createMessageAndSetting{
+    
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, Head_HEIGHT+40, SCREEN_WIDTH, SCREEN_HEIGHT-200) style:UITableViewStyleGrouped];
+ 
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.showsVerticalScrollIndicator = NO;
+    _tableView.showsHorizontalScrollIndicator = NO;
+      self.tableView.scrollEnabled =NO; //设置tableview 不能滚动
+    _tableView.backgroundColor=[UIColor clearColor];
+    [self.view addSubview:_tableView];
+
+}
+#pragma mark - UITableViewDelegate, UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return self.dataList.count ;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [self.dataList[section] count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NSString *ID = @"mineCell";
+    THPersonalCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (!cell) {
+        cell = [[THPersonalCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    
+    NSDictionary *dict = self.dataList[indexPath.section][indexPath.row];
+    cell.textLabel.text = dict[@"title"];
+    cell.textLabel.textColor=RGB(107, 107, 107);
+    cell.imageView.image = [UIImage imageNamed:dict[@"icon"]];
+    cell.detailTextLabel.textColor = RGB(196, 197, 196);
    
-    self.view.backgroundColor=[UIColor whiteColor];
-    //导航栏
-    THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64) navTitle:@"我的"];
-    [self.view addSubview:navView];
-    //加载Segment
-    [self settingSegment];
+    cell.selected = YES;
     
-    //加载ScrollView
-    [self settingScrollView];
-}
-#pragma mark -  新闻公告
-
-- (void)settingSegment{
-    NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"借阅信息",@"个人信息",nil];
-    //1.初始化UISegmentedControl
-    UISegmentedControl *segmentCtrl = [[UISegmentedControl alloc]initWithItems:segmentedArray];
-    segmentCtrl.frame=CGRectMake(0, 64, self.view.frame.size.width, 40);
     
-    segmentCtrl.selectedSegmentIndex = 0;
-    //2.segmentCtrl字体大小，颜色
-    [segmentCtrl setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15],NSForegroundColorAttributeName:[UIColor blackColor]} forState:UIControlStateNormal];
-    [segmentCtrl setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20],NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateSelected];
-    //2.segmentCtrl 背景颜色
-    segmentCtrl.tintColor = RGB(109, 205, 250);
-    [segmentCtrl addTarget:self action:@selector(segmentBtnClick:) forControlEvents:UIControlEventValueChanged];
-    _segmentCtrl = segmentCtrl;
-    [self.view addSubview:segmentCtrl];
-    
-}
-//segmentCtrl 点击事件
-- (void)segmentBtnClick:(UISegmentedControl *)segmentCtrl{
-    
-    self.scrollView.contentOffset = CGPointMake(self.segmentCtrl.selectedSegmentIndex * SCREEN_WIDTH, 0);
-}
-#pragma mark - ScrollView 新闻公告
-- (void)settingScrollView{
-    
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 104, SCREEN_WIDTH, SCREEN_HEIGHT-248)];
-    scrollView.delegate = self;
-    scrollView.bounces = NO;
-    scrollView.pagingEnabled = YES;
-    scrollView.directionalLockEnabled = YES;
-    scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    scrollView.contentSize = CGSizeMake(2 *SCREEN_WIDTH, 0);
-    scrollView.showsHorizontalScrollIndicator = NO;
-    
-    [self.view addSubview:scrollView];
-    
-    THNewsTableView *tableViewOne = [[THNewsTableView alloc] initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, SCREEN_HEIGHT-248)];
-    
-    THAnnouncementTableView *tableViewTwo = [[THAnnouncementTableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH,0, SCREEN_WIDTH, SCREEN_HEIGHT-248)];
-    [scrollView addSubview:tableViewOne];
-    [scrollView addSubview:tableViewTwo];
-    
-    UIButton *detail_Button=[UIButton buttonWithType:UIButtonTypeCustom];
-    detail_Button.frame=CGRectMake((SCREEN_WIDTH-100)/2, SCREEN_HEIGHT-124, 100, 30);
-    [detail_Button setTitle:@"详情" forState:UIControlStateNormal];
-    detail_Button.backgroundColor=RGB(109, 205, 250);
-    [self.view addSubview:detail_Button];
-    
-    _scrollView = scrollView;
-    
+    return cell;
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    CGFloat offset = scrollView.contentOffset.x;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     
-    self.segmentCtrl.selectedSegmentIndex = offset/SCREEN_WIDTH;
+    
+    if (self.dataList[indexPath.section][indexPath.row][@"controller"]){
+        
+        UIViewController *vc = [[self.dataList[indexPath.section][indexPath.row][@"controller"] alloc] init];
+        
+        vc.title = self.dataList[indexPath.section][indexPath.row][@"title"];
+        NSLog(@"......%@",vc.title);
+      
+        
+        //        [self presentViewController:vc animated:YES completion:nil];
+    }
 }
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return !section ? 1 : CGFLOAT_MIN;
+}
+
+#pragma mark -  退出登录按钮
+-(void)createExit_Button{
+    UIButton *exit_Button=[UIButton buttonWithType:UIButtonTypeCustom];
+    exit_Button.frame=CGRectMake(30, SCREEN_HEIGHT-94, SCREEN_WIDTH-60, 30);
+    [exit_Button setTitle:@"退出登录" forState:UIControlStateNormal];
+    [exit_Button addTarget:self action:@selector(exitLogin) forControlEvents:UIControlEventTouchUpInside];
+    exit_Button.layer.cornerRadius = 8.0;//2.0是圆角的弧度，根据需求自己更改
+    exit_Button.layer.borderColor = (__bridge CGColorRef _Nullable)(RGB(254, 118, 84));//设置边框颜色
+    exit_Button.layer.borderWidth = 1.0f;//设置边框颜色
+
+    exit_Button.backgroundColor=RGB(254, 118, 84);
+    [self.view addSubview:exit_Button];
+}
+#pragma mark -  点击退出登录
+-(void)exitLogin{
+    THAppDelegate *appDelegate = (THAppDelegate *)[UIApplication sharedApplication].delegate;
+    self.view.window.rootViewController = appDelegate.nav;
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

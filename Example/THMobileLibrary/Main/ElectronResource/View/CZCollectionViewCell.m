@@ -14,7 +14,7 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        _topImage  = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100,120)];
+        _topImage  = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width,frame.size.width*1.2)];
         _topImage.layer.shadowOpacity=0.8;
         _topImage.layer.shadowRadius=4;
         _topImage.layer.shadowOffset=CGSizeMake(2, 2);

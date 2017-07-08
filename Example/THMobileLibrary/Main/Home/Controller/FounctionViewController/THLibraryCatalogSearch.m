@@ -37,10 +37,10 @@
     [self createNavgationBar];
     //搜索选择
     [self createSearchBar];
-    //加载Segment
+//    //加载Segment
     [self settingSegment];
-    
-    //加载ScrollView
+//
+//    //加载ScrollView
     [self settingScrollView];
 }
 -(void)createNavgationBar{
@@ -50,19 +50,18 @@
     UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
     button.frame=CGRectMake(10, 30, 40, 30);
     [button setTitle:@"返回" forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(backtoHome) forControlEvents:UIControlEventTouchUpInside];
     [navView addSubview:button];
 }
 -(void)createSearchBar{
-    self.searchView=[[UIView alloc]initWithFrame:CGRectMake(15, 100, self.view.frame.size.width-30, 60)];
+    self.searchView=[[UIView alloc]initWithFrame:CGRectMake(15, 64, self.view.frame.size.width-30, 60)];
     _searchView.backgroundColor=RGB(162, 229, 229);
     //将图层的边框设置为圆脚
     
     _searchView.layer.cornerRadius = 8;
     
     _searchView.layer.masksToBounds = YES;
-    
-    
+    [ [ [ UIApplication  sharedApplication ]  keyWindow ] addSubview : self.searchView ] ;
     [self.view addSubview:self.searchView];
     [self.view addSubview:[self setupComboListView]];
     [self.view addSubview:[self createTextField]];
@@ -73,9 +72,9 @@
     FSComboListView *comboListView = [[FSComboListView alloc] initWithValues:@[@"出版社",
                                                                                @"题名",
                                                                                @"作者",
-                                                                               @"ISBN",
-                                                                               @"索书号"]
-                                                                       frame:CGRectMake(20, 110, 90, 40)];
+                                                                               @"ISBN"]
+                                                                              
+                                                                       frame:CGRectMake(20, 74, 90, 40)];
     comboListView.delegate = self;
     comboListView.backgroundColor = RGB(14, 193, 194);
     comboListView.textColor = [UIColor whiteColor];
@@ -84,7 +83,7 @@
     
 }
 -(UITextField *)createTextField{
-    _textField=[[UITextField alloc]initWithFrame:CGRectMake(110, 110, self.view.frame.size.width-170, 40)];
+    _textField=[[UITextField alloc]initWithFrame:CGRectMake(110, 74, self.view.frame.size.width-135, 40)];
     _textField.backgroundColor=[UIColor whiteColor];
     _textField.placeholder = [NSString stringWithFormat:@"请输入出版社名称"];
     
@@ -93,7 +92,7 @@
 -(UIButton *)createButton{
     
     UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame=CGRectMake(110+(self.view.frame.size.width-170), 110, 40, 40);
+    button.frame=CGRectMake(110+(self.view.frame.size.width-170), 74, 40, 40);
 //    button.backgroundColor=RGB(239, 173, 14);
     [button setImage:[UIImage imageNamed:@"btn_opac.png"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(searchBook) forControlEvents:UIControlEventTouchUpInside];
@@ -105,7 +104,7 @@
     NSLog(@"搜索书籍");
 }
 
--(void)back{
+-(void)backtoHome{
     
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -167,9 +166,9 @@
     [self.view addSubview:scrollView];
     
     THNewBook *tableViewOne = [[THNewBook alloc] initWithFrame:CGRectMake(0,0, SCREEN_WIDTH-40, SCREEN_HEIGHT-248)];
-    tableViewOne.backgroundColor=[UIColor redColor];
+  
     THHotBook *tableViewTwo = [[THHotBook alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-40,0, SCREEN_WIDTH-60, SCREEN_HEIGHT-248)];
-     tableViewTwo.backgroundColor=[UIColor greenColor];
+   
     [scrollView addSubview:tableViewOne];
     [scrollView addSubview:tableViewTwo];
     [self.textField resignFirstResponder];

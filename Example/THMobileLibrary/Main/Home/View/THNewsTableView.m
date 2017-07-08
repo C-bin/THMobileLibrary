@@ -65,6 +65,12 @@
 - (NSInteger)numberOfRowsInSection:(NSInteger)section{
     return 1;
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return 30;
+    
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return dataArray.count;
 }
@@ -78,6 +84,7 @@
     }
     CZBookModel *model=dataArray[indexPath.row];
     cell.textLabel.text=model.bookName;
+    cell.textLabel.font=[UIFont systemFontOfSize:12];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 //    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;

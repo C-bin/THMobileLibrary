@@ -9,10 +9,12 @@
 #import "THHomeViewController.h"
 #import "BHInfiniteScrollView.h"
 #import "THImageModel.h"
-#import "THFounctionCell.h"
+#import "HomeMenuCell.h"
 #import "THNewsTableView.h"
 #import "THAnnouncementTableView.h"
 #import "THLibraryCatalogSearch.h"
+#import "MBProgressHUD.h"
+#import "THNewBookViewController.h"
 /***********************************************************
  **  首页
  **********************************************************/
@@ -21,24 +23,25 @@
 
 #define SCREEN_ASPECTRATIO  [UIScreen mainScreen].bounds.size.width/375
 //轮播图高度
-#define LOOP_HEIGHT    164
+#define LOOP_HEIGHT    [UIScreen mainScreen].bounds.size.height/3-64
 //功能按钮区高度
-#define FOUNCTION_HEIGHT    150
+#define FOUNCTION_HEIGHT    160
 //轮播图数据
 #define IMAGE_URL @"http://101.201.116.210:7726/imageManage/getImagePathForMobile/1902ce11663d4399856887e1d11918c0"
 //ScrollView高度
-#define LG_scrollViewH    SCREEN_HEIGHT-LOOP_HEIGHT-FOUNCTION_HEIGHT-SEGMENT_H-108
+#define LG_scrollViewH    [UIScreen mainScreen].bounds.size.height/3+10
 //Segment高度
 #define SEGMENT_H 40
-@interface THHomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate,BHInfiniteScrollViewDelegate>
+@interface THHomeViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate,BHInfiniteScrollViewDelegate,OnTapBtnViewDelegate>
 {
     UICollectionView *mainCollectionView;
-    NSArray * dataArray;
-   
+    NSArray * titleArray;
+    NSArray * iconArray;
 }
 //@property (nonatomic, strong) UIScrollView *contentScrollView;
 @property(nonatomic,strong)NSMutableArray *buttonList;
 @property(nonatomic,strong)NSMutableArray *loopImage_array;
+@property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,weak)CALayer *LGLayer;
 @property (nonatomic, strong) BHInfiniteScrollView* infinitePageView;
 @end
@@ -63,26 +66,24 @@
     [super viewDidLoad];
     
     self.view.backgroundColor=[UIColor whiteColor];
+//self.view.frame.size.height
     //初始化
-   dataArray =@[@"馆藏查询",@"新书推荐",@"借阅排行",@"扫一扫",@"读者信息",@"我的书架",@"正在借阅",@"历史借阅"];
+   titleArray =@[@"馆藏查询",@"新书推荐",@"借阅排行",@"扫一扫",@"读者信息",@"我的书架",@"正在借阅",@"历史借阅"];
     _loopImage_array = [[NSMutableArray alloc]init];
     //导航栏
     THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64) navTitle:@"首页"];
     [self.view addSubview:navView];
-    //轮播图
-    [self getImageData:IMAGE_URL];
-    //功能按钮
-    [self createCollectionView];
-    //加载Segment
-    [self settingSegment];
-
-    //加载ScrollView
-   [self settingScrollView];
+//       轮播图
+        [self getImageData:IMAGE_URL];
+        //功能按钮
+        [self createFeatureView];
+        //加载Segment
+        [self settingSegment];
     
-
-
- 
+        //加载ScrollView
+        [self settingScrollView];
 }
+
 -(void)getImageData:(NSString *)url{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
@@ -103,7 +104,7 @@
                  [_loopImage_array addObject:image_url];
                  //
              }
-             
+
              [self createImageLoop];
          }
      
@@ -114,10 +115,11 @@
          }];
     
 }
+#pragma mark - createImageLoop 轮播视图
 -(void)createImageLoop{
     
     BHInfiniteScrollView* infinitePageView1 = [BHInfiniteScrollView
-                                               infiniteScrollViewWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, LOOP_HEIGHT) Delegate:self ImagesArray:_loopImage_array];
+                                               infiniteScrollViewWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, LOOP_HEIGHT-10) Delegate:self ImagesArray:_loopImage_array];
     infinitePageView1.dotSize = 10;
     infinitePageView1.pageControlAlignmentOffset = CGSizeMake(0, 20);
     infinitePageView1.scrollTimeInterval = 2;
@@ -125,7 +127,6 @@
     infinitePageView1.delegate = self;
     [self.view addSubview:infinitePageView1];
 }
-
 - (void)stop {
     [_infinitePageView stopAutoScrollPage];
 }
@@ -143,77 +144,90 @@
 - (void)infiniteScrollView:(BHInfiniteScrollView *)infiniteScrollView didSelectItemAtIndex:(NSInteger)index {
     //NSLog(@"did select item at index %ld", index);
 }
+#pragma mark - createCollectionView 功能列表
+-(void)createFeatureView{
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, LOOP_HEIGHT+54, self.view.frame.size.width, FOUNCTION_HEIGHT) style:UITableViewStylePlain];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    //禁止滑动
+    self.tableView.scrollEnabled =NO;
+    //隐藏分割线
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:self.tableView];
+}
 
--(void)createCollectionView{
-    #pragma mark - CreateUICollectionView
-    //1.初始化layout
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    //该方法也可以设置itemSize
-    layout.itemSize = CGSizeMake(kScreenWidth / 4, 60);
-    layout.minimumLineSpacing = 0;
-    layout.minimumInteritemSpacing = 0;
-    //2.初始化collectionView
-    mainCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64+LOOP_HEIGHT, SCREEN_WIDTH,FOUNCTION_HEIGHT) collectionViewLayout:layout];
-    [self.view addSubview:mainCollectionView];
+#pragma mark -UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    mainCollectionView.backgroundColor = [UIColor whiteColor];
-    //3.注册collectionViewCell
-    //注意，此处的ReuseIdentifier 必须和 cellForItemAtIndexPath 方法中 一致 均为 cellId
-    [mainCollectionView registerClass:[THFounctionCell class] forCellWithReuseIdentifier:@"cellId"];
-    
-    //4.设置代理
-    mainCollectionView.delegate = self;
-    mainCollectionView.dataSource = self;
- 
+    return 1;
     
 }
 
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return dataArray.count;
+    
+    
+    return  1;
+    
+    
 }
 
-- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    THFounctionCell *cell = (THFounctionCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellId" forIndexPath:indexPath];
-        cell.botlabel.text =[dataArray objectAtIndex:indexPath.row];
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    
+    return 140;
+    
+    
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    
+    static NSString *cellIndentifier = @"menucell";
+    HomeMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIndentifier];
+    if (cell == nil) {
+        cell = [[HomeMenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIndentifier menuArray:iconArray];
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.onTapBtnViewDelegate = self;
     return cell;
-}
-
-//设置每个item的UIEdgeInsets
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    return UIEdgeInsetsMake(0, 0, 1 / [UIScreen mainScreen].scale, 0);
+    
+    
     
 }
-//设置每个item水平间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 0;
-}
 
-//设置每个item垂直间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 10;
-}
+#pragma mark -OnTapBtnViewDelegate
 
-#pragma mark - UICollectionViewDelegateFlowLayout method
-//点击
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-   
-    if (indexPath.row==0) {
+- (void)OnTapBtnView:(UITapGestureRecognizer *)sender {
+    
+    NSLog(@"tag:%ld",sender.view.tag);
+    if (sender.view.tag==10) {
         THLibraryCatalogSearch *libraryCatalogSearch=[[THLibraryCatalogSearch alloc]init];
         [self.navigationController pushViewController:libraryCatalogSearch animated:NO];
+    }else if (sender.view.tag==11){
+        THNewBookViewController *newBook=[[THNewBookViewController alloc]init];
+        [self.navigationController pushViewController:newBook animated:NO];
+    }else if (sender.view.tag==12){
+        NSLog(@"2");
     }
-    
-    
-    
+    else if (sender.view.tag==13){
+        NSLog(@"3");
+    }
+    else if (sender.view.tag==14){
+        NSLog(@"4");
+    }
+    else if (sender.view.tag==15){
+        NSLog(@"5");
+    }
+    else if (sender.view.tag==16){
+        NSLog(@"6");
+    }else if (sender.view.tag==17){
+        NSLog(@"7");
+    }
 }
-
-#pragma mark -  新闻公告
+#pragma mark -  新闻公告 Segment
 
 - (void)settingSegment{
     NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"图书馆通知",@"系统公告",nil];
@@ -226,7 +240,7 @@
     [segmentCtrl setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15],NSForegroundColorAttributeName:[UIColor blackColor]} forState:UIControlStateNormal];
     [segmentCtrl setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20],NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateSelected];
     //2.segmentCtrl 背景颜色
-    segmentCtrl.tintColor = RGB(109, 205, 250);
+    segmentCtrl.tintColor = [UIColor lightGrayColor];
     [segmentCtrl addTarget:self action:@selector(segmentBtnClick:) forControlEvents:UIControlEventValueChanged];
     _segmentCtrl = segmentCtrl;
     [self.view addSubview:segmentCtrl];
@@ -237,7 +251,7 @@
    
     self.scrollView.contentOffset = CGPointMake(self.segmentCtrl.selectedSegmentIndex * SCREEN_WIDTH, 0);
 }
-#pragma mark - ScrollView 新闻公告
+#pragma mark -  新闻公告 ScrollView
 - (void)settingScrollView{
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64+LOOP_HEIGHT+FOUNCTION_HEIGHT+SEGMENT_H, SCREEN_WIDTH, LG_scrollViewH)];
