@@ -7,31 +7,27 @@
 //
 
 #import "THHomeViewController.h"
-#import "BHInfiniteScrollView.h"
-#import "THImageModel.h"
-#import "HomeMenuCell.h"
-#import "THNewsTableView.h"
-#import "THAnnouncementTableView.h"
-#import "THLibraryCatalogSearch.h"
-#import "MBProgressHUD.h"
-#import "THNewBookViewController.h"
+#import <AVFoundation/AVFoundation.h>
+#import "THReaderViewController.h"
+#import "THBorrowingViewController.h"
+#import "THHistoryBorrowViewController.h"
+#import "THRankViewController.h"
+#import "THBookCaseViewController.h"
 /***********************************************************
  **  首页
  **********************************************************/
 
-#define kScreenWidth [UIScreen mainScreen].bounds.size.width
 
-#define SCREEN_ASPECTRATIO  [UIScreen mainScreen].bounds.size.width/375
 //轮播图高度
 #define LOOP_HEIGHT    [UIScreen mainScreen].bounds.size.height/3-64
 //功能按钮区高度
-#define FOUNCTION_HEIGHT    160
+#define FOUNCTION_HEIGHT    120
 //轮播图数据
 #define IMAGE_URL @"http://101.201.116.210:7726/imageManage/getImagePathForMobile/1902ce11663d4399856887e1d11918c0"
 //ScrollView高度
 #define LG_scrollViewH    [UIScreen mainScreen].bounds.size.height/3+10
 //Segment高度
-#define SEGMENT_H 40
+#define SEGMENT_H 35
 @interface THHomeViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate,BHInfiniteScrollViewDelegate,OnTapBtnViewDelegate>
 {
     UICollectionView *mainCollectionView;
@@ -44,6 +40,7 @@
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,weak)CALayer *LGLayer;
 @property (nonatomic, strong) BHInfiniteScrollView* infinitePageView;
+@property (nonatomic, strong) THProgressHUD* progressHUD;
 @end
 
 @implementation THHomeViewController
@@ -66,22 +63,32 @@
     [super viewDidLoad];
     
     self.view.backgroundColor=[UIColor whiteColor];
-//self.view.frame.size.height
+
     //初始化
-   titleArray =@[@"馆藏查询",@"新书推荐",@"借阅排行",@"扫一扫",@"读者信息",@"我的书架",@"正在借阅",@"历史借阅"];
-    _loopImage_array = [[NSMutableArray alloc]init];
-    //导航栏
-    THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64) navTitle:@"首页"];
-    [self.view addSubview:navView];
+   _loopImage_array = [[NSMutableArray alloc]init];
+   
+    [self createNavgationBar];
+    _progressHUD = [[THProgressHUD alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-40, self.view.frame.size.height/2-40, 80, 80)];
+    
+    [self.view addSubview:_progressHUD];
+    [_progressHUD startAnimation];  //开始转动
+    
 //       轮播图
         [self getImageData:IMAGE_URL];
-        //功能按钮
+//        //功能按钮
         [self createFeatureView];
         //加载Segment
         [self settingSegment];
     
         //加载ScrollView
         [self settingScrollView];
+}
+
+-(void)createNavgationBar{
+    //导航栏
+    THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64) navTitle:@"首页"];
+    [self.view addSubview:navView];
+  
 }
 
 -(void)getImageData:(NSString *)url{
@@ -104,14 +111,14 @@
                  [_loopImage_array addObject:image_url];
                  //
              }
-
+        [_progressHUD stopAnimationWithLoadText:@"finish" withType:YES];//加载成功
              [self createImageLoop];
          }
      
          failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
              
              NSLog(@"%@",error);  //这里打印错误信息
-             
+             [_progressHUD stopAnimationWithLoadText:@"加载失败" withType:NO];//加载失败
          }];
     
 }
@@ -134,8 +141,6 @@
 - (void)start {
     [_infinitePageView startAutoScrollPage];
 }
-
-
 
 - (void)infiniteScrollView:(BHInfiniteScrollView *)infiniteScrollView didScrollToIndex:(NSInteger)index {
 //    NSLog(@"did scroll to index %ld", index);
@@ -166,24 +171,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    
-    
     return  1;
-    
-    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
-    return 140;
-    
-    
+    return 120;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
     
     static NSString *cellIndentifier = @"menucell";
     HomeMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIndentifier];
@@ -193,16 +189,13 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.onTapBtnViewDelegate = self;
     return cell;
-    
-    
-    
 }
 
 #pragma mark -OnTapBtnViewDelegate
 
 - (void)OnTapBtnView:(UITapGestureRecognizer *)sender {
     
-    NSLog(@"tag:%ld",sender.view.tag);
+   
     if (sender.view.tag==10) {
         THLibraryCatalogSearch *libraryCatalogSearch=[[THLibraryCatalogSearch alloc]init];
         [self.navigationController pushViewController:libraryCatalogSearch animated:NO];
@@ -210,25 +203,70 @@
         THNewBookViewController *newBook=[[THNewBookViewController alloc]init];
         [self.navigationController pushViewController:newBook animated:NO];
     }else if (sender.view.tag==12){
-        NSLog(@"2");
+        THRankViewController *rank=[[THRankViewController alloc]init];
+        [self.navigationController pushViewController:rank animated:NO];
     }
     else if (sender.view.tag==13){
-        NSLog(@"3");
+        [self openQrCodeScanningView];
     }
     else if (sender.view.tag==14){
-        NSLog(@"4");
+        THReaderViewController *userInfo=[[THReaderViewController alloc]init];
+         [self.navigationController pushViewController:userInfo animated:NO];
     }
     else if (sender.view.tag==15){
-        NSLog(@"5");
+        
+        THBookCaseViewController *bookShell = [[THBookCaseViewController alloc]init];
+        [self.navigationController pushViewController:bookShell animated:NO];
     }
     else if (sender.view.tag==16){
-        NSLog(@"6");
+        THBorrowingViewController *borrowing=[[THBorrowingViewController alloc]init];
+        [self.navigationController pushViewController:borrowing animated:NO];
     }else if (sender.view.tag==17){
-        NSLog(@"7");
+       THHistoryBorrowViewController *history=[[THHistoryBorrowViewController alloc]init];
+        [self.navigationController pushViewController:history animated:NO];
     }
 }
-#pragma mark -  新闻公告 Segment
+#pragma mark -  扫一扫 openQrCodeScanningView
+-(void)openQrCodeScanningView{
+    // 1、 获取摄像设备
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    if (device) {
+        AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        if (status == AVAuthorizationStatusNotDetermined) {
+            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+                if (granted) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        THScanningViewController *scanVC=[[THScanningViewController alloc]init];
+                        [self.navigationController pushViewController:scanVC animated:YES];
+                    });
+                    
+                    NSLog(@"当前线程 - - %@", [NSThread currentThread]);
+                    // 用户第一次同意了访问相机权限
+                    NSLog(@"用户第一次同意了访问相机权限");
+                    
+                } else {
+                    
+                    // 用户第一次拒绝了访问相机权限
+                    NSLog(@"用户第一次拒绝了访问相机权限");
+                }
+            }];
+        } else if (status == AVAuthorizationStatusAuthorized) { // 用户允许当前应用访问相机
+            THScanningViewController *scanVC=[[THScanningViewController alloc]init];
+            [self.navigationController pushViewController:scanVC animated:YES];
+        }
+    } else {
+        UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"未检测到您的摄像头" preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alertC addAction:alertA];
+        [self presentViewController:alertC animated:YES completion:nil];
+    }
 
+}
+
+#pragma mark -  新闻公告 Segment
 - (void)settingSegment{
     NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"图书馆通知",@"系统公告",nil];
     //1.初始化UISegmentedControl
@@ -262,19 +300,26 @@
     scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     scrollView.contentSize = CGSizeMake(2 *SCREEN_WIDTH, 0);
     scrollView.showsHorizontalScrollIndicator = NO;
-    
     [self.view addSubview:scrollView];
     
-    THNewsTableView *tableViewOne = [[THNewsTableView alloc] initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, LG_scrollViewH)];
-    
-    THAnnouncementTableView *tableViewTwo = [[THAnnouncementTableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH,0, SCREEN_WIDTH, LG_scrollViewH)];
+    THNewsTableView *tableViewOne = [[THNewsTableView alloc]initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, LG_scrollViewH) URL:NEWS_URL type:@"1"];
+//    tableViewOne.delegate=self;
+    THNewsTableView *tableViewTwo = [[THNewsTableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH,0, SCREEN_WIDTH, LG_scrollViewH) URL:NEWS_URL type:@"2"];
+//    tableViewTwo.delegate=self;
     [scrollView addSubview:tableViewOne];
     [scrollView addSubview:tableViewTwo];
     
     _scrollView = scrollView;
-    
 }
 
+-(void)newsWithHeadline:(NSString *)headline content:(NSString *)content{
+    
+    THNewsViewController *newVC=[[THNewsViewController alloc]init];
+    newVC.headline=headline;
+    newVC.content=content;
+    [self.navigationController pushViewController:newVC animated:NO];
+    
+}
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     CGFloat offset = scrollView.contentOffset.x;
     
@@ -297,4 +342,6 @@
 }
 */
 
-@end
+    @end
+   
+

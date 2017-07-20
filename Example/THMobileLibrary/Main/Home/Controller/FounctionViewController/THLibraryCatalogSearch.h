@@ -7,12 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "THNewBook.h"
-#import "THHotBook.h"
 @interface THLibraryCatalogSearch : UIViewController
 @property(nonatomic,strong)UIView *searchView;
 @property (nonatomic,strong)UITextField *textField;
 @property (nonatomic, strong) UISegmentedControl *segmentCtrl;
-
 @property (nonatomic, strong) UIScrollView *scrollView;
 @end

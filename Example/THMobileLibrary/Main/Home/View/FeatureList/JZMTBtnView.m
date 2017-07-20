@@ -22,12 +22,14 @@
     self = [super initWithFrame:frame];
     if (self) {
         //
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(frame.size.width/2-22, 5, 50, 50)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(frame.size.width/2-22, 5, 30, 30)];
         imageView.image = [UIImage imageNamed:imageStr];
+     
+//        imageView.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview:imageView];
         
         //
-        UILabel *titleLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 10+50, frame.size.width, 20)];
+        UILabel *titleLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 10+imageView.frame.size.height, frame.size.width, 20)];
         titleLable.text = title;
         titleLable.textAlignment = NSTextAlignmentCenter;
         titleLable.font = [UIFont systemFontOfSize:15];

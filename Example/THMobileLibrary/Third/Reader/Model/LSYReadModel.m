@@ -70,6 +70,7 @@
 {
     
     NSString *key = [url.path lastPathComponent];
+    
     NSMutableData *data=[[NSMutableData alloc]init];
     NSKeyedArchiver *archiver=[[NSKeyedArchiver alloc]initForWritingWithMutableData:data];
     [archiver encodeObject:readModel forKey:key];
@@ -79,6 +80,7 @@
 +(id)getLocalModelWithURL:(NSURL *)url
 {
     NSString *key = [url.path lastPathComponent];
+    
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:key];
     if (!data) {
         if ([[key pathExtension] isEqualToString:@"txt"]) {
@@ -89,7 +91,9 @@
         }
         else if ([[key pathExtension] isEqualToString:@"epub"]){
             NSLog(@"this is epub");
+            
             LSYReadModel *model = [[LSYReadModel alloc] initWithePub:url.path];
+            
             model.resource = url;
             [LSYReadModel updateLocalModel:model url:url];
             return model;

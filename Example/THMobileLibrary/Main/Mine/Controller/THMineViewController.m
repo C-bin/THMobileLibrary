@@ -12,10 +12,9 @@
 #import "THLoginViewController.h"
 #import "THPersonalInformation.h"
 #import "THPersonalCell.h"
+#import "THReaderViewController.h"
 /***********************************************************
  **  我的
- 
-
  **********************************************************/
 #define Head_HEIGHT    ([UIScreen mainScreen].bounds.size.height-114)/3
 #define Message_HEIGHT [UIScreen mainScreen].bounds.size.height/3*2-64
@@ -28,7 +27,12 @@
 @end
 
 @implementation THMineViewController
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+    self.tabBarController.tabBar.hidden=NO;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=RGB(237, 236, 239);
@@ -42,33 +46,34 @@
     if (!_dataList) {
         NSMutableDictionary *miaoBi = [NSMutableDictionary dictionary];
         miaoBi[@"title"] = @"个人信息";
-        miaoBi[@"icon"] = @"user_icon@2x.png";
+        miaoBi[@"icon"] = @"me.png";
         
         //自己写要跳转到的控制器
-        miaoBi[@"controller"] = [UIViewController class];
+        miaoBi[@"controller"] = [THReaderViewController class];
         
-        NSMutableDictionary *zhiBoJian = [NSMutableDictionary dictionary];
-        zhiBoJian[@"title"] = @"借阅信息";
-        zhiBoJian[@"icon"] = @"借阅@2x.png";
-        //自己写要跳转到的控制器
-        zhiBoJian[@"controller"] = [UIViewController class];
+//        NSMutableDictionary *zhiBoJian = [NSMutableDictionary dictionary];
+//        zhiBoJian[@"title"] = @"借阅信息";
+//        zhiBoJian[@"icon"] = @"borrowing.png";
+//        //自己写要跳转到的控制器
+//        zhiBoJian[@"controller"] = [UIViewController class];
         
         
         NSMutableDictionary *liCai = [NSMutableDictionary dictionary];
-        liCai[@"title"] = @"程序设置";
-        liCai[@"icon"] = @"设置@2x.png";
+        liCai[@"title"] = @"借阅信息";
+        liCai[@"icon"] = @"borrowing.png";
         liCai[@"controller"] = [UIViewController class];
         
         NSMutableDictionary *cleanCache = [NSMutableDictionary dictionary];
-        cleanCache[@"title"] = @"关于我们";
-        cleanCache[@"icon"] = @"关于@2x.png";
+        cleanCache[@"title"] = @"程序设置";
+        cleanCache[@"icon"] = @"setting.png";
+        cleanCache[@"controller"] = [UIViewController class];
         
         NSMutableDictionary *setting = [NSMutableDictionary dictionary];
-        setting[@"title"] = @"意见建议";
-        setting[@"icon"] = @"建议@2x.png";
+        setting[@"title"] = @"关于我们";
+        setting[@"icon"] = @"about.png";
         setting[@"controller"] = [UIViewController class];
         
-        NSArray *section1 = @[miaoBi, zhiBoJian];
+        NSArray *section1 = @[miaoBi];
         NSArray *section2 = @[liCai];
         NSArray *section3 = @[cleanCache];
         NSArray *section4 = @[setting];
@@ -94,7 +99,8 @@
     [self.view addSubview:imageView1];
     
     UILabel *nameTitle=[[UILabel alloc]initWithFrame:CGRectMake(120, Head_HEIGHT+5, SCREEN_WIDTH-180, 20)];
-    nameTitle.text=@"003";
+    
+    nameTitle.text=[THReaderConstant shareReadConstant].userName;
     nameTitle.backgroundColor=[UIColor clearColor];
     [self.view addSubview:nameTitle];
     
@@ -133,11 +139,16 @@
     }
     
     NSDictionary *dict = self.dataList[indexPath.section][indexPath.row];
+    
     cell.textLabel.text = dict[@"title"];
     cell.textLabel.textColor=RGB(107, 107, 107);
     cell.imageView.image = [UIImage imageNamed:dict[@"icon"]];
-    cell.detailTextLabel.textColor = RGB(196, 197, 196);
+    
    
+    if ([dict[@"title"] isEqualToString:@"程序设置"]) {
+        cell.detailTextLabel.text = @"0.8M";
+    }
+    
     cell.selected = YES;
     
     
@@ -154,9 +165,10 @@
         
         vc.title = self.dataList[indexPath.section][indexPath.row][@"title"];
         NSLog(@"......%@",vc.title);
-      
-        
-        //        [self presentViewController:vc animated:YES completion:nil];
+        if ([vc.title isEqualToString:@"个人信息"]) {
+            [self.navigationController pushViewController:vc animated:NO];
+        }
+       
     }
 }
 

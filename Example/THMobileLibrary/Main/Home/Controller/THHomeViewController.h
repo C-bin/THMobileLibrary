@@ -7,7 +7,13 @@
 //
 
 #import "THRootViewController.h"
-
+#import "BHInfiniteScrollView.h"
+#import "HomeMenuCell.h"
+#import "THNewsTableView.h"
+#import "THNewsViewController.h"
+#import "THLibraryCatalogSearch.h"
+#import "THNewBookViewController.h"
+#import "THScanningViewController.h"
 @interface THHomeViewController : THRootViewController
 @property (nonatomic, strong) UISegmentedControl *segmentCtrl;
 

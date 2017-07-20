@@ -21,9 +21,6 @@
         _topImage.layer.shadowColor=[UIColor grayColor].CGColor;
         [self.contentView addSubview:_topImage];
         
-        
-       
-        
         _botlabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _topImage.frame.size.height+5,frame.size.width, 40)];
         _botlabel.textAlignment = NSTextAlignmentLeft;
         _botlabel.textColor = [UIColor blackColor];

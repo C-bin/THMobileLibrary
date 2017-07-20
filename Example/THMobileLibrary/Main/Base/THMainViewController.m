@@ -8,14 +8,12 @@
 
 #import "THMainViewController.h"
 #import "THBaseNavView.h"
+#import "THHomeViewController.h"
+#import "THResourceViewController.h"
+#import "THGuideViewController.h"
+#import "THMineViewController.h"
 //定义四个视图控制器
-#define ViewControllers @[@"THHomeViewController", @"THResourceViewController", @"THGuideViewController", @"THMineViewController"]
-//标签 标题
-#define Titles @[@"首页", @"电子资源", @"图书馆指南", @"我的"]
-//标签 未选中图片
-#define Images @[@"", @"", @"", @"tabbar_setting@3x"]
-//标签 选中图片
-#define SelectedImages @[@"", @"", @"", @"tabbar_setting_hl@3x"]
+
 @interface THMainViewController ()
 
 @end
@@ -25,52 +23,40 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
-    self.tabBarController.tabBar.hidden=NO;
+//    self.tabBarController.tabBar.hidden=NO;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
  
     //调用创建标签页方法
-    [self createViewController];
+
+    self.view.backgroundColor=[UIColor whiteColor];
+    THHomeViewController *homeVC = [[THHomeViewController alloc]init];
+    [self createVC:homeVC Title:@"首页" imageName:@"home.png"];
     
-   
+    THResourceViewController *resourceVC = [[THResourceViewController alloc]init];
+    [self createVC:resourceVC Title:@"电子资源" imageName:@"resource.png"];
+    
+    THGuideViewController *guideVC = [[THGuideViewController alloc]init];
+    [self createVC:guideVC Title:@"图书馆指南" imageName:@"guide.png"];
+    
+    THMineViewController *mineVC = [[THMineViewController alloc]init];
+    [self createVC:mineVC Title:@"我的" imageName:@"mine.png"];
 
 }
-
-#pragma mark 创建标签页
-- (void)createViewController
+- (void)createVC:(UIViewController *)vc Title:(NSString *)title imageName:(NSString *)imageName
 {
-    NSMutableArray *vcs = [NSMutableArray array];
+      vc.title = title;
+    self.tabBar.tintColor = RGB(14, 193, 194);
+    vc.tabBarItem.image = [UIImage imageNamed:imageName];
+    NSString *imageSelect = [NSString stringWithFormat:@"light%@",imageName];
     
-    //循环创建四个视图控制
-    for (int i = 0; i < ViewControllers.count; i ++) {
-        
-        //1 独立的News、Find、、、VC
-        THRootViewController *rvc = [[NSClassFromString(ViewControllers[i]) alloc] init];
-        
-        //2 使用第一步的VC创建NVC(NavigationController)
-        UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:rvc];
-        
-        //  将图片保持原色
-        UIImage *image = [[UIImage imageNamed:Images[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        
-        
-        UIImage *selectdImage = [[UIImage imageNamed:SelectedImages[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        
+    vc.tabBarItem.selectedImage = [[UIImage imageNamed:imageSelect] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
-        //  实现标签
-        nc.tabBarItem = [[UITabBarItem alloc] initWithTitle:Titles[i] image:image selectedImage:selectdImage];
-        
-        nc.title=Titles[i];
-       
-
-        //3 将NVC放入数组
-        [vcs addObject:nc];
-        
-    }
-    
-    self.viewControllers = vcs;
+    [self addChildViewController:[[UINavigationController alloc]initWithRootViewController:vc]];
 }
+#pragma mark 创建标签页
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

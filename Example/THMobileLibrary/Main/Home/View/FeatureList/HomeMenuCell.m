@@ -24,10 +24,8 @@
     
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
-   
-        
-         self.menuArray =@[@"馆藏查询",@"新书推荐",@"借阅排行",@"扫一扫",@"读者信息",@"我的书架",@"正在借阅",@"历史借阅"];self.imageArray=@[@"热点资讯.png",@"icon_2.png",@"icon_3.png",@"icon_4.png",@"icon_2.png",@"icon_4.png",@"icon_3.png",@"icon_1.png"];
+
+         self.menuArray =@[@"馆藏查询",@"新书推荐",@"借阅排行",@"扫一扫",@"读者信息",@"我的书架",@"正在借阅",@"历史借阅"];self.imageArray=@[@"inquire.png",@"recommend.png",@"rank.png",@"scan.png",@"reader.png",@"bookshelf.png",@"Borrow.png",@"history.png"];
         
         // 初始化cell布局
         [self setUpSubViews];
@@ -41,16 +39,13 @@
 - (void)setUpSubViews {
 
     // 轮播图第一页
-    _backView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screen_width, 160)];
-   
+    _backView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screen_width, 120)];
     [self addSubview:_backView1];
 
-
-    
     //创建8个view
     for (int i = 0; i < 8; i++) {
         if (i < 4) {
-            CGRect frame = CGRectMake(i*screen_width/4, 0, screen_width/4, 80);
+            CGRect frame = CGRectMake(i*(screen_width-50)/4+10+i*10, 0, (screen_width-50)/4, 50);
             NSString *title = [_menuArray objectAtIndex:i];
             NSString *imageStr = [_imageArray objectAtIndex:i];
             JZMTBtnView *btnView = [[JZMTBtnView alloc] initWithFrame:frame title:title imageStr:imageStr];
@@ -62,7 +57,7 @@
             [btnView addGestureRecognizer:tap];
             
         }else if(i<8){
-            CGRect frame = CGRectMake((i-4)*screen_width/4, 80, screen_width/4, 80);
+            CGRect frame = CGRectMake((i-4)*(screen_width-50)/4+10+(i-4)*10, 60, (screen_width-50)/4, 50);
             NSString *title = [_menuArray objectAtIndex:i];
             NSString *imageStr = [_imageArray objectAtIndex:i];
             JZMTBtnView *btnView = [[JZMTBtnView alloc] initWithFrame:frame title:title imageStr:imageStr];

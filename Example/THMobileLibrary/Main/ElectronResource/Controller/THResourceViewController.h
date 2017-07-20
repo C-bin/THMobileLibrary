@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "THRootViewController.h"
 @interface THResourceViewController : THRootViewController
-
+@property (nonatomic, strong) THProgressHUD* progressHUD;
 @end

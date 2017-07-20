@@ -13,8 +13,11 @@
 #import "UILabel+THLabelHeightAndWidth.h"
 #import "THDetaileModel.h"
 #import "THBookMessageView.h"
-#define SCREEN_WIDTH        [UIScreen mainScreen].bounds.size.width
-#define SCREEN_HEIGHT       [UIScreen mainScreen].bounds.size.height
+#import "THBookCase.h"
+#import "THBookCaseViewController.h"
+//#define SCREEN_WIDTH        [UIScreen mainScreen].bounds.size.width
+//#define SCREEN_HEIGHT       [UIScreen mainScreen].bounds.size.height
+#define HEADER_URL @"http://101.201.114.210/591/ebooks/"
 @interface THDetailViewController ()<UIScrollViewDelegate>{
     UIScrollView *scrollView;
     CGFloat height;
@@ -44,7 +47,8 @@
     self.view.backgroundColor=[UIColor whiteColor];
     detailArray=[[NSMutableArray alloc]init];
     [self createNavgationBar];
-    [self createDetailData];
+   
+    [self createDetailDataWithURL:self.bookURL];
 }
 
 #pragma mark -创建导航栏
@@ -63,12 +67,12 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 #pragma mark -获取图书详情的网络请求
--(void)createDetailData{
-    NSString *baseString =[NSString stringWithFormat:@"http://101.201.116.210:7726/mobile/bookDetailById?bookId=%@",self.bookModel.bookid];
+-(void)createDetailDataWithURL:(NSString *)url{
+    
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
-    [manager GET:baseString parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+    [manager GET:url parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
         
     }
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -87,10 +91,20 @@
              NSArray *bookFiles=[data1 objectForKey:@"bookFiles"];
              NSDictionary *filesDic=[bookFiles objectAtIndex:0];
                 model.fileExt=[filesDic objectForKey:@"fileExt"];
+             self.fileName=[filesDic objectForKey:@"filePath"];
                 model.filePath=[NSString stringWithFormat:@"http://101.201.114.210/591/ebooks/%@",[filesDic objectForKey:@"filePath"]];
+             
                 downPath=model.filePath;
-                model.tableContent=[filesDic objectForKey:@"tableContent"];
+             NSArray *pictures=[data1 objectForKey:@"bookPictures"];
+             NSString *bookPicture=[[pictures objectAtIndex:0]objectForKey:@"filePath"];
+             
+             model.bookImage =[NSString stringWithFormat:@"%@%@",HEADER_URL,bookPicture];
+            model.tableContent=[filesDic objectForKey:@"tableContent"];
+             
+             
+            
              UILabel *labelOne = [[UILabel alloc] initWithFrame:CGRectMake(10, 170, SCREEN_WIDTH-20, 20)];
+            
              labelOne.text =model.tableContent;
              labelOne.backgroundColor = [UIColor whiteColor];
              labelOne.font = [UIFont systemFontOfSize:15];
@@ -153,6 +167,19 @@
 }
 
 -(void)clickRead{
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+//    NSString *path = [paths objectAtIndex:0];
+//    NSString *filePath = [path stringByAppendingPathComponent:self.fileName];
+//    
+//    NSFileManager *fileManager = [NSFileManager defaultManager];
+//    BOOL result = [fileManager fileExistsAtPath:filePath];
+//    NSLog(@"这个文件已经存在：%@",result?@"是的":@"不存在");
+    
+    
+    _progressHUD = [[THProgressHUD alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-40, self.view.frame.size.height/2-40, 80, 80)];
+    [self.view addSubview:_progressHUD];
+    [_progressHUD startAnimation];
+    
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     
@@ -164,28 +191,27 @@
         return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
         NSLog(@"File downloaded to: %@", filePath);
+        
+        
         LSYReadPageViewController *pageView = [[LSYReadPageViewController alloc] init];
         
-        
-        pageView.resourceURL = filePath;    //文件位置
-        
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+       pageView.resourceURL = filePath;
             
             pageView.model = [LSYReadModel getLocalModelWithURL:filePath];
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                //            [_epubActivity stopAnimating];
-                //            [_beginEpub setTitle:@"Beign epub Read" forState:UIControlStateNormal];
-                //            [_beginEpub setEnabled:YES];
-                
+                  [_progressHUD stopAnimationWithLoadText:@"finish" withType:YES];//加载成功
                 [self presentViewController:pageView animated:YES completion:nil];
             });
-        });
+
+      
     }];
     [downloadTask resume];
 }
 -(void)clickBookShell{
-    
+    [[THBookCase  shareBookShelf]encodeBook:_bookModel];
+   
+   
 }
 
 
@@ -209,12 +235,8 @@
 
 #pragma mark -图书详情
 -(void)createDetailViewWithModel:(THDetaileModel *)model{
-   model.bookImage=self.bookModel.bookImage;
+//   model.bookImage=self.bookModel.bookImage;
     THBookMessageView *messageView=[[THBookMessageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150)];
-//     UIImageView *background_image=[[UIImageView alloc]initWithFrame:messageView.bounds];
-//   [background_image sd_setImageWithURL:[NSURL URLWithString:self.bookModel.bookImage] placeholderImage:[UIImage imageNamed:@"000000.jpg"]];
-   
-   
     [messageView configCellWithModel:model];
     [scrollView addSubview:messageView];
 }

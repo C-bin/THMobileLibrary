@@ -7,6 +7,7 @@
 //
 
 #import "THAppDelegate.h"
+#import "THMainViewController.h"
 #import "THLoginViewController.h"
 @implementation THAppDelegate
 

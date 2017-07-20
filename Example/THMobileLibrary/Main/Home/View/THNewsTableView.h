@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+// @protocol THNewsDelegate <NSObject>
+//
+//-(void)newsWithHeadline:(NSString *)headline content:(NSString *)content;
+//
+// @end
 
 @interface THNewsTableView : UITableView<UITableViewDelegate, UITableViewDataSource>
-
+- (instancetype)initWithFrame:(CGRect)frame URL:(NSString *)url type:(NSString *)type;
+//@property(strong , nonatomic) id<THNewsDelegate> delegate;
 @end

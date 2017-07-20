@@ -7,58 +7,70 @@
 //
 
 #import "THNewsTableView.h"
-#import "CZBookModel.h"
+#import "THNewsModel.h"
 #import "THTableViewCell.h"
 @interface THNewsTableView (){
     NSMutableArray * dataArray;
+    NSInteger page;
 }
 
 
 @end
 @implementation THNewsTableView
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame URL:(NSString *)url type:(NSString *)type
 {
     self = [super initWithFrame:frame];
     if (self) {
         dataArray=[[NSMutableArray alloc]init];
+        page=0;
        self.separatorStyle = UITableViewCellSeparatorStyleNone;
-        self.delegate = self;
-        self.dataSource = self;
-      
-        [self getDataArray];
+       self.delegate = self;
+       self.dataSource = self;
+      [self getDataArrayWithURL:url type:type];
     }
     return self;
 }
--(void)getDataArray{
-    //入参直接拼接在URL后（？衔接），多个入参用&分割
-    NSString *urlstring=@"http://101.201.116.210:7726/bookTypeAndSearch/queryBookList?bookType=&classificationId=&classificationNumber=&classificationType=&desc=0&keyword=&pageNum=1&pageSize=9&pageType=3&press=&rankType=1&upYearEndVal=&upYearStartVal=&yearEnd=&yearStart=";
+-(void)getDataArrayWithURL:(NSString *)urlstring type:(NSString *)type{
     
+    NSURLSession *session = [NSURLSession sharedSession];
+    
+    //2.根据会话对象创建task
     NSURL *url = [NSURL URLWithString:urlstring];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        //获取的内容是字符串
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        NSArray * books =[[dict objectForKey:@"data"] objectForKey:@"list"];
-
-        for (int i =0; i<books.count; i++) {
-            NSDictionary * book =[books objectAtIndex:i];
-            CZBookModel  *paperiteam =[[CZBookModel alloc]init];
-            paperiteam.bookName = [book objectForKey:@"bookName"];
+    
+    //3.创建可变的请求对象
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    //4.修改请求方法为POST
+    request.HTTPMethod = @"POST";
+    
+    //5.设置请求体
+    request.HTTPBody = [[NSString stringWithFormat:@"type=%@&page=%ld&pageCount=20",type,page] dataUsingEncoding:NSUTF8StringEncoding];
+    //6.根据会话对象创建一个Task(发送请求）
+    
+    //2.3请求超时
+    request.timeoutInterval = 5;
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        //   解析数据
+        NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        
+        for (NSDictionary *dic in array) {
+            THNewsModel *newsModel  =[[THNewsModel alloc]init];
+            [newsModel setValuesForKeysWithDictionary:dic];
             
-            [dataArray addObject:paperiteam];
-            
+            [dataArray addObject:newsModel];
             
         }
-        dispatch_async(dispatch_get_main_queue(),^{
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
             
-            //更新界面
             [self reloadData];
             
         });
     }];
+    //7.执行任务
     [dataTask resume];
-    
  
     
 }
@@ -82,9 +94,9 @@
         cell = [[THTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"id"];
         
     }
-    CZBookModel *model=dataArray[indexPath.row];
-    cell.textLabel.text=model.bookName;
-    cell.textLabel.font=[UIFont systemFontOfSize:12];
+    THNewsModel *model=dataArray[indexPath.row];
+    cell.textLabel.text=model.QTitle;
+    cell.textLabel.font=[UIFont systemFontOfSize:14];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 //    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
@@ -92,8 +104,19 @@
 }
 // 选中某行cell时会调用
 - (void)tableView:(nonnull UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    CZBookModel *model=dataArray[indexPath.row];
-    NSLog(@"选中didSelectRowAtIndexPath row = %@", model.bookName);
+    THNewsModel *model=dataArray[indexPath.row];
+    NSLog(@"选中didSelectRowAtIndexPath row = %@", model.QContent );
+    
+//    if (self.delegate && [self.delegate respondsToSelector:@selector(newsWithHeadline:content:)]) {
+//        [self.delegate newsWithHeadline:model.QTitle content:model.QContent];
+//        
+//        
+//    }
+    
+
+    
+   
+    
 }
 
 

@@ -21,15 +21,13 @@
 }
 -(void)creatUI{
     self.label=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, self.frame.size.width, 30)];
-    self.label.font = [UIFont boldSystemFontOfSize:16];
+    self.label.font = [UIFont boldSystemFontOfSize:14];
     [self.contentView addSubview:self.label];
 }
--(void)configCellWithModel:(CZBookModel *)model{
+-(void)configCellWithModel:(THNewsModel *)model{
     
-    
-    self.label.text=model.bookName;
-    
-    
+    self.label.text=model.QTitle;
+
 }
 
 @end

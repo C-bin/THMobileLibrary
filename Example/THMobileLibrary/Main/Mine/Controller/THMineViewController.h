@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "THRootViewController.h"
-#import "THNewsTableView.h"
-#import "THAnnouncementTableView.h"
 @interface THMineViewController : THRootViewController
 @property (nonatomic, strong) UISegmentedControl *segmentCtrl;
 @property (nonatomic, strong) UIScrollView *scrollView;

@@ -15,7 +15,7 @@
 @interface THGuideViewController ()
 
 @end
-#define Guide_HEIGHT [UIScreen mainScreen].bounds.size.height/3-64
+#define Guide_HEIGHT 90
 #define MAP_HEIGHT [UIScreen mainScreen].bounds.size.height/3
 
 @implementation THGuideViewController
@@ -57,7 +57,22 @@
     [self.view addSubview:instructionsView];
     
     
+    for (int i=0; i<4; i++) {
+        UIButton*butt=[UIButton buttonWithType:UIButtonTypeCustom];
+        butt.frame=CGRectMake(i*(instructionsView.frame.size.width/4), 0, instructionsView.frame.size.width/4, Guide_HEIGHT);
+      
+        [butt setImage:[UIImage imageNamed:@"libary.png"] forState:UIControlStateNormal];
+        [butt setTitle:@"本馆简介" forState:UIControlStateNormal];
+        [instructionsView addSubview:butt];
+        
+    }
+  
+    
+    
+    
 }
+
+
 -(void)createLabel{
 
     UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(30, 164+Guide_HEIGHT+MAP_HEIGHT, SCREEN_WIDTH-60, 20)];

@@ -19,7 +19,6 @@
 #import "THDetaileModel.h"
 @interface THBookMessageView : UIView
 @property (strong, nonatomic) UIImageView *bookImage;
-
 @property (strong, nonatomic) UILabel *bookName;
 @property (strong, nonatomic) UILabel *bookAuthor;
 @property (strong, nonatomic) UILabel *press;

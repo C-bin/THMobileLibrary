@@ -14,7 +14,7 @@
 #import "AFNetworking.h"
 #import "CZBookModel.h"
 #import "THTHBookListCell.h"
-#import "MJRefresh.h"
+
 /***********************************************************
  **  电子资源
  **********************************************************/
@@ -27,16 +27,13 @@
 #define BOOKSTORE_END    @"&pageType=3&keyword=&classificationType=&classificationNumber=&classificationId=&bookType=L15_1&press=&upYearEndVal=&desc=0&upYearStartVal=&yearEnd=&yearStart="
 
 
-#define SCREEN_WIDTH        [UIScreen mainScreen].bounds.size.width
-#define SCREEN_HEIGHT       [UIScreen mainScreen].bounds.size.height
-#define SCREEN_ASPECTRATIO  [UIScreen mainScreen].bounds.size.width/375
 static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHeaderIdentify";
 @interface THResourceViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,BHInfiniteScrollViewDelegate>
 {
     UICollectionView *mainCollectionView;
     NSMutableArray * dataArray;
     NSInteger page;
-    BOOL _ispulling;
+  
 }
 @property(nonatomic,strong)NSMutableArray *loopImage_array;
 @property (nonatomic, strong) BHInfiniteScrollView* infinitePageView;
@@ -59,7 +56,10 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
     [self.view addSubview:navView];
     page=1;
     dataArray=[[NSMutableArray alloc]init];
-
+    
+    _progressHUD = [[THProgressHUD alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-40, self.view.frame.size.height/2-40, 80, 80)];
+    [self.view addSubview:_progressHUD];
+    [_progressHUD startAnimation]; 
     [self getBooksData];
    
 }
@@ -156,6 +156,7 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
                        
 
              }
+              [_progressHUD stopAnimationWithLoadText:@"finish" withType:YES];//加载成功
              if (mainCollectionView) {
                    [mainCollectionView reloadData];
              }else{
@@ -279,11 +280,10 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
 
     CZBookModel *model=dataArray[indexPath.row];
    
-    THDetailViewController *detail=[[THDetailViewController alloc]init];
-    detail.bookModel = model;
-    
-    
-    [self.navigationController pushViewController:detail animated:NO];
+    THDetailViewController *detailVC=[[THDetailViewController alloc]init];
+    detailVC.bookModel = model;
+    detailVC.bookURL = [NSString stringWithFormat:@"http://101.201.116.210:7726/mobile/bookDetailById?bookId=%@",model.bookid];
+    [self.navigationController pushViewController:detailVC animated:NO];
 
 }
 

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface THNewsViewController : UIViewController
-
+@property (copy, nonatomic) NSString *headline;        //书名
+@property (copy, nonatomic) NSString *content ;
 @end

@@ -5,6 +5,7 @@
 //  Created by 天海网络  on 2017/7/6.
 //  Copyright © 2017年 C-bin. All rights reserved.
 //
+//http://www.thyhapp.com:8091/LoginService.asmx?op=Login
 
 #import "THLoginViewController.h"
 #import <AVFoundation/AVFoundation.h>
@@ -20,7 +21,7 @@
 /**
  *  初始的frameY值
  */
-#define ORIGIN_FRAMW_Y (self.view.frame.size.height-40)/2
+#define ORIGIN_FRAMW_Y (self.view.frame.size.height-80)/2
 
 /**
  *  播放器的音量值
@@ -31,7 +32,7 @@
  *  输入框和登陆，注册按钮的高度
  */
 #define HEIGHT_OF_FIELD 40
-@interface THLoginViewController ()
+@interface THLoginViewController ()<UITextFieldDelegate>
 /*** 视频播放器*/
 @property(nonatomic,strong)AVPlayer *player;
 /*** 播放视频的view*/
@@ -105,25 +106,36 @@
  */
 -(void)createLoginView
 {
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSString *name = [userDefault objectForKey:@"pusername"];
+    NSString *passWord=[userDefault objectForKey:@"password"];
+    
     self.loginView = [[UIView alloc] initWithFrame:self.view.bounds];
     self.loginView.backgroundColor = [UIColor colorWithRed:1.00f green:1.00f blue:1.00f alpha:0.3f];
     [self.view addSubview:self.loginView];
-    
-    UITextField *nameField = [[UITextField alloc] initWithFrame:CGRectMake(50, ORIGIN_FRAMW_Y, self.view.frame.size.width - 100, HEIGHT_OF_FIELD)];
-    nameField.backgroundColor = [UIColor colorWithRed:0.81f green:0.91f blue:0.94f alpha:0.5f];
-    [self.loginView addSubview:nameField];
-    self.nameField = nameField;
-    
+    //账号
+    self.nameField = [[UITextField alloc] initWithFrame:CGRectMake(50, ORIGIN_FRAMW_Y, self.view.frame.size.width - 100, HEIGHT_OF_FIELD)];
+    self.nameField.backgroundColor = [UIColor colorWithRed:0.81f green:0.91f blue:0.94f alpha:0.5f];
+    [self.loginView addSubview:self.nameField];
     self.nameField.layer.cornerRadius = 8;
     self.nameField.borderStyle = 0;
+    self.nameField.delegate = self;
+    self.nameField.text = name;
+    self.nameField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.nameField.keyboardType = UIKeyboardTypeEmailAddress;
     self.nameField.layer.borderColor = (__bridge CGColorRef)([UIColor cyanColor]);
-    
+//    密码
     self.passWordField = [[UITextField alloc] initWithFrame:CGRectMake(50, ORIGIN_FRAMW_Y + 60, self.view.frame.size.width - 100, HEIGHT_OF_FIELD)];
     self.passWordField.backgroundColor = [UIColor colorWithRed:0.81f green:0.91f blue:0.94f alpha:0.5f];
     [self.loginView addSubview:self.passWordField];
-    
     self.passWordField.layer.cornerRadius = 8;
     self.passWordField.borderStyle = 0;
+    self.passWordField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.passWordField.delegate = self;
+    self.passWordField.text = passWord;
+    self.passWordField.keyboardType = UIKeyboardTypeEmailAddress;
+    self.passWordField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.passWordField.secureTextEntry = YES;
     self.passWordField.layer.borderColor = (__bridge CGColorRef)([UIColor cyanColor]);
     
     
@@ -131,49 +143,174 @@
     self.nameField.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"user_icon"]];
     self.nameField.leftViewMode = UITextFieldViewModeAlways;
     self.passWordField.leftViewMode = UITextFieldViewModeAlways;
-    self.passWordField.secureTextEntry = YES;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignFirstRe)];
     
     [self.loginView addGestureRecognizer:tap];
     [self createButtons];
+    
+   
+    
+    //给textfiled添加监听事件
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(jiantingNotification)
+                                                 name:UITextFieldTextDidChangeNotification
+                                               object:self.passWordField];
+}
+
+- (void)jiantingNotification {
+    if (_nameField.text.length ==0 || _passWordField.text.length==0) {
+        [self loginButtonNormalStatus];
+    }else {
+        [self loginButtonHighLightStatus];
+    }
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSMutableString *newStr = [textField.text mutableCopy];
+    [newStr replaceCharactersInRange:range
+                          withString:string];
+    if ([textField isEqual:_passWordField]) {
+        if ([_nameField.text length] == 0 || [newStr length] == 0) {
+            [self loginButtonNormalStatus];
+        }else {
+            [self loginButtonHighLightStatus];
+        }
+    }else if ([textField isEqual:_nameField]){
+        if ([_passWordField.text length] == 0 || [newStr length] == 0) {
+            [self loginButtonNormalStatus];
+        }else {
+            [self loginButtonHighLightStatus];
+        }
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    if ([textField isEqual:_passWordField]) {
+        if ([_nameField.text length] == 0 || [textField.text length] != 0) {
+            NSLog(@"----0%@",textField.text);
+            [self loginButtonNormalStatus];
+        }else {
+            [self loginButtonHighLightStatus];
+        }
+    }else if ([textField isEqual:_nameField]) {
+        if ([_passWordField.text length] == 0 || [textField.text length] != 0) {
+            [self loginButtonNormalStatus];
+        }else {
+            [self loginButtonHighLightStatus];
+        }
+    }
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if ([textField isEqual:_passWordField]) {
+        if (textField.text.length == 0) {
+            [self loginButtonNormalStatus];
+        }else {
+            [self loginButtonHighLightStatus];
+        }
+    }
+}
+
+-(void)loginButtonHighLightStatus{
+    self.loginButton.backgroundColor = [UIColor colorWithRed:14/255.0 green:193/255.0 blue:192/255.0 alpha:1];
+    [_loginButton setTitleColor:RGB(56, 46, 46) forState:UIControlStateNormal];
+    
+     [_loginButton addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    _loginButton.userInteractionEnabled = YES;
+}
+-(void)loginButtonNormalStatus{
+    _loginButton.backgroundColor = [UIColor colorWithRed:14/255.0 green:193/255.0 blue:192/255.0 alpha:0.2];
+    [_loginButton setTitleColor:RGB(56, 46, 46) forState:UIControlStateNormal];
+  
+    _loginButton.userInteractionEnabled = NO;
 }
 
 /**
- *  创建登录和注册按钮
+ *  创建登录按钮
  */
 -(void)createButtons
 {
-    self.loginButton  = [[UIButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width-200)/2, ORIGIN_FRAMW_Y + 120, 200, HEIGHT_OF_FIELD)];
-    self.loginButton.backgroundColor = [UIColor colorWithRed:14/255.0 green:193/255.0 blue:192/255.0 alpha:0.5];
+    _loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _loginButton.frame = CGRectMake((self.view.frame.size.width-200)/2, ORIGIN_FRAMW_Y + 120, 200, HEIGHT_OF_FIELD);
+    _loginButton.backgroundColor = [UIColor colorWithRed:14/255.0 green:193/255.0 blue:192/255.0 alpha:0.2];
     [_loginButton setTitle:@"登录" forState:UIControlStateNormal];
-    [_loginButton setTitleColor:[UIColor colorWithRed:0.46f green:0.46f blue:0.46f alpha:1.00f] forState:UIControlStateNormal];
-    //    [self.loginView addSubview:loginButton];
-    _loginButton.layer.cornerRadius = 8;
-    //    self.loginButton = loginButton;
-    [_loginButton addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.loginView addSubview:self.loginButton];
     
-    
-    
-    _signupButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 100, self.view.frame.size.height-80, 80, HEIGHT_OF_FIELD)];
-    _signupButton.backgroundColor = [UIColor colorWithRed:0.81f green:0.91f blue:0.94f alpha:0.5f];
-    [_signupButton setTitle:@"注册" forState:UIControlStateNormal];
-    [_signupButton setTitleColor:[UIColor colorWithRed:0.46f green:0.46f blue:0.46f alpha:1.00f] forState:UIControlStateNormal];
-    //    [self.loginView addSubview:signupButton];
-    _signupButton.layer.cornerRadius = 8;
-    //    self.signupButton = signupButton;
-    [_signupButton addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.loginView addSubview:self.signupButton];
-    
+   
+    _loginButton.userInteractionEnabled = NO;
+    [self.view addSubview:_loginButton];
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSString *name = [userDefault objectForKey:@"pusername"];
+    if (name) {
+        [self loginButtonHighLightStatus];
+    }
 }
 
 /**
  *  登录Aciton
  */
--(void)loginAction:(UIButton*)button
+-(void)loginAction
 {
-  self.view.window.rootViewController = [[THMainViewController alloc] init];
+    /**/
+//    //1.创建会话对象
+    NSURLSession *session = [NSURLSession sharedSession];
+    
+    //2.根据会话对象创建task
+    NSURL *url = [NSURL URLWithString:ISLOGIN];
+    
+    //3.创建可变的请求对象
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    //4.修改请求方法为POST
+    request.HTTPMethod = @"POST";
+    
+    //5.设置请求体
+    request.HTTPBody = [[NSString stringWithFormat:@"cardNum=%@&password=%@",self.nameField.text,self.passWordField.text] dataUsingEncoding:NSUTF8StringEncoding];
+    
+    //6.根据会话对象创建一个Task(发送请求）
+    
+    //2.3请求超时
+    request.timeoutInterval = 5;
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    
+        //   解析数据
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+   
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            
+            if ([[dic objectForKey:@"success"] isEqualToString:@"true"]) {
+        
+                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                //登陆成功后把用户名存储到UserDefault
+                [userDefaults setObject:self.nameField.text forKey:@"pusername"];
+                [userDefaults setObject:self.passWordField.text forKey:@"password"];
+                [userDefaults synchronize];
+                [THReaderConstant shareReadConstant].userName=self.nameField.text;
+                
+                self.view.window.rootViewController = [[THMainViewController alloc] init];
+                
+            }else{
+                UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"提示" message:@"卡号或密码出现错误" preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    
+                }]];
+                [self presentViewController:alert animated:true completion:nil];
+            }
+        });
+    
+    }];
+    //7.执行任务
+    [dataTask resume];
+    
 }
 
 /**
@@ -190,9 +327,8 @@
     [self.nameField resignFirstResponder];
     [self.passWordField resignFirstResponder];
 }
-
 /**
- *  不知道这个是干什么的
+ *
  */
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -225,8 +361,6 @@
         }
     }];
 }
-
-
 /**
  *  键盘消失的Action
  */

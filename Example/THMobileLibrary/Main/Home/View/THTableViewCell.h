@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-#import "CZBookModel.h"
+#import "THNewsModel.h"
 @interface THTableViewCell : UITableViewCell
 @property (nonatomic,strong) UILabel *label;
--(void)configCellWithModel:(CZBookModel *)model;
+-(void)configCellWithModel:(THNewsModel *)model;
 @end
