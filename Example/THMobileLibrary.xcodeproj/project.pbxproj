@@ -104,6 +104,17 @@
 		37575E781F0DC2B500757193 /* welcome_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 37575E701F0DC2B500757193 /* welcome_video.mp4 */; };
 		37575E7B1F0DC2E200757193 /* THLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37575E7A1F0DC2E200757193 /* THLoginViewController.m */; };
 		375A4AA11F1E14DE00845887 /* THReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375A4AA01F1E14DE00845887 /* THReaderViewController.m */; };
+		375AE3701F2194EB00C6F85C /* THAboutusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375AE36F1F2194EB00C6F85C /* THAboutusViewController.m */; };
+		375AE3731F219DB900C6F85C /* CacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 375AE3721F219DB900C6F85C /* CacheTool.m */; };
+		375AE3761F21B25700C6F85C /* THSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375AE3751F21B25700C6F85C /* THSettingViewController.m */; };
+		375AE37B1F21E24D00C6F85C /* THBorrowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 375AE37A1F21E24D00C6F85C /* THBorrowModel.m */; };
+		375AE37E1F21E2DA00C6F85C /* THBorrowingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 375AE37D1F21E2DA00C6F85C /* THBorrowingCell.m */; };
+		375AE3841F21ECC500C6F85C /* 办证.png in Resources */ = {isa = PBXBuildFile; fileRef = 375AE3801F21ECC500C6F85C /* 办证.png */; };
+		375AE3851F21ECC500C6F85C /* 时间.png in Resources */ = {isa = PBXBuildFile; fileRef = 375AE3811F21ECC500C6F85C /* 时间.png */; };
+		375AE3861F21ECC500C6F85C /* 简介.png in Resources */ = {isa = PBXBuildFile; fileRef = 375AE3821F21ECC500C6F85C /* 简介.png */; };
+		375AE3871F21ECC500C6F85C /* 须知.png in Resources */ = {isa = PBXBuildFile; fileRef = 375AE3831F21ECC500C6F85C /* 须知.png */; };
+		375AE38A1F21F0F300C6F85C /* THLibMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375AE3891F21F0F300C6F85C /* THLibMessageViewController.m */; };
+		375AE38D1F21F73E00C6F85C /* THLibMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 375AE38C1F21F73E00C6F85C /* THLibMessageModel.m */; };
 		375F022A1EF2657200E6B27C /* THNewsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F02291EF2657200E6B27C /* THNewsTableView.m */; };
 		375F02301EF266BA00E6B27C /* THTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F022F1EF266BA00E6B27C /* THTableViewCell.m */; };
 		375F02331EF2779200E6B27C /* THNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F02321EF2779200E6B27C /* THNewsViewController.m */; };
@@ -397,6 +408,24 @@
 		375A4A9E1F1DFCAE00845887 /* NetworkInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkInterface.h; sourceTree = "<group>"; };
 		375A4A9F1F1E14DE00845887 /* THReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THReaderViewController.h; sourceTree = "<group>"; };
 		375A4AA01F1E14DE00845887 /* THReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THReaderViewController.m; sourceTree = "<group>"; };
+		375AE36E1F2194EB00C6F85C /* THAboutusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THAboutusViewController.h; sourceTree = "<group>"; };
+		375AE36F1F2194EB00C6F85C /* THAboutusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THAboutusViewController.m; sourceTree = "<group>"; };
+		375AE3711F219DB900C6F85C /* CacheTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CacheTool.h; sourceTree = "<group>"; };
+		375AE3721F219DB900C6F85C /* CacheTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheTool.m; sourceTree = "<group>"; };
+		375AE3741F21B25700C6F85C /* THSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSettingViewController.h; sourceTree = "<group>"; };
+		375AE3751F21B25700C6F85C /* THSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSettingViewController.m; sourceTree = "<group>"; };
+		375AE3791F21E24D00C6F85C /* THBorrowModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THBorrowModel.h; sourceTree = "<group>"; };
+		375AE37A1F21E24D00C6F85C /* THBorrowModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THBorrowModel.m; sourceTree = "<group>"; };
+		375AE37C1F21E2DA00C6F85C /* THBorrowingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THBorrowingCell.h; sourceTree = "<group>"; };
+		375AE37D1F21E2DA00C6F85C /* THBorrowingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THBorrowingCell.m; sourceTree = "<group>"; };
+		375AE3801F21ECC500C6F85C /* 办证.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "办证.png"; sourceTree = "<group>"; };
+		375AE3811F21ECC500C6F85C /* 时间.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "时间.png"; sourceTree = "<group>"; };
+		375AE3821F21ECC500C6F85C /* 简介.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "简介.png"; sourceTree = "<group>"; };
+		375AE3831F21ECC500C6F85C /* 须知.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "须知.png"; sourceTree = "<group>"; };
+		375AE3881F21F0F300C6F85C /* THLibMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLibMessageViewController.h; sourceTree = "<group>"; };
+		375AE3891F21F0F300C6F85C /* THLibMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLibMessageViewController.m; sourceTree = "<group>"; };
+		375AE38B1F21F73E00C6F85C /* THLibMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLibMessageModel.h; sourceTree = "<group>"; };
+		375AE38C1F21F73E00C6F85C /* THLibMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLibMessageModel.m; sourceTree = "<group>"; };
 		375F02281EF2657200E6B27C /* THNewsTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNewsTableView.h; sourceTree = "<group>"; };
 		375F02291EF2657200E6B27C /* THNewsTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNewsTableView.m; sourceTree = "<group>"; };
 		375F022E1EF266BA00E6B27C /* THTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THTableViewCell.h; sourceTree = "<group>"; };
@@ -1019,6 +1048,35 @@
 			path = login;
 			sourceTree = "<group>";
 		};
+		375AE3771F21E22E00C6F85C /* BorrowingCell */ = {
+			isa = PBXGroup;
+			children = (
+				375AE37C1F21E2DA00C6F85C /* THBorrowingCell.h */,
+				375AE37D1F21E2DA00C6F85C /* THBorrowingCell.m */,
+			);
+			path = BorrowingCell;
+			sourceTree = "<group>";
+		};
+		375AE3781F21E22E00C6F85C /* BorrowModel */ = {
+			isa = PBXGroup;
+			children = (
+				375AE3791F21E24D00C6F85C /* THBorrowModel.h */,
+				375AE37A1F21E24D00C6F85C /* THBorrowModel.m */,
+			);
+			path = BorrowModel;
+			sourceTree = "<group>";
+		};
+		375AE37F1F21ECC500C6F85C /* 200x200 */ = {
+			isa = PBXGroup;
+			children = (
+				375AE3801F21ECC500C6F85C /* 办证.png */,
+				375AE3811F21ECC500C6F85C /* 时间.png */,
+				375AE3821F21ECC500C6F85C /* 简介.png */,
+				375AE3831F21ECC500C6F85C /* 须知.png */,
+			);
+			path = 200x200;
+			sourceTree = "<group>";
+		};
 		375F01A21EF211EB00E6B27C /* Third */ = {
 			isa = PBXGroup;
 			children = (
@@ -1189,6 +1247,8 @@
 		37D4E6301F0DE0790055670E /* Borrowing */ = {
 			isa = PBXGroup;
 			children = (
+				375AE3771F21E22E00C6F85C /* BorrowingCell */,
+				375AE3781F21E22E00C6F85C /* BorrowModel */,
 				3775902D1F203F270034641B /* THBorrowingViewController.h */,
 				3775902E1F203F270034641B /* THBorrowingViewController.m */,
 			);
@@ -1453,6 +1513,8 @@
 			children = (
 				37ED0C731EE7D029005B4CD8 /* THGuideViewController.h */,
 				37ED0C741EE7D029005B4CD8 /* THGuideViewController.m */,
+				375AE3881F21F0F300C6F85C /* THLibMessageViewController.h */,
+				375AE3891F21F0F300C6F85C /* THLibMessageViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1460,6 +1522,8 @@
 		37ED0C631EE7B1CC005B4CD8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				375AE38B1F21F73E00C6F85C /* THLibMessageModel.h */,
+				375AE38C1F21F73E00C6F85C /* THLibMessageModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1488,6 +1552,10 @@
 			children = (
 				37ED0C7A1EE7D05C005B4CD8 /* THMineViewController.h */,
 				37ED0C7B1EE7D05C005B4CD8 /* THMineViewController.m */,
+				375AE36E1F2194EB00C6F85C /* THAboutusViewController.h */,
+				375AE36F1F2194EB00C6F85C /* THAboutusViewController.m */,
+				375AE3741F21B25700C6F85C /* THSettingViewController.h */,
+				375AE3751F21B25700C6F85C /* THSettingViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1495,6 +1563,8 @@
 		37ED0C671EE7B1CC005B4CD8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				375AE3711F219DB900C6F85C /* CacheTool.h */,
+				375AE3721F219DB900C6F85C /* CacheTool.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1530,6 +1600,7 @@
 		37ED0C8C1EE7E9D0005B4CD8 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				375AE37F1F21ECC500C6F85C /* 200x200 */,
 				3767850F1F189F7600EFECF8 /* 222.png */,
 				378D234B1F136F310070645F /* btn_opac.png */,
 				37575E681F0DC2B500757193 /* login */,
@@ -1735,12 +1806,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				37782CBA1EF76BDA00D41AE8 /* THTHBookListCell.xib in Resources */,
+				375AE3871F21ECC500C6F85C /* 须知.png in Resources */,
 				374C8FB31EF8FB0000ACEC80 /* comboDownArrow.png in Resources */,
 				374C8F851EF8BD5500ACEC80 /* 细说明朝.epub in Resources */,
 				37575E731F0DC2B500757193 /* pw_icon.png in Resources */,
 				376785101F189F7600EFECF8 /* 222.png in Resources */,
 				37575E721F0DC2B500757193 /* beijing.jpg in Resources */,
 				370508A51EFD10EB00A01557 /* MJRefresh.bundle in Resources */,
+				375AE3851F21ECC500C6F85C /* 时间.png in Resources */,
 				37575E751F0DC2B500757193 /* uberlogin.png in Resources */,
 				374C8F841EF8BD5500ACEC80 /* 每天懂一点好玩心理学.epub in Resources */,
 				374C8F861EF8BD5500ACEC80 /* 陌生人的来信.epub in Resources */,
@@ -1754,12 +1827,14 @@
 				374C8F821EF8BD5500ACEC80 /* reader_more@2x.png in Resources */,
 				374C8F9E1EF8BD5500ACEC80 /* bt_tjcp_no@2x.png in Resources */,
 				3743B2681F0C84A300783488 /* 3787527286718810832.jpg in Resources */,
+				375AE3841F21ECC500C6F85C /* 办证.png in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				37575E741F0DC2B500757193 /* pw_icon@2x.png in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				3743B26D1F0CDEFA00783488 /* MineBackGround.jpg in Resources */,
 				37575E771F0DC2B500757193 /* user_icon@2x.png in Resources */,
 				374C8F7D1EF8BD5500ACEC80 /* bg_back_white.png in Resources */,
+				375AE3861F21ECC500C6F85C /* 简介.png in Resources */,
 				374C8F7E1EF8BD5500ACEC80 /* bg_back_white@2x.png in Resources */,
 				374FA8761F01EB50005F6375 /* MBProgressHUD.bundle in Resources */,
 				37DA69EB1EF28D9500E71A08 /* LICENSE in Resources */,
@@ -1883,6 +1958,7 @@
 				374C8F781EF8BD5500ACEC80 /* LSYChapterModel.m in Sources */,
 				37D4E6381F0DE0A60055670E /* THNewBookViewController.m in Sources */,
 				37782CA91EF75A3700D41AE8 /* AFURLSessionManager.m in Sources */,
+				375AE37E1F21E2DA00C6F85C /* THBorrowingCell.m in Sources */,
 				37782CAF1EF75A3700D41AE8 /* UIImageView+AFNetworking.m in Sources */,
 				378D234F1F138AFD0070645F /* THResultsViewController.m in Sources */,
 				37DA69F01EF28D9500E71A08 /* SDWebImageDecoder.m in Sources */,
@@ -1891,9 +1967,11 @@
 				375F022A1EF2657200E6B27C /* THNewsTableView.m in Sources */,
 				37DA69F31EF28D9500E71A08 /* SDWebImageManager.m in Sources */,
 				37D4E63B1F0E16420055670E /* THPersonalInformation.m in Sources */,
+				375AE3701F2194EB00C6F85C /* THAboutusViewController.m in Sources */,
 				374C8F7B1EF8BD5500ACEC80 /* LSYReadModel.m in Sources */,
 				374C8F8A1EF8BD5500ACEC80 /* CXMLDocument_CreationExtensions.m in Sources */,
 				374C8F881EF8BD5500ACEC80 /* LSYViewPagerVC.m in Sources */,
+				375AE3731F219DB900C6F85C /* CacheTool.m in Sources */,
 				374C8FA11EF8BD5500ACEC80 /* LSYMenuView.m in Sources */,
 				6003F59E195388D20070C39A /* THAppDelegate.m in Sources */,
 				377590381F20461E0034641B /* THReaderConstant.m in Sources */,
@@ -1937,6 +2015,7 @@
 				374C8F991EF8BD5500ACEC80 /* ioapi.c in Sources */,
 				37575E671F0DC28400757193 /* SignupViewController.m in Sources */,
 				374C8FA01EF8BD5500ACEC80 /* LSYMagnifierView.m in Sources */,
+				375AE3761F21B25700C6F85C /* THSettingViewController.m in Sources */,
 				375F02331EF2779200E6B27C /* THNewsViewController.m in Sources */,
 				370508A71EFD10EB00A01557 /* NSBundle+MJRefresh.m in Sources */,
 				374C8F6E1EF8BD5500ACEC80 /* LSYChapterVC.m in Sources */,
@@ -1953,6 +2032,7 @@
 				3768C2B91F15CCCE0080442F /* THScanningViewController.m in Sources */,
 				3775903B1F2052FD0034641B /* THBookCase.m in Sources */,
 				37DA69F71EF28D9500E71A08 /* UIImage+MultiFormat.m in Sources */,
+				375AE38A1F21F0F300C6F85C /* THLibMessageViewController.m in Sources */,
 				374C8F931EF8BD5500ACEC80 /* CXMLNode.m in Sources */,
 				37782CB91EF76BDA00D41AE8 /* THTHBookListCell.m in Sources */,
 				37A6CED81F0F962000485041 /* JZMTBtnView.m in Sources */,
@@ -2000,6 +2080,7 @@
 				374C8F731EF8BD5500ACEC80 /* LSYReadUtilites.m in Sources */,
 				370508AA1EFD10EB00A01557 /* UIView+MJExtension.m in Sources */,
 				37DA69F11EF28D9500E71A08 /* SDWebImageDownloader.m in Sources */,
+				375AE37B1F21E24D00C6F85C /* THBorrowModel.m in Sources */,
 				377590451F2098BF0034641B /* THHistoryBorrow.m in Sources */,
 				3775902F1F203F270034641B /* THBorrowingViewController.m in Sources */,
 				374C8F751EF8BD5500ACEC80 /* LSYReadPageViewController.m in Sources */,
@@ -2030,6 +2111,7 @@
 				370508A41EFD10EB00A01557 /* MJRefreshStateHeader.m in Sources */,
 				374C8F9F1EF8BD5500ACEC80 /* LSYBottomMenuView.m in Sources */,
 				37ED0C9E1EE7F194005B4CD8 /* THRootViewController.m in Sources */,
+				375AE38D1F21F73E00C6F85C /* THLibMessageModel.m in Sources */,
 				37782CAD1EF75A3700D41AE8 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				374C8F9A1EF8BD5500ACEC80 /* mztools.c in Sources */,
 				37D4E63E1F0E173A0055670E /* THPersonalCell.m in Sources */,

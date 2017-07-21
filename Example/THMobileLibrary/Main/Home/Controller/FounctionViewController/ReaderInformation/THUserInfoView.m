@@ -50,8 +50,6 @@
    label.lineBreakMode = NSLineBreakByWordWrapping; //根据单词进行换行
      label.numberOfLines = 0;
     [label sizeToFit];
-//    [self.view addSubview:textLabel];
-//    label.backgroundColor=[UIColor whiteColor];
     NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:label.text];
     // 需要改变的第一个文字的位置
     NSUInteger firstLoc = [[noteStr string] rangeOfString:@" "].location + 1;

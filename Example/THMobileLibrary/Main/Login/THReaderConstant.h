@@ -10,7 +10,7 @@
 
 @interface THReaderConstant : NSObject
 @property (nonatomic, copy) NSString *userName;
-
+@property (nonatomic, copy) NSString *cacheFile;
 
 +(THReaderConstant *)shareReadConstant;
 @end

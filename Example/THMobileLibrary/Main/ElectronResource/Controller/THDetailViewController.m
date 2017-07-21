@@ -167,13 +167,6 @@
 }
 
 -(void)clickRead{
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-//    NSString *path = [paths objectAtIndex:0];
-//    NSString *filePath = [path stringByAppendingPathComponent:self.fileName];
-//    
-//    NSFileManager *fileManager = [NSFileManager defaultManager];
-//    BOOL result = [fileManager fileExistsAtPath:filePath];
-//    NSLog(@"这个文件已经存在：%@",result?@"是的":@"不存在");
     
     
     _progressHUD = [[THProgressHUD alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-40, self.view.frame.size.height/2-40, 80, 80)];
@@ -192,7 +185,7 @@
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
         NSLog(@"File downloaded to: %@", filePath);
         
-        
+        [THReaderConstant shareReadConstant].cacheFile=[filePath absoluteString];
         LSYReadPageViewController *pageView = [[LSYReadPageViewController alloc] init];
         
        pageView.resourceURL = filePath;
@@ -209,12 +202,20 @@
     [downloadTask resume];
 }
 -(void)clickBookShell{
-    [[THBookCase  shareBookShelf]encodeBook:_bookModel];
    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"是否加入书架" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+  
+    [alert show];
    
 }
 
-
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex == 1) {//确定则注销
+         [[THBookCase  shareBookShelf]encodeBook:_bookModel];
+    }
+    
+}
 #pragma mark -立即阅读／收藏
 -(UIButton *)buttonWithtitle:(NSString *)title frame:(CGRect)frame action:(SEL)action{
     

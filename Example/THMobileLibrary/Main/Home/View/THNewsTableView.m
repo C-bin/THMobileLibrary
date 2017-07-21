@@ -107,11 +107,10 @@
     THNewsModel *model=dataArray[indexPath.row];
     NSLog(@"选中didSelectRowAtIndexPath row = %@", model.QContent );
     
-//    if (self.delegate && [self.delegate respondsToSelector:@selector(newsWithHeadline:content:)]) {
-//        [self.delegate newsWithHeadline:model.QTitle content:model.QContent];
-//        
-//        
-//    }
+      NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    
+     [center postNotificationName:@"newsMessage" object:model.QTitle userInfo:@{@"Value": model.QContent}];
+
     
 
     

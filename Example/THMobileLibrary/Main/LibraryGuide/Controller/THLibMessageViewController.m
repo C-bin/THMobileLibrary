@@ -1,18 +1,18 @@
 //
-//  THNewsViewController.m
+//  THLibMessageViewController.m
 //  THMobileLibrary
 //
-//  Created by 天海网络  on 2017/6/15.
+//  Created by 天海网络  on 2017/7/21.
 //  Copyright © 2017年 C-bin. All rights reserved.
 //
 
-#import "THNewsViewController.h"
+#import "THLibMessageViewController.h"
 
-@interface THNewsViewController ()
+@interface THLibMessageViewController ()
 
 @end
 
-@implementation THNewsViewController
+@implementation THLibMessageViewController
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -22,17 +22,13 @@
         self.navigationController.interactivePopGestureRecognizer.delegate = nil;
     }
     
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor=RGB(242, 242, 242);
-    
-    //导航栏
     [self createNavgationBar];
-    
     [self createNewsView];
 }
-
 -(void)createNewsView{
     
     UIView *newsView=[[UIView alloc]initWithFrame:CGRectMake(15,100, SCREEN_WIDTH-30, SCREEN_HEIGHT-180)];
@@ -60,6 +56,11 @@
     [newsView addSubview:textView];
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 -(void)createNavgationBar{
     //导航栏
     THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64) navTitle:self.navtitle];
@@ -74,10 +75,4 @@
     
     [self.navigationController popViewControllerAnimated:YES];
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 @end

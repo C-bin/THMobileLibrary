@@ -28,11 +28,15 @@
 #define LG_scrollViewH    [UIScreen mainScreen].bounds.size.height/3+10
 //Segment高度
 #define SEGMENT_H 35
+#define  segmentedArray   [[NSArray alloc]initWithObjects:@"图书馆通知",@"系统公告",nil]
+
+
 @interface THHomeViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate,BHInfiniteScrollViewDelegate,OnTapBtnViewDelegate>
 {
     UICollectionView *mainCollectionView;
     NSArray * titleArray;
     NSArray * iconArray;
+    NSInteger selectedIndex;
 }
 //@property (nonatomic, strong) UIScrollView *contentScrollView;
 @property(nonatomic,strong)NSMutableArray *buttonList;
@@ -268,7 +272,7 @@
 
 #pragma mark -  新闻公告 Segment
 - (void)settingSegment{
-    NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"图书馆通知",@"系统公告",nil];
+//    NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"图书馆通知",@"系统公告",nil];
     //1.初始化UISegmentedControl
     UISegmentedControl *segmentCtrl = [[UISegmentedControl alloc]initWithItems:segmentedArray];
     segmentCtrl.frame=CGRectMake(0, 64+LOOP_HEIGHT+FOUNCTION_HEIGHT, self.view.frame.size.width, SEGMENT_H);
@@ -286,7 +290,8 @@
 }
 //segmentCtrl 点击事件
 - (void)segmentBtnClick:(UISegmentedControl *)segmentCtrl{
-   
+ 
+    selectedIndex= segmentCtrl.selectedSegmentIndex;
     self.scrollView.contentOffset = CGPointMake(self.segmentCtrl.selectedSegmentIndex * SCREEN_WIDTH, 0);
 }
 #pragma mark -  新闻公告 ScrollView
@@ -303,22 +308,25 @@
     [self.view addSubview:scrollView];
     
     THNewsTableView *tableViewOne = [[THNewsTableView alloc]initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, LG_scrollViewH) URL:NEWS_URL type:@"1"];
-//    tableViewOne.delegate=self;
     THNewsTableView *tableViewTwo = [[THNewsTableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH,0, SCREEN_WIDTH, LG_scrollViewH) URL:NEWS_URL type:@"2"];
-//    tableViewTwo.delegate=self;
+
     [scrollView addSubview:tableViewOne];
     [scrollView addSubview:tableViewTwo];
-    
+    //通知中心是个单例
+    NSNotificationCenter *notiCenter = [NSNotificationCenter defaultCenter];
+    // 注册一个监听事件。第三个参数的事件名， 系统用这个参数来区别不同事件。
+    [notiCenter addObserver:self selector:@selector(receiveNotification:) name:@"newsMessage" object:nil];
     _scrollView = scrollView;
 }
 
--(void)newsWithHeadline:(NSString *)headline content:(NSString *)content{
-    
-    THNewsViewController *newVC=[[THNewsViewController alloc]init];
-    newVC.headline=headline;
-    newVC.content=content;
-    [self.navigationController pushViewController:newVC animated:NO];
-    
+- (void)receiveNotification:(NSNotification *)noti
+{
+    THNewsViewController *newsVC=[[THNewsViewController alloc]init];
+    newsVC.headline=noti.object;
+    newsVC.content= noti.userInfo[@"Value"];
+    newsVC.navtitle=[segmentedArray objectAtIndex:selectedIndex];
+    [self.navigationController pushViewController:newsVC animated:NO];
+
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     CGFloat offset = scrollView.contentOffset.x;

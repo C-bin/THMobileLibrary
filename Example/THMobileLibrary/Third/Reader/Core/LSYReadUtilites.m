@@ -128,9 +128,9 @@
 +(NSMutableArray *)ePubFileHandle:(NSString *)path;
 {
     NSString *ePubPath = [self unZip:path];
-//    if (!ePubPath) {
-//        return nil;
-//    }
+    if (!ePubPath) {
+        return nil;
+    }
     NSString *OPFPath = [self OPFPath:ePubPath];
     return [self parseOPF:OPFPath];
     

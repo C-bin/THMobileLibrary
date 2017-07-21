@@ -7,31 +7,92 @@
 //
 
 #import "THGuideViewController.h"
-#import "THBaseNavView.h"
 #import "THGuideView.h"
-/***********************************************************
- **  图书馆指南
- **********************************************************/
-@interface THGuideViewController ()
+#import "THLibMessageViewController.h"
+#import "THLibMessageModel.h"
 
-@end
 #define Guide_HEIGHT 90
 #define MAP_HEIGHT [UIScreen mainScreen].bounds.size.height/3
+#define imageArray @[@"简介.png",@"办证.png",@"须知.png",@"时间.png"]
+#define titleArray @[@"本馆简介",@"办证指南",@"读者须知",@"开馆时间"]
+/***********************************************************
+ **  图书馆指南
+ *************************三国*********************************/
+@interface THGuideViewController (){
+     NSMutableArray *libMessage;
+}
+
+@end
 
 @implementation THGuideViewController
-//http://192.168.1.4:8080/newsWeb/EnterWelcome.action
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+    self.tabBarController.tabBar.hidden=NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    libMessage=[[NSMutableArray alloc]init];
    
-    UIImage *image=[UIImage imageNamed:@"3787527286718810832.jpg"];
-    self.view.backgroundColor=[UIColor colorWithPatternImage:image];
+    self.view.backgroundColor=RGB(242, 242, 242);
     //导航栏
     THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64) navTitle:@"图书馆指南"];
     [self.view addSubview:navView];
-    [self createGuideView];
-    [self createImageView];
-    [self createLabel];
+   
+    [self getLibMessageData];
+    
 }
+
+-(void)getLibMessageData{
+    NSURLSession *session = [NSURLSession sharedSession];
+    
+    //2.根据会话对象创建task
+    NSURL *url = [NSURL URLWithString:LIBINFO];
+    
+    //3.创建可变的请求对象
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    //4.修改请求方法为POST
+    request.HTTPMethod = @"POST";
+    
+    //5.设置请求体
+    request.HTTPBody = nil;
+    
+    //6.根据会话对象创建一个Task(发送请求）
+    
+    //2.3请求超时
+    request.timeoutInterval = 5;
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        //   解析数据
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        
+      
+             self.SchoolIntro=[dic objectForKey:@"SchoolIntro"];
+             self.SchoolRule=[dic objectForKey:@"SchoolRule"];
+             self.WorkTime=[dic objectForKey:@"WorkTime"];
+             self.BorrowCard=[dic objectForKey:@"BorrowCard"];
+            
+             [libMessage addObject:self.SchoolIntro];
+             [libMessage addObject:self.BorrowCard];
+             [libMessage addObject:self.SchoolRule];
+             [libMessage addObject:self.WorkTime];
+     
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            
+            [self createGuideView];
+            [self createImageView];
+            [self createLabel];
+            
+        });
+    }];
+    //7.执行任务
+    [dataTask resume];
+}
+
 -(void)createImageView{
     UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(30, 104+Guide_HEIGHT, SCREEN_WIDTH-60, 20)];
     label.text=@"地理位置:";
@@ -61,23 +122,33 @@
         UIButton*butt=[UIButton buttonWithType:UIButtonTypeCustom];
         butt.frame=CGRectMake(i*(instructionsView.frame.size.width/4), 0, instructionsView.frame.size.width/4, Guide_HEIGHT);
       
-        [butt setImage:[UIImage imageNamed:@"libary.png"] forState:UIControlStateNormal];
-        [butt setTitle:@"本馆简介" forState:UIControlStateNormal];
+        [butt setImage:[UIImage imageNamed:[imageArray objectAtIndex:i]] forState:UIControlStateNormal];
+        [butt addTarget:self action:@selector(getLibInfo:) forControlEvents:UIControlEventTouchUpInside];
+        butt.tag =30+i;
         [instructionsView addSubview:butt];
         
     }
-  
-    
-    
-    
 }
 
-
+-(void)getLibInfo:(UIButton *)btn{
+    
+    THLibMessageViewController *libVC=[[THLibMessageViewController alloc]init];
+    libVC.navtitle=[titleArray objectAtIndex:(btn.tag-30)];
+    libVC.headline=[titleArray objectAtIndex:(btn.tag-30)];
+    libVC.content=[libMessage objectAtIndex:(btn.tag-30)];
+    [self.navigationController pushViewController:libVC animated:NO];
+    
+}
 -(void)createLabel{
 
     UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(30, 164+Guide_HEIGHT+MAP_HEIGHT, SCREEN_WIDTH-60, 20)];
     label.text=@"公交路线:";
     [self.view addSubview:label];
+    
+    UILabel *way=[[UILabel alloc]initWithFrame:CGRectMake(30, 194+Guide_HEIGHT+MAP_HEIGHT, SCREEN_WIDTH-60, 20)];
+    way.backgroundColor=[UIColor whiteColor];
+    way.text=@"30路、36路、43路、51路、60路、85路";
+    [self.view addSubview:way];
 
 }
 - (void)didReceiveMemoryWarning {

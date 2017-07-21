@@ -13,13 +13,24 @@
 #import "THPersonalInformation.h"
 #import "THPersonalCell.h"
 #import "THReaderViewController.h"
+#import "THBorrowingViewController.h"
+#import "THAboutusViewController.h"
+#import "THSettingViewController.h"
+//#import "CacheTool.h"
 /***********************************************************
  **  我的
  **********************************************************/
-#define Head_HEIGHT    ([UIScreen mainScreen].bounds.size.height-114)/3
-#define Message_HEIGHT [UIScreen mainScreen].bounds.size.height/3*2-64
-@interface THMineViewController ()<UITableViewDelegate,UITableViewDataSource>{
+#define   Head_HEIGHT    ([UIScreen mainScreen].bounds.size.height-114)/3
+#define   Message_HEIGHT [UIScreen mainScreen].bounds.size.height/3*2-64
+
+#define   DocumentPath   NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject
+#define   LibraryPath    NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES).lastObject
+#define   TempPath       NSTemporaryDirectory()
+
+
+@interface THMineViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>{
     NSArray *title_array;
+    NSString *cacheSize;
 }
 @property (nonatomic,strong) UITableView *tableView;
 /** 数据数组 */
@@ -40,7 +51,7 @@
     
     [self headImageView];
     [self createMessageAndSetting];
-    [self createExit_Button];
+   
 }
 - (NSArray *)dataList{
     if (!_dataList) {
@@ -61,17 +72,17 @@
         NSMutableDictionary *liCai = [NSMutableDictionary dictionary];
         liCai[@"title"] = @"借阅信息";
         liCai[@"icon"] = @"borrowing.png";
-        liCai[@"controller"] = [UIViewController class];
+        liCai[@"controller"] = [THBorrowingViewController class];
         
         NSMutableDictionary *cleanCache = [NSMutableDictionary dictionary];
         cleanCache[@"title"] = @"程序设置";
         cleanCache[@"icon"] = @"setting.png";
-        cleanCache[@"controller"] = [UIViewController class];
+        cleanCache[@"controller"] = [THSettingViewController class];
         
         NSMutableDictionary *setting = [NSMutableDictionary dictionary];
         setting[@"title"] = @"关于我们";
         setting[@"icon"] = @"about.png";
-        setting[@"controller"] = [UIViewController class];
+        setting[@"controller"] = [THAboutusViewController class];
         
         NSArray *section1 = @[miaoBi];
         NSArray *section2 = @[liCai];
@@ -144,12 +155,7 @@
     cell.textLabel.textColor=RGB(107, 107, 107);
     cell.imageView.image = [UIImage imageNamed:dict[@"icon"]];
     
-   
-    if ([dict[@"title"] isEqualToString:@"程序设置"]) {
-        cell.detailTextLabel.text = @"0.8M";
-    }
-    
-    cell.selected = YES;
+//    cell.selected = YES;
     
     
     return cell;
@@ -165,36 +171,15 @@
         
         vc.title = self.dataList[indexPath.section][indexPath.row][@"title"];
         NSLog(@"......%@",vc.title);
-        if ([vc.title isEqualToString:@"个人信息"]) {
-            [self.navigationController pushViewController:vc animated:NO];
-        }
-       
+         [self.navigationController pushViewController:vc animated:NO];
     }
 }
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return !section ? 1 : CGFLOAT_MIN;
 }
 
-#pragma mark -  退出登录按钮
--(void)createExit_Button{
-    UIButton *exit_Button=[UIButton buttonWithType:UIButtonTypeCustom];
-    exit_Button.frame=CGRectMake(30, SCREEN_HEIGHT-94, SCREEN_WIDTH-60, 30);
-    [exit_Button setTitle:@"退出登录" forState:UIControlStateNormal];
-    [exit_Button addTarget:self action:@selector(exitLogin) forControlEvents:UIControlEventTouchUpInside];
-    exit_Button.layer.cornerRadius = 8.0;//2.0是圆角的弧度，根据需求自己更改
-    exit_Button.layer.borderColor = (__bridge CGColorRef _Nullable)(RGB(254, 118, 84));//设置边框颜色
-    exit_Button.layer.borderWidth = 1.0f;//设置边框颜色
 
-    exit_Button.backgroundColor=RGB(254, 118, 84);
-    [self.view addSubview:exit_Button];
-}
-#pragma mark -  点击退出登录
--(void)exitLogin{
-    THAppDelegate *appDelegate = (THAppDelegate *)[UIApplication sharedApplication].delegate;
-    self.view.window.rootViewController = appDelegate.nav;
-}
 
 
 

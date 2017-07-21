@@ -53,50 +53,9 @@
 #define LibrarySystem       [NSString stringWithFormat:@"%@/News.asmx",LBASEURL]
 //http://www.thyhapp.com:8091/News.asmx/GetNews
 #define NEWS_URL         [NSString stringWithFormat:@"%@/GetNews",LibrarySystem]
+//图书馆信息
+#define LIBNOTE         [NSString stringWithFormat:@"%@/LibNote.asmx",LBASEURL]
 
-//我的图书馆接口
-#define MYLIBRARY       [NSString stringWithFormat:@"%@/MyLibraryService.asmx/MyLibrary",LBASEURL]
-
-//OPAC查询
-#define GETBOOKINFO     [NSString stringWithFormat:@"%@/SearchBookInfoService.asmx/GetBookInfo",LBASEURL]
-//是否在馆
-#define GETISBORROWED   [NSString stringWithFormat:@"%@/SearchBookInfoService.asmx/GetIsBorrowed",LBASEURL]
-
-//续借
-#define ISRENEWAL       [NSString stringWithFormat:@"%@/RenewService.asmx/IsReNewal",LBASEURL]
-
-//图书馆须知
-#define NOTICELIST      [NSString stringWithFormat:@"%@/NoticeService.asmx/searchNoticeList",CBASEURL]
-
-//龙源期刊  Periodical
-#define PERIODICAL       @"http://zhstsg.vip.qikan.com"
-
-//重置密码
-#define UPDATEPSW       [NSString stringWithFormat:@"%@/UpdatePswService.asmx/ChangePsw",CBASEURL]
-
-//信息核实
-#define FINDPSW         [NSString stringWithFormat:@"%@/FindPswService.asmx/findPsw",LBASEURL]
-
-//确认修改
-#define FINDOFPSW       [NSString stringWithFormat:@"%@/FindOfPswService.asmx/FindOfPsw",CBASEURL]
-
-//出入记录
-#define GETRECORD       [NSString stringWithFormat:@"%@/SearchSchoolInOutService.asmx/GetRecord",LBASEURL]
-
-//验证卡号真实性
-#define ISEXIST         [NSString stringWithFormat:@"%@/LoginService.asmx/IsExist",LBASEURL]
-
-//注册
-#define SAVEUSERINFO    [NSString stringWithFormat:@"%@/RegisterService.asmx/SaveUserInfo",CBASEURL]
-
-
-
-//管理个人信息   http://www.thyhapp.com:8020/UserInfoUpdateService.asmx/SearchInfo
-#define SEARCHINFO      [NSString stringWithFormat:@"%@/UserInfoUpdateService.asmx/SearchInfo",CBASEURL]
-
-//更改个人信息  http://www.thyhapp.com:8020/UserInfoUpdateService.asmx/UpdateInfo
-#define UPDATEINFO      [NSString stringWithFormat:@"%@/UserInfoUpdateService.asmx/UpdateInfo",CBASEURL]
-
-
+#define LIBINFO        [NSString stringWithFormat:@"%@/LibInfo",LIBNOTE]
 
 #endif /* NetworkInterface_h */

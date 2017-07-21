@@ -7,10 +7,11 @@
 //
 
 #import "THBorrowingViewController.h"
-
+#import "THBorrowModel.h"
+#import "THBorrowingCell.h"
 @interface THBorrowingViewController ()<UITableViewDelegate,UITableViewDataSource>{
-    NSMutableArray *BorrowArray;
-    NSInteger page;
+    NSMutableArray *borrowArray;
+  
 }
 
 
@@ -29,9 +30,11 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-     page=1;
+    borrowArray=[[NSMutableArray alloc]init];
    //导航栏
     [self createNavgationBar];
+    [self getBorrowingDataArray];
+    [self createTableView];
    
 }
 
@@ -59,10 +62,21 @@
         
         //   解析数据
         NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+
+        for (NSDictionary *dic in array) {
+            THBorrowModel *borrow  =[[THBorrowModel alloc]init];
+            
+            [borrow setValuesForKeysWithDictionary:dic];
+//            NSLog(@"-------------%@",[dic objectForKey:@"BookName"]);
+            [borrowArray addObject:borrow];
+        }
         
         dispatch_sync(dispatch_get_main_queue(), ^{
- 
+            
+            [self.tableView reloadData];
+            
         });
+
         
     }];
     //7.执行任务
@@ -70,9 +84,49 @@
     
 }
 
+-(void)createTableView{
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
+    NSLog(@"didCompleteWithError33333--%@",[NSThread currentThread]);
+    _tableView.backgroundColor=RGB(242, 242, 242);
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:_tableView];
+}
+/* 这个函数是指定显示多少cells*/
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return borrowArray.count;
+}
+//返回行高
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return 120;
+}
 
-
-
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    THBorrowingCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    if (!cell) {
+        cell = [[THBorrowingCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
+    }
+    THBorrowModel *model=borrowArray[indexPath.row];
+    [cell configCellWithModel:model];
+    cell.backgroundColor=RGB(242, 242, 242);
+    NSLog(@"-------------%@",model.BookName);
+    
+    return cell;
+    
+}
+// 选中某行cell时会调用
+- (void)tableView:(nonnull UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    //    CZBookModel *model=dataArray[indexPath.row];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    NSString *bookName=borrowArray[indexPath.row];
+    NSLog(@"选中 = %@",bookName);
+    
+}
 -(void)createNavgationBar{
     //导航栏
     THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64) navTitle:@"正在借阅"];

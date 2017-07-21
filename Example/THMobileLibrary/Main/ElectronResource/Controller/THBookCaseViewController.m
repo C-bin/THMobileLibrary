@@ -36,7 +36,6 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
     [super viewDidLoad];
     // Do any additional setup after loading the view.
      dataArray =[THBookCase shareBookShelf].books;
-    CZBookModel *model=[dataArray objectAtIndex:0];
     //导航栏
     [self createNavgationBar];
     

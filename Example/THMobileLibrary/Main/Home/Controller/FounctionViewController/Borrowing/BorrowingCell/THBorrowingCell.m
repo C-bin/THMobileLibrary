@@ -1,14 +1,14 @@
 //
-//  THHistoryBorrowCell.m
+//  THBorrowingCell.m
 //  THMobileLibrary
 //
-//  Created by 天海网络  on 2017/7/20.
+//  Created by 天海网络  on 2017/7/21.
 //  Copyright © 2017年 C-bin. All rights reserved.
 //
 
-#import "THHistoryBorrowCell.h"
+#import "THBorrowingCell.h"
 #define CELL_WIDTH        self.frame.size.width
-@implementation THHistoryBorrowCell
+@implementation THBorrowingCell
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     
@@ -53,12 +53,13 @@
     
     
 }
--(void)configCellWithModel:(THHistoryBorrow *)model{
+-(void)configCellWithModel:(THBorrowModel *)model{
     
-    self.BookName.text=model.Bookname;
-    self.Borrowtime.text=[NSString stringWithFormat:@"借阅日期:%@",model.Borrowtime];
-    self.Actualtime.text=[NSString stringWithFormat:@"归还日期:%@",model.Actualtime];
-
+    self.BookName.text=model.BookName;
+    self.Borrowtime.text=[NSString stringWithFormat:@"借阅日期:%@",model.BorrowTime];
+    self.Actualtime.text=[NSString stringWithFormat:@"结束日期:%@",model.GiveBackTime];
+    
 }
+
 
 @end
