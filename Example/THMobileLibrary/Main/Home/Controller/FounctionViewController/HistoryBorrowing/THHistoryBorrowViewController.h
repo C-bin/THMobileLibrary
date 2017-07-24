@@ -10,4 +10,5 @@
 
 @interface THHistoryBorrowViewController : UIViewController
 @property (nonatomic,strong)UITableView *tableView;
+@property (nonatomic, strong) THProgressHUD* progressHUD;
 @end

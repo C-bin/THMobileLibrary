@@ -10,4 +10,5 @@
 
 @interface THSettingViewController : UIViewController
 @property (nonatomic,strong)UITableView *tableView;
+@property (nonatomic,strong)UIAlertView *alert;
 @end

@@ -154,7 +154,7 @@
     cell.textLabel.text = dict[@"title"];
     cell.textLabel.textColor=RGB(107, 107, 107);
     cell.imageView.image = [UIImage imageNamed:dict[@"icon"]];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
 //    cell.selected = YES;
     
     

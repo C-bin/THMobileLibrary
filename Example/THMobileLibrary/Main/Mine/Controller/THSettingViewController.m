@@ -87,14 +87,18 @@
     NSString *bookName=historyArray[indexPath.row];
     NSLog(@"选中 = %@",bookName);
     if (indexPath.row==0) {
-        NSLog(@"pingfen");
+        _alert = [[UIAlertView alloc] initWithTitle:nil message:@"谢谢" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+        
+        [_alert show];
     }else if (indexPath.row==1){
-        NSLog(@"jiancegengxin");
+        _alert = [[UIAlertView alloc] initWithTitle:nil message:@"已经是最新版本" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+      
+        [_alert show];
     }else if (indexPath.row==2){
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"您确定要清除缓存吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
-        alert.tag=10;
-       [alert show];
+       _alert = [[UIAlertView alloc] initWithTitle:nil message:@"您确定要清除缓存吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+        _alert.tag=10;
+       [_alert show];
     }
 }
 
@@ -168,9 +172,9 @@
 #pragma mark -  点击退出登录
 -(void)exitLogin{
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"您确定要退出登录吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
-    alert.tag=11;
-    [alert show];
+    _alert = [[UIAlertView alloc] initWithTitle:nil message:@"您确定要退出登录吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+    _alert.tag=11;
+    [_alert show];
    
 }
 

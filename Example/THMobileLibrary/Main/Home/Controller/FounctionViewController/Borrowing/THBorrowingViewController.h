@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface THBorrowingViewController : UIViewController
+@property (nonatomic, strong) THProgressHUD* progressHUD;
 @property (nonatomic,strong)UITableView *tableView;
 @end

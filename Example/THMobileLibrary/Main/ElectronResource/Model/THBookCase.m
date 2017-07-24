@@ -20,7 +20,7 @@
 }
 
 //归档图书到书架2
--(void)encodeBook:(CZBookModel*)book {
+-(void)encodeBook:(THDetaileModel*)book {
     //解档
     [self decoderBooks];
     //检查书架是否有书
@@ -29,13 +29,18 @@
     }
     //过滤掉重复的书
     for (int i =0; i<self.books.count; i++) {
-        CZBookModel *book_tmp= [self.books objectAtIndex:i];
-        if (book_tmp.bookid ==book.bookid) {
-            [self.books removeObjectAtIndex:i];
+        THDetaileModel *book_tmp= [self.books objectAtIndex:i];
+        
+        if ([book_tmp.bookid isEqualToString:book.bookid]) {
+           [self.books removeObjectAtIndex:i];
+           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"书架中已经存在" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+            [alert show];
         }
     }
-    [self.books addObject:book];
     
+    [self.books addObject:book];
+     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"成功加入书架" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+    [alert show];
     NSString *paths = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
     NSString *bookArrPath = [paths stringByAppendingString:BOOKSHELF_ENCODER_PATH];
     [NSKeyedArchiver archiveRootObject:self.books toFile:bookArrPath];

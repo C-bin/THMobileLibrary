@@ -32,7 +32,9 @@
     [super viewDidLoad];
    
    
-    
+    _progressHUD = [[THProgressHUD alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-40, self.view.frame.size.height/2-40, 80, 80)];
+    [self.view addSubview:_progressHUD];
+    [_progressHUD startAnimation];
     page=0;
     rankArray=[[NSMutableArray alloc]init];
     //导航栏
@@ -76,6 +78,7 @@
         dispatch_sync(dispatch_get_main_queue(), ^{
             
             [self.tableView reloadData];
+             [_progressHUD stopAnimationWithLoadText:@"finish" withType:YES];//加载成功
             
         });
     }];

@@ -98,6 +98,7 @@
     cell.textLabel.text=model.QTitle;
     cell.textLabel.font=[UIFont systemFontOfSize:14];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.backgroundColor=[UIColor whiteColor];
 //    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
     

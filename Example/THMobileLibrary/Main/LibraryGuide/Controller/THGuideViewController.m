@@ -37,6 +37,9 @@
     libMessage=[[NSMutableArray alloc]init];
    
     self.view.backgroundColor=RGB(242, 242, 242);
+    _progressHUD = [[THProgressHUD alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-40, self.view.frame.size.height/2-40, 80, 80)];
+    [self.view addSubview:_progressHUD];
+    [_progressHUD startAnimation];
     //导航栏
     THBaseNavView *navView=[[THBaseNavView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64) navTitle:@"图书馆指南"];
     [self.view addSubview:navView];
@@ -86,7 +89,7 @@
             [self createGuideView];
             [self createImageView];
             [self createLabel];
-            
+             [_progressHUD stopAnimationWithLoadText:@"finish" withType:YES];//加载成功
         });
     }];
     //7.执行任务
@@ -102,9 +105,9 @@
     
     mapView.layer.masksToBounds = YES;
     //给图层添加一个有色边框
-    mapView.layer.borderWidth = 5;
+    mapView.layer.borderWidth = 1;
     
-    mapView.layer.borderColor = [[UIColor colorWithRed:0.52 green:0.09 blue:0.07 alpha:1] CGColor];
+    mapView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     
     [self.view addSubview:mapView];
 

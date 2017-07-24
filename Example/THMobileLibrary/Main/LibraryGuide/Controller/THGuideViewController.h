@@ -15,4 +15,5 @@
 @property (copy, nonatomic) NSString *SchoolRule; //读者须知
 @property (copy, nonatomic) NSString *WorkTime;  //开馆时间
 @property (copy, nonatomic) NSString *BorrowCard;  //办证指南
+@property (nonatomic, strong) THProgressHUD* progressHUD;
 @end

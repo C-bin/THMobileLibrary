@@ -37,7 +37,7 @@
 //    aboutUs.backgroundColor=[UIColor whiteColor];
 //    [self.view addSubview:aboutUs];
     
-    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake((SCREEN_WIDTH-50)/2, 84, 60, 60)];
+    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake((SCREEN_WIDTH-50)/2, 114, 60, 60)];
     imageView.image=[UIImage imageNamed:@"btn_opac.png"];
     imageView.layer.cornerRadius=15;
     [self.view addSubview:imageView];
@@ -47,26 +47,28 @@
 //    appName.text=@"天海移动图书";
 //    [aboutUs addSubview:appName];
     
-    UILabel *versions=[[UILabel alloc]initWithFrame:CGRectMake(0,154, SCREEN_WIDTH, 20)];
+    UILabel *versions=[[UILabel alloc]initWithFrame:CGRectMake(0,184, SCREEN_WIDTH, 20)];
     versions.font=[UIFont systemFontOfSize:14];
     versions.textColor=[UIColor lightGrayColor];
     versions.text=@"V 1.0.0";
     versions.textAlignment=NSTextAlignmentCenter;
     [self.view addSubview:versions];
-    
-    
-//    UILabel *line=[[UILabel alloc]initWithFrame:CGRectMake(10, 80, aboutUs.frame.size.width-20, 1)];
-//    line.backgroundColor=[UIColor lightGrayColor];
-//    [aboutUs addSubview:line];
-    
-    
-    UILabel *brief=[[UILabel alloc]initWithFrame:CGRectMake(30, 184, SCREEN_WIDTH-60, 100)];
-    brief.font=[UIFont systemFontOfSize:17];
-    brief.text=@"天海移动图书馆是专门为各图书馆研发的专业移动阅读平台，用户可在手机、pad等移动设备上自助完成个人";
+
+    UILabel *brief=[[UILabel alloc]initWithFrame:CGRectMake(0, 214, SCREEN_WIDTH, 20)];
+    brief.font=[UIFont systemFontOfSize:15];
+    brief.textColor=[UIColor lightGrayColor];
+    NSString *netAddress=@"http://www.hbthwl.net";
+    brief.text=[NSString stringWithFormat:@"官网:%@",netAddress];
+    brief.textAlignment=NSTextAlignmentCenter;
     brief.numberOfLines=0;
     [self.view addSubview:brief];
     
-    
+    UILabel *line=[[UILabel alloc]initWithFrame:CGRectMake(0, 244, SCREEN_WIDTH, 20)];
+     brief.font=[UIFont systemFontOfSize:15];
+    line.textColor=[UIColor lightGrayColor];
+    line.text=@"客服电话:0311-8361820";
+    line.textAlignment=NSTextAlignmentCenter;
+    [self.view addSubview:line];
 
 }
 

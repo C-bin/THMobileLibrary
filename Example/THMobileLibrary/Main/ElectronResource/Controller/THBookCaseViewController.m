@@ -57,9 +57,6 @@ static NSString * const SupplementaryViewHeaderIdentify = @"SupplementaryViewHea
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)getBooksData{
-    
-}
 -(void)createCollectionView{
     //1.初始化layout
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];

@@ -28,10 +28,10 @@
     view.layer.borderColor = [UIColor lightGrayColor].CGColor;//边框颜色
     
     view.layer.borderWidth = 1;//边框宽度
-    view.layer.shadowColor = [UIColor lightGrayColor].CGColor;//shadowColor阴影颜色
-    view.layer.shadowOffset = CGSizeMake(4,4);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
-    view.layer.shadowOpacity = 1;//阴影透明度，默认0
-    view.layer.shadowRadius = 3;//阴影半径，默认3
+//    view.layer.shadowColor = [UIColor lightGrayColor].CGColor;//shadowColor阴影颜色
+//    view.layer.shadowOffset = CGSizeMake(4,4);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
+//    view.layer.shadowOpacity = 1;//阴影透明度，默认0
+//    view.layer.shadowRadius = 3;//阴影半径，默认3
     [self addSubview:view];
     
     self.BookName=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, CELL_WIDTH-20, 20)];

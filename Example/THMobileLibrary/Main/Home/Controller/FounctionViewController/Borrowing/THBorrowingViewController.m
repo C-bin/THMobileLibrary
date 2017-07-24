@@ -31,7 +31,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     borrowArray=[[NSMutableArray alloc]init];
-   //导航栏
+    
+    _progressHUD = [[THProgressHUD alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-40, self.view.frame.size.height/2-40, 80, 80)];
+    [self.view addSubview:_progressHUD];
+    [_progressHUD startAnimation];
+    //导航栏
     [self createNavgationBar];
     [self getBorrowingDataArray];
     [self createTableView];
@@ -59,7 +63,6 @@
     //2.3请求超时
     request.timeoutInterval = 5;
     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        
         //   解析数据
         NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
 
@@ -67,14 +70,13 @@
             THBorrowModel *borrow  =[[THBorrowModel alloc]init];
             
             [borrow setValuesForKeysWithDictionary:dic];
-//            NSLog(@"-------------%@",[dic objectForKey:@"BookName"]);
             [borrowArray addObject:borrow];
         }
         
         dispatch_sync(dispatch_get_main_queue(), ^{
             
             [self.tableView reloadData];
-            
+             [_progressHUD stopAnimationWithLoadText:@"finish" withType:YES];//加载成功
         });
 
         

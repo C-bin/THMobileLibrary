@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface THDetaileModel : NSObject
+@interface THDetaileModel : NSObject<NSCoding>
 
+@property (nonatomic,copy) NSString *bookid;
 @property (nonatomic,copy) NSString *describe;
 @property (nonatomic,copy) NSString *bookImage;
 @property (copy, nonatomic) NSString *bookName;        //书名

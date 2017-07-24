@@ -33,5 +33,6 @@
 @property (nonatomic,copy)NSString *MaxBorrowedCount;
 /* 我的地址 */
 @property (nonatomic,copy)NSString *Address;
+@property (nonatomic, strong) THProgressHUD* progressHUD;
 
 @end

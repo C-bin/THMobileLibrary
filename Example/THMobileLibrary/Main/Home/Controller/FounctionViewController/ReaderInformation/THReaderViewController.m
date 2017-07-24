@@ -30,7 +30,11 @@
     [super viewDidLoad];
     infoArray=[[NSMutableArray alloc]init];
     self.view.backgroundColor=RGB(237, 237, 239);
-    //导航栏
+   
+    _progressHUD = [[THProgressHUD alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-40, self.view.frame.size.height/2-40, 80, 80)];
+    [self.view addSubview:_progressHUD];
+     //导航栏
+    [_progressHUD startAnimation];
     [self createNavgationBar];
     [self getReaderInfo];
   
@@ -118,6 +122,7 @@
     
     
   [self createInfoViewWithArray:headArray InfoArray:infoArray];
+       [_progressHUD stopAnimationWithLoadText:@"finish" withType:YES];//加载成功
 
   });
     }];

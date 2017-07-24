@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CZBookModel.h"
+#import "THDetaileModel.h"
 @interface THBookCase : NSObject
 
 //书架中的书籍信息
@@ -15,6 +15,6 @@
 
 +(THBookCase *)shareBookShelf;
 //归档到书架
--(void)encodeBook:(CZBookModel*)book;
+-(void)encodeBook:(THDetaileModel*)book;
 -(void)decoderBooks;
 @end

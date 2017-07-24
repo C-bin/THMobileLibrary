@@ -9,7 +9,10 @@
 #import "THScanningViewController.h"
 #import "SGQRCode.h"
 #import "THDetailViewController.h"
-@interface THScanningViewController () <SGQRCodeScanManagerDelegate, SGQRCodeAlbumManagerDelegate>
+@interface THScanningViewController () <SGQRCodeScanManagerDelegate, SGQRCodeAlbumManagerDelegate>{
+    
+    NSString *jump_URL;
+}
 @property (nonatomic, strong) SGQRCodeScanningView *scanningView;
 
 @end
@@ -30,10 +33,10 @@
     [self.scanningView removeTimer];
 }
 
-- (void)dealloc {
-    NSLog(@"SGQRCodeScanningVC - dealloc");
-    [self removeScanningView];
-}
+//- (void)dealloc {
+//    NSLog(@"SGQRCodeScanningVC - dealloc");
+//    [self removeScanningView];
+//}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -77,8 +80,8 @@
 
 #pragma mark - - - SGQRCodeScanManagerDelegate
 - (void)QRCodeScanManager:(SGQRCodeScanManager *)scanManager didOutputMetadataObjects:(NSArray *)metadataObjects {
-    [scanManager SG_stopRunning];
-      
+//    [scanManager SG_stopRunning];
+    
    
     NSLog(@"metadataObjects - - %@", metadataObjects);
     if (metadataObjects != nil && metadataObjects.count > 0) {
@@ -88,27 +91,28 @@
         
         AVMetadataMachineReadableCodeObject *obj = metadataObjects[0];
         //        ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
-        NSString *jump_URL = [obj stringValue];
+        jump_URL = [obj stringValue];
         NSLog(@"跳转地址----++++++%@",jump_URL);
-        NSArray *array = [jump_URL componentsSeparatedByString:@"?"]; //从字符A中分隔成2个元素的数组
-        NSLog(@"array:%@",array); //结果是adfsfsfs和dfsdf
-
+        
        
-        if ([jump_URL hasPrefix:@"http"]) {
-//            NSURL *url = [ [ NSURL alloc ] initWithString:jump_URL];
-//            [[UIApplication sharedApplication] openURL:url];
+        if ([jump_URL rangeOfString:@"?"].location !=NSNotFound) {
+            NSArray *array = [jump_URL componentsSeparatedByString:@"?"];
+//
             THDetailViewController *detailVC=[[THDetailViewController alloc]init];
-             detailVC.bookURL = [NSString stringWithFormat:@"http://101.201.116.210:7726/mobile/bookDetailById?bookId=%@",[array objectAtIndex:1]];
-             [self.navigationController pushViewController:detailVC animated:NO];
-        }else {
-            NSLog(@"条形码0");
+            detailVC.typeVC=@"返回首页";
+            detailVC.bookURL = [NSString stringWithFormat:@"http://101.201.116.210:7726/mobile/bookDetailById?bookId=%@",[array objectAtIndex:1]];
+            [self.navigationController pushViewController:detailVC animated:NO];
+//
+        }else{
+            
+            UIAlertView*  alert = [[UIAlertView alloc] initWithTitle:nil message:jump_URL delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+                        [alert show];
+             [self setupQRCodeScanning];
         }
         
-        //        [self.navigationController pushViewController:jumpVC animated:YES];
-    } else {
-        NSLog(@"暂未识别出扫描的二维码");
+        
     }
-      
+    
 }
 
 

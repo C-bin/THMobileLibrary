@@ -47,7 +47,9 @@
     self.view.backgroundColor=[UIColor whiteColor];
     detailArray=[[NSMutableArray alloc]init];
     [self createNavgationBar];
-   
+    _progressHUD = [[THProgressHUD alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-40, self.view.frame.size.height/2-40, 80, 80)];
+    [self.view addSubview:_progressHUD];
+    [_progressHUD startAnimation];
     [self createDetailDataWithURL:self.bookURL];
 }
 
@@ -64,7 +66,14 @@
 }
 -(void)back{
     
-    [self.navigationController popViewControllerAnimated:YES];
+    if ([self.typeVC isEqualToString:@"返回首页"]) {
+        THHomeViewController *homeVC=self.navigationController.viewControllers[0];
+        [self.navigationController popToViewController:homeVC animated:NO];
+    }
+    
+    [self.navigationController popViewControllerAnimated:NO];
+    
+    
 }
 #pragma mark -获取图书详情的网络请求
 -(void)createDetailDataWithURL:(NSString *)url{
@@ -82,36 +91,38 @@
              
              NSDictionary *data1=[dict objectForKey:@"data1"];
 
-                 THDetaileModel  *model =[[THDetaileModel alloc]init];
-                 model.bookName = [data1 objectForKey:@"bookName"];
-                 model.bookAuthor = [data1 objectForKey:@"bookAuthor"];
-                 model.press = [data1 objectForKey:@"press"];
-                 model.isbn = [data1 objectForKey:@"isbn"];
-                 model.describe=[data1 objectForKey:@"description"];
+                _detaile =[[THDetaileModel alloc]init];
+                _detaile.bookid = [data1 objectForKey:@"id"];
+                 _detaile.bookName = [data1 objectForKey:@"bookName"];
+                 _detaile.bookAuthor = [data1 objectForKey:@"bookAuthor"];
+                 _detaile.press = [data1 objectForKey:@"press"];
+                 _detaile.isbn = [data1 objectForKey:@"isbn"];
+                 _detaile.describe=[data1 objectForKey:@"description"];
              NSArray *bookFiles=[data1 objectForKey:@"bookFiles"];
              NSDictionary *filesDic=[bookFiles objectAtIndex:0];
-                model.fileExt=[filesDic objectForKey:@"fileExt"];
+                _detaile.fileExt=[filesDic objectForKey:@"fileExt"];
              self.fileName=[filesDic objectForKey:@"filePath"];
-                model.filePath=[NSString stringWithFormat:@"http://101.201.114.210/591/ebooks/%@",[filesDic objectForKey:@"filePath"]];
+                _detaile.filePath=[NSString stringWithFormat:@"http://101.201.114.210/591/ebooks/%@",[filesDic objectForKey:@"filePath"]];
              
-                downPath=model.filePath;
+                downPath=_detaile.filePath;
              NSArray *pictures=[data1 objectForKey:@"bookPictures"];
              NSString *bookPicture=[[pictures objectAtIndex:0]objectForKey:@"filePath"];
              
-             model.bookImage =[NSString stringWithFormat:@"%@%@",HEADER_URL,bookPicture];
-            model.tableContent=[filesDic objectForKey:@"tableContent"];
+             _detaile.bookImage =[NSString stringWithFormat:@"%@%@",HEADER_URL,bookPicture];
+            _detaile.tableContent=[filesDic objectForKey:@"tableContent"];
              
              
             
              UILabel *labelOne = [[UILabel alloc] initWithFrame:CGRectMake(10, 170, SCREEN_WIDTH-20, 20)];
             
-             labelOne.text =model.tableContent;
+             labelOne.text =_detaile.tableContent;
              labelOne.backgroundColor = [UIColor whiteColor];
              labelOne.font = [UIFont systemFontOfSize:15];
              labelOne.numberOfLines = 0;
              list_heigh= [UILabel getHeightByWidth:labelOne.frame.size.width title:labelOne.text font:labelOne.font];
              labelOne.frame = CGRectMake(10, 284+height, self.view.frame.size.width-20, list_heigh);
-            [self createCollectionViewWithModel:model];
+            [self createCollectionViewWithModel:_detaile];
+            [_progressHUD stopAnimationWithLoadText:@"finish" withType:YES];//加载成功
          }
      
          failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
@@ -168,7 +179,7 @@
 
 -(void)clickRead{
     
-    
+//    [_progressHUD startAnimation];
     _progressHUD = [[THProgressHUD alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-40, self.view.frame.size.height/2-40, 80, 80)];
     [self.view addSubview:_progressHUD];
     [_progressHUD startAnimation];
@@ -197,7 +208,6 @@
                 [self presentViewController:pageView animated:YES completion:nil];
             });
 
-      
     }];
     [downloadTask resume];
 }
@@ -212,9 +222,9 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
     if (buttonIndex == 1) {//确定则注销
-         [[THBookCase  shareBookShelf]encodeBook:_bookModel];
+         [[THBookCase  shareBookShelf]encodeBook:_detaile];
+        
     }
-    
 }
 #pragma mark -立即阅读／收藏
 -(UIButton *)buttonWithtitle:(NSString *)title frame:(CGRect)frame action:(SEL)action{
