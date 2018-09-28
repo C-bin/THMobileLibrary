@@ -19,6 +19,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     NSLog(@"git checkout -b develop 分支");
+//    git pull
    
 }
 
