@@ -19,7 +19,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     NSLog(@"git checkout -b develop 分支");
-    NSLog(@"develop分支，不合并到master分支中去。。。");
+   
 }
 
 - (void)didReceiveMemoryWarning
