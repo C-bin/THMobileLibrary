@@ -35,13 +35,6 @@
     */
     /*
      
-     1. 主要分支介绍
-     1.1 master分支
-     1.2 develop分支
-     1.3 release分支
-     1.4 bugfix分支
-     1.5 feature分支
-     
      
      2. 新功能开发工作流
      2.1 切换到本地仓库工作区
@@ -78,7 +71,48 @@
      
      ---------------------
      
-     本文来自 花開酒暖 的CSDN 博客 ，全文地址请点击：https://blog.csdn.net/zsm180/article/details/75291260?utm_source=copy 
+     本文来自 花開酒暖 的CSDN 博客 ，全文地址请点击：https://blog.csdn.net/zsm180/article/details/75291260?utm_source=copy
+     */
+    
+    
+    
+    
+    
+}
+-(void)jieshao{
+    /*介绍
+     
+     1.1 master分支
+     
+     主分支，产品的功能全部实现后，最终在master分支对外发布。
+     
+     
+     
+     1.2 develop分支
+     
+     开发分支，基于master分支克隆，产品的编码工作在此分支进行。
+     
+     
+     
+     1.3 release分支
+     
+     测试分支，基于delevop分支克隆，产品编码工作完成后，发布到本分支测试，测试过程中发现的小bug直接在本分支进行修复，修复完成后合并到develop分支。本分支属于临时分支，目的实现后可删除分支。
+     
+     
+     
+     1.4 bugfix分支
+     
+     Bug修复分支，基于master分支或发布的里程碑Tag克隆，主要用于修复对外发布的分支，收到客户的Bug反馈后，在此分支进行修复，修复完毕后分别合并到develop分支和master分支。本分支属于临时分支，目的实现后可删除分支。
+     
+     
+     
+     1.5 feature分支
+     
+     功能特征分支，基于develop分支克隆，主要用于多人协助开发场景或探索性功能验证场景，功能开发完毕后合并到develop分支。feature分支可创建多个，属于临时分支，目的实现后可删除分支。
+     
+     ---------------------
+     
+     本文来自 花開酒暖 的CSDN 博客 ，全文地址请点击：https://blog.csdn.net/zsm180/article/details/75291260?utm_source=copy
      */
 }
 
